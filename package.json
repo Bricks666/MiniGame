@@ -1,0 +1,32 @@
+{
+  "name": "MiniGame",
+  "version": "1.0.0",
+  "description": "Создаю игру по урокам, пытаясь понять, как со всем этим работать",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bricks666/MiniGame.git"
+  },
+  "devtool": "inline-source-map",
+  "scripts": {
+    "dist": "webpack -w",
+    "start": "webpack serve --mode development --env development"
+  },
+  "bugs": {
+    "url": "https://github.com/Bricks666/MiniGame/issues"
+  },
+  "author": "Bricks",
+  "license": "ISC",
+  "homepage": "https://github.com/Bricks666/MiniGame#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.46.0",
+    "webpack-cli": "^4.7.2"
+  },
+  "dependencies": {
+    "@webpack-cli/init": "^1.1.3",
+    "path": "^0.12.7"
+  }
+}
