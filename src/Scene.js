@@ -1,10 +1,12 @@
 class Scene {
   #game;
-  _status;
+  #image;
+  #status;
 
-  constructor(game) {
+  constructor(game, imageSrc) {
+    this.#status = this.constructor.WORKING;
     this.#game = game;
-    this._status = this.constructor.WORKING;
+    this.load(imageSrc);
   }
 
   static get WORKING() {
@@ -27,7 +29,7 @@ class Scene {
   }
 
   get status() {
-    return this._status;
+    return this.#status;
   }
 
   get game() {
@@ -35,10 +37,14 @@ class Scene {
   }
 
   init() {
-    this._status = this.constructor.WORKING;
+    this.#status = this.constructor.WORKING;
   }
 
   render() {}
+
+  finish(status) {
+    this.#status = status;
+  }
 }
 
 export default Scene;

@@ -41,8 +41,7 @@ class Screen {
   }
 
   #createCanvas(width, height) {
-    let elements = document.getElementsByTagName("canvas");
-    let canvas = elements[0] || document.createElement("canvas");
+    let canvas = document.createElement("canvas");
     document.querySelector("body").appendChild(canvas);
 
     return canvas;

@@ -3,7 +3,7 @@ import Scene from "../Scene";
 class Loading extends Scene {
   #timeLoading;
 
-  constructor(game) {
+  constructor(game, imageSrc) {
     super(game);
     this.#timeLoading = 0;
   }
@@ -14,13 +14,8 @@ class Loading extends Scene {
   }
 
   update(time) {
-    if (this.#timeLoading > 30000) {
-      alert("Проверьте скорость соединения с интернетом");
-    }
-    this.#timeLoading = time;
-    console.log(this.#timeLoading);
     if (this.game.screen.isLoadedImages === true) {
-      this._status = this.constructor.LOADED;
+      setTimeout(() => this.finish(Scene.LOADED), 5000);
     }
   }
 
