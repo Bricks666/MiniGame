@@ -1,23 +1,12 @@
-export class MusicLoader {
-  #musicSrc;
+import { MediaLoader } from "./MediaLoader";
+
+export class MusicLoader extends MediaLoader {
 
   constructor(musicSrc) {
-    this.#musicSrc = musicSrc;
+    super(musicSrc);
   }
 
   load() {
-    return new Promise((resolve, reject) => {
-      const music = new Audio();
-
-      music.src = this.#musicSrc;
-
-      music.onloadeddata = () => resolve(music);
-      music.onerror = () =>
-        reject(
-          new Error(
-            `Мелодия по адресу ${this.#musicSrc} не была загружена`
-          )
-        );
-    });
+    return super.load(Audio);
   }
 }

@@ -4,7 +4,7 @@ class Loading extends Scene {
   #timeLoading;
 
   constructor(game, imageSrc) {
-    super(game);
+    super(game, imageSrc);
     this.#timeLoading = 0;
   }
 
@@ -14,8 +14,8 @@ class Loading extends Scene {
   }
 
   update(time) {
-    if (this.game.screen.isLoadedImages === true) {
-      setTimeout(() => this.finish(Scene.LOADED), 5000);
+    if (this.game.allMediaLoaded === true) {
+      this.finish(Scene.LOADED);
     }
   }
 

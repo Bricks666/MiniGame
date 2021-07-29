@@ -1,12 +1,20 @@
+import { ImageLoader } from "./ImageLoader";
+
 class Scene {
   #game;
   #image;
   #status;
+  #loaded;
 
   constructor(game, imageSrc) {
     this.#status = this.constructor.WORKING;
     this.#game = game;
-    this.load(imageSrc);
+    this.#loaded = true;
+
+    if (Boolean(imageSrc)) {
+      this.#loaded = false;
+      this.#load(imageSrc);
+    }
   }
 
   static get WORKING() {
@@ -34,6 +42,22 @@ class Scene {
 
   get game() {
     return this.#game;
+  }
+
+  get image() {
+    return this.#image;
+  }
+
+  get loaded() {
+    return this.#loaded;
+  }
+
+  #load(imageSrc) {
+    const loader = new ImageLoader(imageSrc);
+    loader.load().then((image) => {
+      this.#image = image;
+      this.#loaded = true;
+    });
   }
 
   init() {

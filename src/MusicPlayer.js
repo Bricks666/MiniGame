@@ -2,21 +2,22 @@ import { MusicLoader } from "./MusicLoader";
 
 export class MusicPlayer {
   #music;
-  #isMusicLoaded;
   #intervalSetVolumeId;
+  #loaded;
   static Volume = 0.25;
 
   constructor(musicSrc) {
-    this.#isMusicLoaded = false;
     this.#load(musicSrc);
     this.#intervalSetVolumeId = 0;
+    this.#loaded = false;
   }
 
   get isStopped() {
     return this.#music.paused;
   }
-  get isMusicLoaded() {
-    return this.#isMusicLoaded;
+
+  get loaded() {
+    return this.#loaded;
   }
 
   #load(musicSrc) {
@@ -24,7 +25,7 @@ export class MusicPlayer {
 
     loader.load().then((music) => {
       this.#music = music;
-      this.#isMusicLoaded = true;
+      this.#loaded = true;
       this.musicSetting();
       console.log("Мелодия загружена");
     });

@@ -9,6 +9,7 @@ class Game {
   #scenes;
   #currentScene;
   #currentMusic;
+  #allMediaLoaded;
 
   constructor({ width = 640, height = 640 }) {
     this.#screen = new Screen({ width, height });
@@ -17,19 +18,47 @@ class Game {
     Если сделать подгрузку изображения для каждой сцены ее обязанностью,
     То можно будет вынести общего предка у Loader'ов
     */
-    this.#screen.loadImages({
+    /*     this.#screen.loadImages({
       menu: "img/MainMenu.png",
       player: "img/Player.png",
       tiles: "img/Title.png",
-    });
+    }); */
 
     this.#scenes = {
       loading: { scene: new Loading(this), music: null },
       menu: {
-        scene: new MainMenu(this),
+        scene: new MainMenu(this, "img/MainMenu.png"),
         music: new MusicPlayer("music/menu.mp3"),
       },
+
+      allMediaLoaded() {
+        /* Изучить прокси, чтобы переписать все это безобразие */
+        return new Promise((resolve) => {
+          let id = setInterval(() => {
+            let allLoaded = true;
+            for (let property of Object.values(this)) {
+              for (let value of Object.values(property)) {
+                if (value?.loaded === false) {
+                  allLoaded = false;
+                  break;
+                }
+              }
+              console.log(`key is ${property} and allLoaded is ${allLoaded}`);
+              if (allLoaded === false) {
+                break;
+              }
+            }
+            if (allLoaded === true) {
+              clearInterval(id);
+              resolve();
+            }
+          }, 100);
+        });
+      },
     };
+    this.#scenes.allMediaLoaded().then(() => {
+      this.#allMediaLoaded = true;
+    });
     this.#currentScene = this.#scenes.loading.scene;
     this.#currentMusic = this.#scenes.loading.music;
     this.#currentMusic?.startPlaying();
@@ -38,6 +67,10 @@ class Game {
 
   get screen() {
     return this.#screen;
+  }
+
+  get allMediaLoaded() {
+    return this.#allMediaLoaded;
   }
 
   #changeScene(status) {

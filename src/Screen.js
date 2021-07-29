@@ -5,8 +5,6 @@ class Screen {
   #height;
   #canvas;
   #context;
-  #images;
-  #isLoadedImages;
 
   constructor({ width = 480, height = 480 }) {
     this.#width = width;
@@ -16,9 +14,6 @@ class Screen {
     this.#basicStylingCanvas();
 
     this.#context = this.#canvas.getContext("2d");
-
-    this.#images = {};
-    this.#isLoadedImages = false;
   }
 
   get width() {
@@ -27,10 +22,6 @@ class Screen {
 
   get height() {
     return this.#height;
-  }
-
-  get isLoadedImages() {
-    return this.#isLoadedImages;
   }
 
   #basicStylingCanvas() {
@@ -52,28 +43,14 @@ class Screen {
     this.#context.fillRect(0, 0, this.#width, this.#height);
   }
 
-  loadImages(images) {
-    if (Object.getPrototypeOf(images) !== Object.prototype) {
-      throw new SyntaxError(
-        "Вы передали неправильный тип данных, метод ожидает объект"
-      );
-    }
-
-    let loader = new ImageLoader(images);
-    loader.load().then(() => {
-      this.#images = Object.assign(this.#images, loader.images);
-      this.#isLoadedImages = true;
-    });
-  }
-
   print(x, y, text) {
     this.#context.fillStyle = "#ffffff";
     this.#context.fillText(text, x, y);
     this.#context.font = "32px Roboto";
   }
 
-  drawImage(x, y, imageName) {
-    this.#context.drawImage(this.#images[imageName], x, y);
+  drawImage(x, y, image) {
+    this.#context.drawImage(image, x, y);
   }
 }
 

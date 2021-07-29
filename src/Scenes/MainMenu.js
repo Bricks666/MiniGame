@@ -1,14 +1,12 @@
 import Scene from "../Scene";
 
 export class MainMenu extends Scene {
-
-
   constructor(game, musicSrc) {
     super(game, musicSrc);
   }
 
   render(time) {
-    this.game.screen.drawImage(0, 0, "menu");
+    this.game.screen.drawImage(0, 0, this.image);
 
     this.game.screen.print(
       this.game.screen.width / 25,
