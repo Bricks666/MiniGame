@@ -1,5 +1,3 @@
-import { ImageLoader } from "./ImageLoader";
-
 class Screen {
   #width;
   #height;
@@ -31,7 +29,7 @@ class Screen {
     this.#canvas.height = this.#height;
   }
 
-  #createCanvas(width, height) {
+  #createCanvas() {
     let canvas = document.createElement("canvas");
     document.querySelector("body").appendChild(canvas);
 

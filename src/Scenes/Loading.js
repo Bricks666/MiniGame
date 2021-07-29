@@ -1,27 +1,17 @@
-import Scene from "../Scene";
+import Scene from "./Scene";
 
 class Loading extends Scene {
-  #timeLoading;
-
-  constructor(game, imageSrc) {
-    super(game, imageSrc);
-    this.#timeLoading = 0;
+  constructor(game, imageSrc = null, musicSrc = null) {
+    super(game, imageSrc, musicSrc);
   }
 
   init() {
     super.init();
-    this.#timeLoading = 0;
   }
 
-  update(time) {
-    if (this.game.allMediaLoaded === true) {
-      this.finish(Scene.LOADED);
-    }
-  }
+  update(time) {}
 
   render(time) {
-    this.update(time);
-
     this.game.screen.fill("#000000");
     this.game.screen.print(
       this.game.screen.width / 2.7,
@@ -30,6 +20,10 @@ class Loading extends Scene {
     );
 
     super.render(time);
+  }
+
+  finish() {
+    super.finish(Scene.LOADED);
   }
 }
 
