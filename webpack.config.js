@@ -1,8 +1,11 @@
 const path = require("path");
+require("babel-polyfill");
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.js",
+  entry: {
+    app: ["babel-polyfill", "./src/index.js"],
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "js/minigame.js",

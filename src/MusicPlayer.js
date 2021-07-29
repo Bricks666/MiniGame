@@ -20,15 +20,19 @@ export class MusicPlayer {
     return this.#loaded;
   }
 
-  #load(musicSrc) {
+  async #load(musicSrc) {
     const loader = new MusicLoader(musicSrc);
 
-    loader.load().then((music) => {
-      this.#music = music;
-      this.#loaded = true;
-      this.musicSetting();
-      console.log("Мелодия загружена");
-    });
+    this.#music = await loader.load();
+    this.musicSetting();
+    this.#loaded = true;
+    console.log("Мелодия загружена");
+    // .then((music) => {
+    //   this.#music = music;
+    //   this.#loaded = true;
+    //   this.musicSetting();
+    //   console.log("Мелодия загружена");
+    // });
   }
 
   musicSetting() {

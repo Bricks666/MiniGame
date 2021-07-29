@@ -52,12 +52,10 @@ class Scene {
     return this.#loaded;
   }
 
-  #load(imageSrc) {
+  async #load(imageSrc) {
     const loader = new ImageLoader(imageSrc);
-    loader.load().then((image) => {
-      this.#image = image;
-      this.#loaded = true;
-    });
+    this.#image = await loader.load();
+    this.#loaded = true;
   }
 
   init() {
