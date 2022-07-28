@@ -1,11 +1,11 @@
-import { MediaLoader } from "./MediaLoader";
+import { MediaLoader } from './MediaLoader';
 
 export class MusicLoader extends MediaLoader {
-  constructor(musicSrc) {
-    super(musicSrc);
-  }
+	constructor(musicSrc) {
+		super(musicSrc);
+	}
 
-  load() {
-    return super.load(Audio);
-  }
+	load() {
+		return super.load(Audio);
+	}
 }

@@ -1,11 +1,12 @@
 class Person {
-  health;
-  weapon;
+	health;
 
-  constructor(health, weapon) {
-    this.health = health;
-    this.weapon = weapon;
-  }
+	weapon;
+
+	constructor(health, weapon) {
+		this.health = health;
+		this.weapon = weapon;
+	}
 }
 
 export default Person;

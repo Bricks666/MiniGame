@@ -1,100 +1,103 @@
-import { ImageLoader } from "../Loaders/ImageLoader";
-import { MusicLoader } from "../Loaders/MusicLoader";
+import { ImageLoader } from '../Loaders/ImageLoader';
+import { MusicLoader } from '../Loaders/MusicLoader';
 
 class Scene {
-  #game;
-  #status;
+	#game;
 
-  #image;
-  #imageLoaded;
+	#status;
 
-  #music;
-  #musicLoaded;
+	#image;
 
-  constructor(game, imageSrc = null, musicSrc = null) {
-    this.#game = game;
+	#imageLoaded;
 
-    this.#status = this.constructor.WORKING;
+	#music;
 
-    this.#imageLoaded = true;
-    this.#musicLoaded = true;
+	#musicLoaded;
 
-    if (Boolean(imageSrc)) {
-      this.#imageLoaded = false;
-      this.#loadImage(imageSrc);
-    }
+	constructor(game, imageSrc = null, musicSrc = null) {
+		this.#game = game;
 
-    if (Boolean(musicSrc)) {
-      this.#musicLoaded = false;
-      this.#loadMusic(musicSrc);
-    }
-  }
+		this.#status = this.constructor.WORKING;
 
-  static get WORKING() {
-    return "WORKING";
-  }
+		this.#imageLoaded = true;
+		this.#musicLoaded = true;
 
-  static get LOADED() {
-    return "LOADED";
-  }
+		if (imageSrc) {
+			this.#imageLoaded = false;
+			this.#loadImage(imageSrc);
+		}
 
-  static get START() {
-    return "START";
-  }
+		if (musicSrc) {
+			this.#musicLoaded = false;
+			this.#loadMusic(musicSrc);
+		}
+	}
 
-  static get LOSE() {
-    return "LOSE";
-  }
+	static get WORKING() {
+		return 'WORKING';
+	}
 
-  static get WIN() {
-    return "WIN";
-  }
+	static get LOADED() {
+		return 'LOADED';
+	}
 
-  static get FINISHED() {
-    return "FINISHED";
-  }
+	static get START() {
+		return 'START';
+	}
 
-  get status() {
-    return this.#status;
-  }
+	static get LOSE() {
+		return 'LOSE';
+	}
 
-  get game() {
-    return this.#game;
-  }
+	static get WIN() {
+		return 'WIN';
+	}
 
-  get image() {
-    return this.#image;
-  }
+	static get FINISHED() {
+		return 'FINISHED';
+	}
 
-  get music() {
-    return this.#music;
-  }
+	get status() {
+		return this.#status;
+	}
 
-  get allMediaLoaded() {
-    return this.#imageLoaded && this.#musicLoaded;
-  }
+	get game() {
+		return this.#game;
+	}
 
-  async #loadImage(imageSrc) {
-    const loader = new ImageLoader(imageSrc);
-    this.#image = await loader.load();
-    this.#imageLoaded = true;
-  }
+	get image() {
+		return this.#image;
+	}
 
-  async #loadMusic(musicSrc) {
-    const loader = new MusicLoader(musicSrc);
-    this.#music = await loader.load();
-    this.#musicLoaded = true;
-  }
+	get music() {
+		return this.#music;
+	}
 
-  init() {
-    this.#status = this.constructor.WORKING;
-  }
+	get allMediaLoaded() {
+		return this.#imageLoaded && this.#musicLoaded;
+	}
 
-  render() {}
+	async #loadImage(imageSrc) {
+		const loader = new ImageLoader(imageSrc);
+		this.#image = await loader.load();
+		this.#imageLoaded = true;
+	}
 
-  finish(status) {
-    this.#status = status;
-  }
+	async #loadMusic(musicSrc) {
+		const loader = new MusicLoader(musicSrc);
+		this.#music = await loader.load();
+		this.#musicLoaded = true;
+	}
+
+	init() {
+		this.#status = this.constructor.WORKING;
+	}
+
+	render() {}
+
+	finish(status) {
+		this.#status = status;
+	}
 }
 
 export default Scene;

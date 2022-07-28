@@ -1,4 +1,4 @@
-import Person from "./Person";
+import Person from './Person';
 
 class Player extends Person {}
 

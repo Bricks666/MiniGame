@@ -1,35 +1,36 @@
 export class MusicPlayer {
-  #currentMusic;
-  #volume;
+	#currentMusic;
 
-  constructor(volume = 0.25) {
-    this.#currentMusic = null;
-    this.#volume = volume;
-  }
+	#volume;
 
-  get isMusicPlaying() {
-    return !this.#currentMusic?.paused;
-  }
+	constructor(volume = 0.25) {
+		this.#currentMusic = null;
+		this.#volume = volume;
+	}
 
-  changePlayingMusic(music) {
-    this.stopMusic();
-    this.#currentMusic = music;
-    if (Boolean(this.#currentMusic)) {
-      this.#currentMusic.loop = true;
-    }
-    this.playMusic();
-  }
+	get isMusicPlaying() {
+		return !this.#currentMusic?.paused;
+	}
 
-  musicSetting({ volume }) {
-    this.#volume = volume;
-  }
+	changePlayingMusic(music) {
+		this.stopMusic();
+		this.#currentMusic = music;
+		if (this.#currentMusic) {
+			this.#currentMusic.loop = true;
+		}
+		this.playMusic();
+	}
 
-  playMusic() {
-    this.#currentMusic?.play();
-    /* Подумать над оптимизацией конструкции */
-  }
+	musicSetting({ volume, }) {
+		this.#volume = volume;
+	}
 
-  stopMusic() {
-    this.#currentMusic?.pause();
-  }
+	playMusic() {
+		this.#currentMusic?.play();
+		/* Подумать над оптимизацией конструкции */
+	}
+
+	stopMusic() {
+		this.#currentMusic?.pause();
+	}
 }
