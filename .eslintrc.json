@@ -1,0 +1,65 @@
+{
+	"root": true,
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:sonarjs/recommended",
+		"airbnb"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": "tsconfig.json",
+		"ecmaVersion": "latest"
+	},
+	"plugins": ["@typescript-eslint", "sonarjs"],
+	"rules": {
+		"indent": ["warn", "tab", { "SwitchCase": 1 }],
+		"no-mixed-spaces-and-tabs": "warn",
+		"quotes": ["error", "single"],
+		"semi": ["warn", "always"],
+		"no-alert": "error",
+		"no-debugger": "warn",
+		"no-constructor-return": "error",
+		"no-duplicate-imports": "warn",
+		"no-promise-executor-return": "error",
+		"no-self-compare": "error",
+		"no-console": "warn",
+		"no-tabs": "off",
+		"no-restricted-exports": "off",
+		"jsx-quotes": ["error", "prefer-single"],
+		"comma-dangle": [
+			"warn",
+			{
+				"arrays": "always",
+				"objects": "always",
+				"imports": "never",
+				"exports": "never",
+				"functions": "never"
+			}
+		],
+		"consistent-return": "off",
+		"no-use-before-define": "off",
+		"arrow-body-style": "off",
+		"lines-between-class-members": "off",
+
+		/* IMPORRT */
+		"import/extensions": [
+			"error",
+			"never",
+			{
+				"png": "always"
+			}
+		],
+		"import/no-unresolved": 0,
+		"import/prefer-default-export": "off",
+
+		/* TYPESCRIPT */
+		"@typescript-eslint/no-explicit-any": "warn",
+		"@typescript-eslint/no-empty-interface": "warn"
+	},
+	"ignorePatterns": ["*.config.*", "*.d.ts"]
+}
