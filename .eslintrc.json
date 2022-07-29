@@ -45,6 +45,7 @@
 		"no-use-before-define": "off",
 		"arrow-body-style": "off",
 		"lines-between-class-members": "off",
+		"no-unused-vars": "off",
 
 		/* IMPORRT */
 		"import/extensions": [
@@ -59,7 +60,8 @@
 
 		/* TYPESCRIPT */
 		"@typescript-eslint/no-explicit-any": "warn",
-		"@typescript-eslint/no-empty-interface": "warn"
+		"@typescript-eslint/no-empty-interface": "warn",
+		"@typescript-eslint/no-unused-vars": "error"
 	},
-	"ignorePatterns": ["*.config.*", "*.d.ts"]
+	"ignorePatterns": ["*.config.*", "*.d.ts", "*.js"]
 }

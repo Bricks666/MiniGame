@@ -1,9 +1,7 @@
-export interface RectOptions {
-	readonly x: number;
-	readonly y: number;
-	readonly width: number;
-	readonly height: number;
-}
+import { Coordinate, Size } from './types';
+import { collide } from './utils';
+
+export interface RectOptions extends Coordinate, Size {}
 
 export type Center = [number, number];
 
@@ -13,11 +11,14 @@ export class Rect {
 	width: number;
 	height: number;
 
-	constructor(options: RectOptions) {
-		this.height = options.height;
-		this.width = options.width;
-		this.x = options.x;
-		this.y = options.y;
+	constructor(options?: RectOptions) {
+		const {
+			height = 0, width = 0, x = 0, y = 0,
+		} = options || {};
+		this.height = height;
+		this.width = width;
+		this.x = x;
+		this.y = y;
 	}
 
 	get centerX(): number {
@@ -36,10 +37,35 @@ export class Rect {
 	}
 
 	get center(): Center {
-		return [this.centerX, this.centerY];
+		return [this.centerX, this.centerY,];
 	}
 
 	set center(otherCenter: Center) {
-		[this.centerX, this.centerY] = otherCenter;
+		[this.centerX, this.centerY,] = otherCenter;
+	}
+
+	moveTo(coordinate: Coordinate): Rect {
+		this.x = coordinate.x;
+		this.y = coordinate.y;
+
+		return this;
+	}
+
+	moveOn(coordinate: Coordinate): Rect {
+		this.x += coordinate.x;
+		this.y += coordinate.y;
+
+		return this;
+	}
+
+	collideRect(rect: Rect): boolean {
+		const isCollideX: boolean = collide(this.x, this.width, rect.x, rect.width);
+		const isCollideY: boolean = collide(
+			this.y,
+			this.height,
+			rect.y,
+			rect.height
+		);
+		return isCollideX || isCollideY;
 	}
 }
