@@ -59,13 +59,22 @@ export class Rect {
 	}
 
 	collideRect(rect: Rect): boolean {
-		const isCollideX: boolean = collide(this.x, this.width, rect.x, rect.width);
-		const isCollideY: boolean = collide(
-			this.y,
-			this.height,
-			rect.y,
-			rect.height
+		return Rect.collideRect(this, rect);
+	}
+
+	static collideRect(rect1: RectOptions, rect2: RectOptions): boolean {
+		const isCollideX: boolean = collide(
+			rect1.x,
+			rect1.width,
+			rect2.x,
+			rect2.width
 		);
-		return isCollideX || isCollideY;
+		const isCollideY: boolean = collide(
+			rect1.y,
+			rect1.height,
+			rect2.y,
+			rect2.height
+		);
+		return isCollideX && isCollideY;
 	}
 }

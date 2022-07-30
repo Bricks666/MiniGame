@@ -3,17 +3,15 @@ import { Screen } from './screen';
 import { Group } from './group';
 import { Rect, RectOptions } from './rect';
 
-export type SpriteOptions = RectOptions
+export type SpriteOptions = RectOptions;
 
 export class Sprite {
 	rect: Rect;
 	image: HTMLImageElement;
-	time: number;
 	private readonly groups: Set<Group<this>>;
 
 	constructor(options: SpriteOptions) {
 		this.rect = new Rect(options);
-		this.time = 0;
 		this.groups = new Set();
 		this.image = new Image();
 		this.image.src = './assets/img/Player.png';
@@ -22,15 +20,10 @@ export class Sprite {
 
 	update(): void {
 		/** TODO */
-		if (!(this.time % 60) && this.time) {
-			this.rect.moveOn({
-				x: 0,
-				y: 64,
-			});
-		}
-
-		this.time += 1;
-		return undefined;
+		this.rect.moveOn({
+			x: 0,
+			y: 1,
+		});
 	}
 
 	draw(screen: Screen): void {

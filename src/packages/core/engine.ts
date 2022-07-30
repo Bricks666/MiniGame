@@ -1,9 +1,10 @@
-import { SceneMachine, SceneMachineOptions } from './scene-machine';
+import { SceneMachine } from './scene-machine';
 import { Screen } from './screen';
 import { Key } from './types';
 
-export interface EngineOptions<K extends Key> extends SceneMachineOptions<K> {
+export interface EngineOptions<K extends Key> {
 	readonly screen: Screen;
+	readonly sceneMachine: SceneMachine<K>;
 }
 
 export class Engine<K extends Key> {
@@ -11,16 +12,19 @@ export class Engine<K extends Key> {
 	readonly sceneMachine: SceneMachine<K>;
 
 	constructor(options: EngineOptions<K>) {
-		const { screen, ...sceneMachineOptions } = options;
+		const { screen, sceneMachine, } = options;
 		this.screen = screen;
-		this.sceneMachine = new SceneMachine(sceneMachineOptions);
+		this.sceneMachine = sceneMachine;
 	}
 
-	start() {
+	start(): void {
 		requestAnimationFrame(this.update.bind(this));
 	}
 
-	update() {
+	update(): void {
+		this.sceneMachine.update();
+		this.sceneMachine.draw(this.screen);
+		this.screen.update();
 		requestAnimationFrame(this.update.bind(this));
 	}
 }

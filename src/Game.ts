@@ -1,16 +1,21 @@
-import { Engine, EngineOptions, SceneDict } from '@/packages/core';
+import {
+	Engine, SceneDict, SceneMachine, Screen
+} from '@/packages/core';
 import { Level1 } from './Scenes/Level/Level1';
 
 type Scenes = 'level';
 
-export type GameOptions = Pick<EngineOptions<Scenes>, 'screen'>;
-
 class Game extends Engine<Scenes> {
-	constructor(options: GameOptions) {
+	constructor() {
 		const states: SceneDict<Scenes> = {
 			level: new Level1(),
 		};
-		super({ ...options, states, stateSceneKey: 'level', });
+		const sceneMachine = new SceneMachine<Scenes>({
+			states,
+			stateSceneKey: 'level',
+		});
+		const screen = new Screen({ height: 640, width: 640, });
+		super({ sceneMachine, screen, });
 	}
 
 	update() {
@@ -23,9 +28,6 @@ class Game extends Engine<Scenes> {
 			},
 			'white'
 		);
-		this.sceneMachine.update();
-		this.sceneMachine.draw(this.screen);
-
 		super.update();
 	}
 }
