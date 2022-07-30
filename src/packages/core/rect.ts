@@ -1,7 +1,9 @@
 import { Coordinate, Size } from './types';
 import { collide } from './utils';
 
-export interface RectOptions extends Coordinate, Size {}
+export interface RectProperties extends Coordinate, Size {}
+
+export type RectParams = Partial<RectProperties>
 
 export type Center = [number, number];
 
@@ -11,10 +13,10 @@ export class Rect {
 	width: number;
 	height: number;
 
-	constructor(options?: RectOptions) {
+	constructor(options: RectParams = {}) {
 		const {
 			height = 0, width = 0, x = 0, y = 0,
-		} = options || {};
+		} = options;
 		this.height = height;
 		this.width = width;
 		this.x = x;
@@ -26,14 +28,15 @@ export class Rect {
 	}
 
 	set centerX(otherCenterX: number) {
-		this.x = otherCenterX * 2 - this.width;
+		this.x = otherCenterX - this.width / 2;
 	}
+
 	get centerY(): number {
 		return (this.y + this.height) / 2;
 	}
 
 	set centerY(otherCenterY: number) {
-		this.y = otherCenterY * 2 - this.height;
+		this.y = otherCenterY - 2 * this.height;
 	}
 
 	get center(): Center {
@@ -62,7 +65,7 @@ export class Rect {
 		return Rect.collideRect(this, rect);
 	}
 
-	static collideRect(rect1: RectOptions, rect2: RectOptions): boolean {
+	static collideRect(rect1: RectProperties, rect2: RectProperties): boolean {
 		const isCollideX: boolean = collide(
 			rect1.x,
 			rect1.width,

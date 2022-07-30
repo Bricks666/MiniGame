@@ -1,5 +1,5 @@
 import { Group } from './group';
-import { Screen } from './screen';
+import { Screen } from './Screen';
 import { Sprite } from './sprite';
 
 export class ScenePart<T extends Sprite = Sprite> {

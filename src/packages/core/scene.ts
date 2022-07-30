@@ -1,5 +1,5 @@
 import { ScenePart } from './scene-part';
-import { Screen } from './screen';
+import { Screen } from './Screen';
 
 export class Scene {
 	protected readonly sceneParts: ScenePart[];
@@ -8,11 +8,11 @@ export class Scene {
 		this.sceneParts = [];
 	}
 
-	update() {
+	update(): void {
 		this.sceneParts.forEach((scenePart) => scenePart.update());
 	}
 
-	draw(screen: Screen) {
+	draw(screen: Screen): void {
 		this.sceneParts.forEach((scenePart) => scenePart.draw(screen));
 	}
 }

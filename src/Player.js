@@ -1,5 +1,3 @@
-import Person from './Person';
+import { Entity } from '@/components/Entity';
 
-class Player extends Person {}
-
-export default Player;
+export class Player extends Entity {}

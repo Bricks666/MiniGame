@@ -1,20 +1,32 @@
 import {
 	Engine, SceneDict, SceneMachine, Screen
 } from '@/packages/core';
-import { Level1 } from './Scenes/Level/Level1';
+import { Level } from './Scenes/Level';
+import { Loading } from './Scenes/Loading';
+import { MainMenu } from './Scenes/MainMenu';
 
-type Scenes = 'level';
+type Scenes = 'level' | 'mainMenu' | 'loading';
 
 class Game extends Engine<Scenes> {
 	constructor() {
+		const screen = new Screen({
+			height: 640,
+			width: 640,
+			style: {
+				display: 'block',
+				margin: '0 auto',
+				border: '1px solid black',
+			},
+		});
 		const states: SceneDict<Scenes> = {
-			level: new Level1(),
+			level: new Level(),
+			mainMenu: new MainMenu(),
+			loading: new Loading(),
 		};
 		const sceneMachine = new SceneMachine<Scenes>({
 			states,
-			stateSceneKey: 'level',
+			stateSceneKey: 'mainMenu',
 		});
-		const screen = new Screen({ height: 640, width: 640, });
 		super({ sceneMachine, screen, });
 	}
 

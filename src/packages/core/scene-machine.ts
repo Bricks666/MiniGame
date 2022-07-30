@@ -1,5 +1,5 @@
 import { Scene } from './scene';
-import { Screen } from './screen';
+import { Screen } from './Screen';
 import {
 	Key, StateDict, StateMachine, StateMachineOptions
 } from './types';

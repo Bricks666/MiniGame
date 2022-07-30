@@ -1,5 +1,5 @@
 import { SceneMachine } from './scene-machine';
-import { Screen } from './screen';
+import { Screen } from './Screen';
 import { Key } from './types';
 
 export interface EngineOptions<K extends Key> {

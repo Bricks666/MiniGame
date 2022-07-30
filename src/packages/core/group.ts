@@ -1,4 +1,4 @@
-import { Screen } from './screen';
+import { Screen } from './Screen';
 import { Sprite } from './sprite';
 
 export interface GroupOptions<T extends Sprite> {

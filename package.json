@@ -1,5 +1,5 @@
 {
-	"name": "MiniGame",
+	"name": "mini-game",
 	"version": "1.0.0",
 	"description": "Создаю игру по урокам, пытаясь понять, как со всем этим работать",
 	"main": "./dist/index.js",
@@ -8,6 +8,7 @@
 		"start": "http-server ./dist",
 		"dev": "rollup -c ./rollup.config.js --watch",
 		"build": "rollup -c ./rollup.config.prod.js",
+		"build:dev": "rollup -c ./rollup.config.js",
 		"lint": "eslint --ext .ts,.js src/",
 		"lint:fix": "eslint --ext .ts,.js src/ --fix"
 	},
@@ -34,5 +35,7 @@
 		"rollup-plugin-terser": "^7.0.2",
 		"rollup-plugin-typescript2": "^0.32.1",
 		"typescript": "^4.7.4"
+	},
+	"dependencies": {
 	}
 }

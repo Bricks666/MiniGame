@@ -9,7 +9,8 @@ export class GameField extends ScenePart {
 					height: 64,
 					width: 64,
 					x: 64 * i,
-					y: 0,
+					y: 64 * i,
+					imageSrc: 'assets/img/Player.png',
 				})
 			);
 		}
