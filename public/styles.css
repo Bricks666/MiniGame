@@ -1,0 +1,14 @@
+@font-face {
+	font-family: 'Public Pixel';
+	src: local('PublicPixel'), local('Public Pixel'),
+		url('./fonts/PublicPixel.ttf') format('TrueType');
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-family: 'Public Pixel', monospace;
+  color: black;
+}

@@ -1,5 +1,5 @@
 import { Scene } from '@/packages/core';
-import { Header } from './ScenePart';
+import { Header } from './ScenePart/index';
 
 export class MainMenu extends Scene {
 	constructor() {

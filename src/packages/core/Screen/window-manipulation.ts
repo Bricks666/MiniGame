@@ -1,3 +1,5 @@
+import { Size } from '../index';
+
 export const setTitle = (title: string): void => {
 	let titleTag = document.querySelector<HTMLTitleElement>('title');
 

@@ -7,5 +7,5 @@ export * from './scene';
 export * from './scene-part';
 export * from './scene-machine';
 export * from './Text';
-export * as loader from './loaders';
+export * from './loaders';
 export * from './types';
