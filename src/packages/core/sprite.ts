@@ -5,12 +5,13 @@ import { Screen } from './Screen';
 import { Group } from './group';
 import { Rect, RectParams } from './rect';
 import { SpriteImage } from './sprite-image';
+import { Drawable } from './index';
 
 export interface SpriteOptions extends RectParams {
 	readonly imageSrc: string;
 }
 
-export class Sprite {
+export class Sprite implements Drawable {
 	rect: Rect;
 	image: SpriteImage;
 

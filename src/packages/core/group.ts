@@ -1,3 +1,4 @@
+import { Drawable } from './index';
 import { Screen } from './Screen';
 import { Sprite } from './sprite';
 
@@ -5,7 +6,7 @@ export interface GroupOptions<T extends Sprite> {
 	readonly sprites?: T[];
 }
 
-export class Group<T extends Sprite = Sprite> {
+export class Group<T extends Sprite = Sprite> implements Drawable {
 	readonly sprites: Set<T>;
 
 	constructor(options: GroupOptions<T> = {}) {

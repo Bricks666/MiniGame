@@ -1,4 +1,10 @@
-import { Engine, SceneDict, SceneMachine, Screen } from '@/packages/core';
+import {
+	domEventEmitter,
+	Engine,
+	SceneDict,
+	SceneMachine,
+	Screen
+} from '@/packages/core';
 import { DISPLAY_SIZE } from './consts/display';
 import { Level } from './scenes/Level/index';
 import { Loading } from './scenes/Loading/index';
@@ -16,6 +22,7 @@ export class Game extends Engine<Scenes> {
 				border: '1px solid black',
 			},
 		});
+		domEventEmitter.setDisplay(screen);
 		const states: SceneDict<Scenes> = {
 			level: new Level(),
 			mainMenu: new MainMenu(),
@@ -25,7 +32,7 @@ export class Game extends Engine<Scenes> {
 			states,
 			stateSceneKey: 'mainMenu',
 		});
-		super({ sceneMachine, screen });
+		super({ sceneMachine, screen, });
 	}
 
 	update() {

@@ -12,11 +12,11 @@ export class ScenePart<T extends Sprite = Sprite> {
 		this.sprites = new Group();
 	}
 
-	update() {
+	update(): void {
 		this.sprites.update();
 	}
 
-	draw(screen: Screen) {
+	draw(screen: Screen): void {
 		this.sprites.draw(screen);
 	}
 }

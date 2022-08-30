@@ -1,9 +1,10 @@
 export interface TextProperties {
 	readonly text: string;
-	readonly fontSize?: string;
-	readonly fontFamily?: string;
-	readonly strokeWidth?: string;
-	readonly fillStyle?: string;
+	readonly fontSize: number;
+	readonly fontFamily: string;
+	readonly strokeWidth: number;
+	readonly fillStyle: string;
+  readonly lineHeight: number;
 }
 
 export type TextStyleProperties = Omit<TextProperties, 'text'>;

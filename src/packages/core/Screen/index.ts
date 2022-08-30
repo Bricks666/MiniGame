@@ -1,2 +1,2 @@
-export * from './screen';
+export * from './Screen';
 export * from './window-manipulation';

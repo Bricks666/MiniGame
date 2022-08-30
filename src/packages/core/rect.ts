@@ -3,7 +3,7 @@ import { collide } from './utils';
 
 export interface RectProperties extends Coordinate, Size {}
 
-export type RectParams = Partial<RectProperties>
+export type RectParams = Partial<RectProperties>;
 
 export type Center = [number, number];
 
@@ -36,7 +36,7 @@ export class Rect {
 	}
 
 	set centerY(otherCenterY: number) {
-		this.y = otherCenterY - 2 * this.height;
+		this.y = otherCenterY - this.height / 2;
 	}
 
 	get center(): Center {
@@ -65,6 +65,10 @@ export class Rect {
 		return Rect.collideRect(this, rect);
 	}
 
+	collidePoint(point: Coordinate): boolean {
+		return Rect.collidePoint(this, point);
+	}
+
 	static collideRect(rect1: RectProperties, rect2: RectProperties): boolean {
 		const isCollideX: boolean = collide(
 			rect1.x,
@@ -78,6 +82,12 @@ export class Rect {
 			rect2.y,
 			rect2.height
 		);
+		return isCollideX && isCollideY;
+	}
+
+	static collidePoint(rect1: RectProperties, point: Coordinate): boolean {
+		const isCollideX: boolean = collide(rect1.x, rect1.width, point.x, 0);
+		const isCollideY: boolean = collide(rect1.y, rect1.height, point.y, 0);
 		return isCollideX && isCollideY;
 	}
 }

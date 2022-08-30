@@ -1,3 +1,4 @@
+import { eventBus } from './eventBus';
 import { Scene } from './scene';
 import { Screen } from './Screen';
 import {
@@ -16,6 +17,8 @@ export class SceneMachine<K extends Key> implements StateMachine<K, Scene> {
 		const { states, stateSceneKey, } = options;
 		this.states = states;
 		this.currentState = this.states[stateSceneKey];
+
+		this.#subscribe();
 	}
 
 	changeState(stateKey: K): void {
@@ -28,5 +31,9 @@ export class SceneMachine<K extends Key> implements StateMachine<K, Scene> {
 
 	update(): void {
 		this.currentState.update();
+	}
+
+	#subscribe(): void {
+		eventBus.onChangeScene<K>(this.changeState.bind(this));
 	}
 }

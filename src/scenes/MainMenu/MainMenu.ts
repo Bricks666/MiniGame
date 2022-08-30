@@ -1,16 +1,11 @@
 import { Scene } from '@/packages/core';
-import { Header } from './ScenePart/index';
+import { Header } from './ScenePart/Header';
+import { Menu } from './ScenePart/Menu/Menu';
 
 export class MainMenu extends Scene {
 	constructor() {
 		super();
 		this.sceneParts.push(new Header());
+		this.sceneParts.push(new Menu());
 	}
-	/* render(time) {
-		this.update();
-		this.game.drawImage(0, 0, this.image);
-
-		this.game.print(100, 600, 'Нажмите пробел, чтобы начать');
-		super.render(time);
-	} */
 }

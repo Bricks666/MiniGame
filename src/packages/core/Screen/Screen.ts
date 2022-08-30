@@ -15,7 +15,7 @@ export const methodPaintMap: Record<RequestType, PaintMethods> = {
 };
 
 export class Screen {
-	#rect: Rect;
+	rect: Rect;
 
 	readonly #canvas: HTMLCanvasElement;
 	readonly #context: CanvasRenderingContext2D;
@@ -26,7 +26,7 @@ export class Screen {
 			height = 0, width = 0, container = document.body, style,
 		} = options;
 
-		this.#rect = new Rect({
+		this.rect = new Rect({
 			height,
 			width,
 			x: 0,
@@ -39,6 +39,10 @@ export class Screen {
 		container.append(this.#canvas);
 		this.#context = this.#canvas.getContext('2d')!;
 		this.#basicStylingCanvas(style);
+	}
+
+	get canvas() {
+		return this.#canvas;
 	}
 
 	fill(rect: RectProperties, color: string): void {
@@ -68,7 +72,7 @@ export class Screen {
 	update(): void {
 		this.#paintRequestSprite.forEach((request) => {
 			const { rect, type, value, } = request;
-			if (!Rect.collideRect(this.#rect, rect)) {
+			if (!Rect.collideRect(this.rect, rect)) {
 				return;
 			}
 
@@ -107,8 +111,8 @@ export class Screen {
 	}
 
 	#basicStylingCanvas(style?: Partial<CSSStyleDeclaration>): void {
-		this.#canvas.width = this.#rect.width;
-		this.#canvas.height = this.#rect.height;
+		this.#canvas.width = this.rect.width;
+		this.#canvas.height = this.rect.height;
 		this.#context.textBaseline = 'top';
 		Object.assign(this.#canvas.style, style);
 	}
