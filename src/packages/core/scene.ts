@@ -1,5 +1,5 @@
 import { ScenePart } from './scene-part';
-import { Screen } from './Screen';
+import { Screen } from './screen';
 
 export class Scene {
 	protected readonly sceneParts: ScenePart[];

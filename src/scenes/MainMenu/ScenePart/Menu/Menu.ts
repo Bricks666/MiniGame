@@ -1,5 +1,6 @@
 import { DISPLAY_SIZE, HEADER_HEIGHT } from '@/consts/display';
-import { eventBus, List } from '@/packages/core';
+import { List } from '@/packages/components';
+import { eventBus } from '@/packages/events';
 
 export class Menu extends List {
 	constructor() {
@@ -13,7 +14,9 @@ export class Menu extends List {
 				{
 					text: 'Play',
 					fillStyle: 'white',
-					onClick: () => eventBus.emitChangeScene('level'),
+					onClick: () => {
+						eventBus.emitChangeScene('level');
+					},
 				},
 				{
 					text: 'Exit',

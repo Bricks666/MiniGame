@@ -1,5 +1,5 @@
 import { Drawable } from './index';
-import { Screen } from './Screen';
+import { Screen } from './screen';
 import { Unit } from './unit';
 
 export interface GroupOptions<T extends Unit> {

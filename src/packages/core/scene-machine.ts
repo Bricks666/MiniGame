@@ -1,6 +1,5 @@
-import { eventBus } from './eventBus';
 import { Scene } from './scene';
-import { Screen } from './Screen';
+import { Screen } from './screen';
 import { Key, StateDict, StateMachine, StateMachineOptions } from './types';
 
 export type SceneDict<K extends Key> = StateDict<K, Scene>;
@@ -15,13 +14,9 @@ export class SceneMachine<K extends Key> implements StateMachine<K, Scene> {
 		const { states, stateSceneKey } = options;
 		this.states = states;
 		this.currentState = this.states[stateSceneKey];
-
-		this.changeState = this.changeState.bind(this);
-		this.#subscribe();
 	}
 
 	changeState(stateKey: K): void {
-		console.log(stateKey);
 		this.currentState = this.states[stateKey];
 	}
 
@@ -31,9 +26,5 @@ export class SceneMachine<K extends Key> implements StateMachine<K, Scene> {
 
 	update(): void {
 		this.currentState.update();
-	}
-
-	#subscribe(): void {
-		eventBus.onChangeScene<K>(this.changeState);
 	}
 }

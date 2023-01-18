@@ -1,5 +1,5 @@
 import { Group } from './group';
-import { Screen } from './Screen';
+import { Screen } from './screen';
 import { Unit, UnitOptions } from './unit';
 
 export interface ScenePartOptions extends UnitOptions {}

@@ -1,6 +1,6 @@
 import { Group } from './group';
 import { Rect, RectParams } from './rect';
-import { Screen } from './Screen';
+import { Screen } from './screen';
 import { Drawable } from './types';
 
 export interface UnitOptions {
@@ -29,7 +29,7 @@ export abstract class Unit implements Drawable {
 		this.#groups.forEach((group) => group.remove(this));
 	}
 
-	abstract draw(screen: Screen): void;
+	abstract draw(screen: Screen, ...args: any[]): void;
 
 	abstract update(): void;
 }

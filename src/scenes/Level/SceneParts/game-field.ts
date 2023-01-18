@@ -1,5 +1,6 @@
 import { DISPLAY_SIZE } from '@/consts/display';
-import { ScenePart, Sprite } from '@/packages/core';
+import { ScenePart } from '@/packages/core';
+import { Sprite } from '@/packages/sprites';
 
 export class GameField extends ScenePart {
 	constructor() {
@@ -23,5 +24,6 @@ export class GameField extends ScenePart {
 				})
 			);
 		}
+		console.log(this.units);
 	}
 }

@@ -1,4 +1,4 @@
-import { terser } from 'rollup-plugin-terser';
+import { terser } from '@rollup/plugin-terser';
 import baseConfig from './rollup.config';
 
 /** @type {import('rollup').RollupOptions} */

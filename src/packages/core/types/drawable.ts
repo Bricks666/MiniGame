@@ -1,4 +1,4 @@
-import { Screen } from '../Screen';
+import { Screen } from '../screen';
 
 export interface Drawable {
 	draw(screen: Screen): void;
