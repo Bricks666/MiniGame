@@ -4,9 +4,11 @@ import { eventBus, List } from '@/packages/core';
 export class Menu extends List {
 	constructor() {
 		super({
-			width: DISPLAY_SIZE.width,
-			height: DISPLAY_SIZE.height - HEADER_HEIGHT,
-			y: HEADER_HEIGHT,
+			rect: {
+				width: DISPLAY_SIZE.width,
+				height: DISPLAY_SIZE.height - HEADER_HEIGHT,
+				y: HEADER_HEIGHT,
+			},
 			items: [
 				{
 					text: 'Play',

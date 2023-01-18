@@ -16,7 +16,6 @@ export class SpriteImage {
 				this.rect.width = image.width;
 				this.rect.height = image.height;
 			})
-			.catch(console.log)
 			.finally(() => {
 				this.isReady = true;
 			});

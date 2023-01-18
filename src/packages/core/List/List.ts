@@ -1,11 +1,8 @@
 import { Button } from '../Button';
-import { ScenePart } from '../scene-part';
-import { SpriteOptions } from '../sprite';
+import { ScenePart, ScenePartOptions } from '../scene-part';
 import { ButtonOptions } from '../Button/Button';
 
-export interface ListOptions
-	extends Omit<SpriteOptions, 'imageSrc'>,
-		CreateItemsOptions {}
+export interface ListOptions extends ScenePartOptions, CreateItemsOptions {}
 
 export interface CreateItemsOptions {
 	readonly items: ButtonOptions[];
@@ -14,13 +11,13 @@ export interface CreateItemsOptions {
 
 export class List extends ScenePart {
 	constructor(options: ListOptions) {
-		const { items, align, ...spriteOptions } = options;
-		super(spriteOptions);
-		this.#createItems({ items, align, });
+		const { items, align, ...rest } = options;
+		super(rest);
+		this.#createItems({ items, align });
 	}
 
 	#createItems(options: CreateItemsOptions): void {
-		const { align, items, } = options;
+		const { align, items } = options;
 		const itemsCount = items.length;
 		const centredElementIndex = align === 'center' ? itemsCount / 2 : 0;
 
@@ -28,7 +25,7 @@ export class List extends ScenePart {
 			const element = new Button(item);
 			element.rect.center = this.rect.center;
 			element.rect.centerY += (i - centredElementIndex) * element.rect.height;
-			this.sprites.add(element);
+			this.units.add(element);
 		});
 	}
 }

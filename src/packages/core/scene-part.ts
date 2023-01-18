@@ -1,22 +1,22 @@
 import { Group } from './group';
-import { Rect, RectParams } from './rect';
 import { Screen } from './Screen';
-import { Sprite } from './sprite';
+import { Unit, UnitOptions } from './unit';
 
-export class ScenePart<T extends Sprite = Sprite> {
-	rect: Rect;
-	protected readonly sprites: Group<T>;
+export interface ScenePartOptions extends UnitOptions {}
 
-	constructor(rect: RectParams) {
-		this.rect = new Rect(rect);
-		this.sprites = new Group();
+export class ScenePart<T extends Unit = Unit> extends Unit {
+	protected readonly units: Group<T>;
+
+	constructor(options: ScenePartOptions) {
+		super(options);
+		this.units = new Group();
 	}
 
 	update(): void {
-		this.sprites.update();
+		this.units.update();
 	}
 
 	draw(screen: Screen): void {
-		this.sprites.draw(screen);
+		this.units.draw(screen);
 	}
 }

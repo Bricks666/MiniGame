@@ -1,46 +1,46 @@
 import { Drawable } from './index';
 import { Screen } from './Screen';
-import { Sprite } from './sprite';
+import { Unit } from './unit';
 
-export interface GroupOptions<T extends Sprite> {
-	readonly sprites?: T[];
+export interface GroupOptions<T extends Unit> {
+	readonly units?: T[];
 }
 
-export class Group<T extends Sprite = Sprite> implements Drawable {
-	readonly sprites: Set<T>;
+export class Group<T extends Unit = Unit> implements Drawable {
+	readonly units: Set<T>;
 
 	constructor(options: GroupOptions<T> = {}) {
-		const { sprites, } = options;
-		this.sprites = new Set<T>();
+		const { units } = options;
+		this.units = new Set<T>();
 
-		if (sprites) {
-			sprites.forEach((sprite) => this.add(sprite));
+		if (units) {
+			units.forEach((unit) => this.add(unit));
 		}
 	}
 
 	update(): void {
-		this.sprites.forEach((sprite) => sprite.update());
+		this.units.forEach((sprite) => sprite.update());
 	}
 
 	draw(screen: Screen): void {
-		this.sprites.forEach((sprite) => sprite.draw(screen));
+		this.units.forEach((sprite) => sprite.draw(screen));
 	}
 
 	add(sprite: T): void {
-		this.sprites.add(sprite);
+		this.units.add(sprite);
 		sprite.add(this);
 	}
 
-	remove(sprite: T): void {
-		this.sprites.delete(sprite);
-		sprite.remove(this);
+	remove(unit: T): void {
+		this.units.delete(unit);
+		unit.remove(this);
 	}
 
-	has(sprite: T): boolean {
-		return this.sprites.has(sprite);
+	has(unit: T): boolean {
+		return this.units.has(unit);
 	}
 
 	clear(): void {
-		this.sprites.forEach(this.remove.bind(this));
+		this.units.forEach(this.remove.bind(this));
 	}
 }

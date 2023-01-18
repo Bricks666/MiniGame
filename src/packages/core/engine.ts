@@ -12,19 +12,21 @@ export class Engine<K extends Key> {
 	readonly sceneMachine: SceneMachine<K>;
 
 	constructor(options: EngineOptions<K>) {
-		const { screen, sceneMachine, } = options;
+		const { screen, sceneMachine } = options;
 		this.screen = screen;
 		this.sceneMachine = sceneMachine;
+
+		this.update = this.update.bind(this);
 	}
 
 	start(): void {
-		requestAnimationFrame(this.update.bind(this));
+		requestAnimationFrame(this.update);
 	}
 
 	update(): void {
 		this.sceneMachine.update();
 		this.sceneMachine.draw(this.screen);
 		this.screen.update();
-		requestAnimationFrame(this.update.bind(this));
+		requestAnimationFrame(this.update);
 	}
 }

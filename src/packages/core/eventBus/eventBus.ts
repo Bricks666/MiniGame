@@ -4,7 +4,7 @@ import { EVENTS } from './events';
 import { ChangeSceneListeners } from './types';
 
 export class EventBus extends EventEmitter {
-	private listeners: Map<string, Listener[]>;
+	private listeners: Map<string, Set<Listener>>;
 
 	constructor() {
 		super();
@@ -13,15 +13,12 @@ export class EventBus extends EventEmitter {
 
 	on(type: string, listener: Listener): VoidFunction {
 		if (!this.listeners.get(type)) {
-			this.listeners.set(type, []);
+			this.listeners.set(type, new Set());
 		}
-		this.listeners.get(type)?.push(listener);
+		this.listeners.get(type)!.add(listener);
 
 		return () => {
-			this.listeners.set(
-				type,
-				this.listeners.get(type)!.filter((l) => l !== listener)
-			);
+			this.listeners.get(type)?.delete(listener);
 		};
 	}
 
