@@ -1,6 +1,6 @@
-import { GAME_NAME } from './consts/game';
-import { Game } from './game';
-import { setTitle, setIcon } from './packages/display';
+import { Game } from '@/app';
+import { GAME_NAME } from '@/shared/configs';
+import { setTitle, setIcon } from '@/shared/packages/display';
 
 window.onload = () => {
 	setTitle(GAME_NAME);
