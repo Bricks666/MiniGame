@@ -1,6 +1,5 @@
-import { Display } from '../display';
-import { Image, ImageOptions } from '../primitives';
-import { Unit, UnitOptions } from './unit';
+import { Image, ImageOptions } from '@/packages/primitives';
+import { Unit } from '../unit';
 
 export interface SpriteOptions extends ImageOptions {
 	readonly src: string;

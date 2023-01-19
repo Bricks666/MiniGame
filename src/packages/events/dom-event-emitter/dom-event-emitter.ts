@@ -24,17 +24,12 @@ export class DOMEventEmitter extends EventEmitter {
 				return;
 			}
 
-			console.log(evt.x, this.#display.canvas.offsetLeft);
-			console.log(evt.y, this.#display.canvas.offsetTop);
+			const isCollide = polygon.collidePoint({
+				x: evt.x - this.#display.canvas.offsetLeft,
+				y: evt.y - this.#display.canvas.offsetTop,
+			});
 
-			if (
-				polygon.collidePoint({
-					x: evt.x - this.#display.canvas.offsetLeft,
-					y: evt.y - this.#display.canvas.offsetTop,
-				})
-			) {
-				console.log(evt, polygon);
-				console.log('Collide');
+			if (isCollide) {
 				listener();
 			}
 		};

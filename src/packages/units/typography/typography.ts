@@ -1,5 +1,5 @@
-import { Text, TextOptions } from '../primitives';
-import { Unit } from './unit';
+import { Text, TextOptions } from '@/packages/primitives';
+import { Unit } from '../unit';
 
 export type TypographyOptions = TextOptions;
 
@@ -10,9 +10,6 @@ export class Typography extends Unit<typeof Text> {
 			shapeOptions: [{ ...options }],
 			shape: Text,
 		});
-		this.shape.y = 0;
-
-		console.log(this.shape);
 	}
 
 	update(): void {}

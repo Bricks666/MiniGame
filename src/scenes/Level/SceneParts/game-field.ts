@@ -7,7 +7,6 @@ export class GameField extends ScenePart {
 			...DISPLAY_SIZE,
 			x: 0,
 			y: 0,
-			color: 'black',
 		});
 		this.#createSprites(10);
 	}

@@ -18,11 +18,14 @@ export class Game extends Engine<Scenes> {
 				border: '1px solid black',
 			},
 		});
-		//@ts-ignore
+
 		const states: SceneDict<Scenes> = {
-			level: new Level(),
-			mainMenu: new MainMenu(),
-			loading: new Loading(),
+			level: new Level({ ...display.rect.sizes }),
+			mainMenu: new MainMenu({ ...display.rect.sizes }),
+			loading: new Loading({
+				...display.rect.sizes,
+				createParts: () => [],
+			}),
 		};
 		const sceneMachine = new SceneMachine<Scenes>({
 			states,

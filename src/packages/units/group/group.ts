@@ -1,6 +1,6 @@
-import { Display } from '../display';
-import { Drawable } from '../primitives';
-import { Unit } from './unit';
+import { Display } from '@/packages/display';
+import { Drawable } from '@/packages/primitives';
+import { Unit } from '../unit';
 
 export interface GroupOptions<T extends Unit> {
 	readonly units?: T[];

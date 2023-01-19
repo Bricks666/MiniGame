@@ -1,4 +1,4 @@
-import { domEventEmitter, Handler } from '../../events';
+import { domEventEmitter, Handler } from '@/packages/events';
 import { Typography, TypographyOptions } from '../typography';
 
 export interface ButtonOptions extends TypographyOptions {

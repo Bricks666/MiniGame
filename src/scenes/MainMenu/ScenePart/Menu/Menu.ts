@@ -10,7 +10,7 @@ export class Menu extends List {
 			y: HEADER_HEIGHT,
 			x: 0,
 			color: 'black',
-			gap: 10,
+			gap: 20,
 			items: [
 				{
 					text: 'Play',
@@ -23,7 +23,6 @@ export class Menu extends List {
 					text: 'Exit',
 					color: 'white',
 					onClick: () => {
-						console.log('close');
 						window.close();
 					},
 				},

@@ -44,6 +44,15 @@ export abstract class Polygon implements Drawable {
 		[this.centerX, this.centerY] = otherCenter;
 	}
 
+	get sizes(): Coordinate & Size {
+		return {
+			height: this.height,
+			width: this.width,
+			x: this.x,
+			y: this.y,
+		};
+	}
+
 	moveTo(coordinate: Coordinate): this {
 		this.x = coordinate.x;
 		this.y = coordinate.y;
@@ -90,8 +99,7 @@ export abstract class Polygon implements Drawable {
 			point.y,
 			0
 		);
-		console.log('[X]', isCollideX);
-		console.log('[Y]', isCollideY);
+
 		return isCollideX && isCollideY;
 	}
 

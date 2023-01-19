@@ -1,11 +1,6 @@
-import { Group } from './group';
-import { Display } from '../display';
-import {
-	Drawable,
-	Polygon,
-	Rectangle,
-	RectangleCoordinates,
-} from '../primitives';
+import { Group } from '../group';
+import { Display } from '@/packages/display';
+import { Drawable, Polygon, Rectangle } from '@/packages/primitives';
 
 export interface UnitOptions<T extends typeof Polygon> {
 	readonly shapeOptions: ConstructorParameters<T>;

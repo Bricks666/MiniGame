@@ -1,7 +1,7 @@
-import { Group } from './group';
-import { Display } from '../display';
-import { ExtractShapeOptions, Unit, UnitOptions } from './unit';
-import { Polygon, Rectangle } from '../primitives';
+import { Group } from '../group';
+import { Display } from '@/packages/display';
+import { Polygon, Rectangle } from '@/packages/primitives';
+import { ExtractShapeOptions, Unit, UnitOptions } from '../unit';
 
 export type ScenePartOptions = ExtractShapeOptions<
 	UnitOptions<typeof Rectangle>
