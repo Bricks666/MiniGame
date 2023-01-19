@@ -1,19 +1,20 @@
 import { SceneMachine } from './scene-machine';
-import { Screen } from './screen';
+import { Display } from '../display';
 import { Key } from './types';
+import { rectangleRequestAdapter } from '../renderer';
 
 export interface EngineOptions<K extends Key> {
-	readonly screen: Screen;
+	readonly display: Display;
 	readonly sceneMachine: SceneMachine<K>;
 }
 
 export class Engine<K extends Key> {
-	readonly screen: Screen;
+	readonly display: Display;
 	readonly sceneMachine: SceneMachine<K>;
 
 	constructor(options: EngineOptions<K>) {
-		const { screen, sceneMachine } = options;
-		this.screen = screen;
+		const { display, sceneMachine } = options;
+		this.display = display;
 		this.sceneMachine = sceneMachine;
 
 		this.update = this.update.bind(this);
@@ -24,9 +25,10 @@ export class Engine<K extends Key> {
 	}
 
 	update(): void {
+		this.display.draw(rectangleRequestAdapter(this.display.rect));
 		this.sceneMachine.update();
-		this.sceneMachine.draw(this.screen);
-		this.screen.update();
+		this.sceneMachine.draw(this.display);
+		this.display.update();
 		requestAnimationFrame(this.update);
 	}
 }

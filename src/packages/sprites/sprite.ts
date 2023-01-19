@@ -1,7 +1,6 @@
-import { Screen } from '../core/screen';
-import { SpriteImage } from '../core/sprite-image';
-import { Unit, UnitOptions } from '../core/unit';
-import { spriteRequestAdapter } from './lib';
+import { Unit, UnitOptions } from '../core';
+import { SpriteImage } from './sprite-image';
+import { Display } from '../display';
 
 export interface SpriteOptions extends UnitOptions {
 	readonly src: string;
@@ -18,7 +17,7 @@ export class Sprite extends Unit {
 
 	update<R extends Array<unknown>>(..._args: R): void {}
 
-	draw<R extends any>(screen: Screen, ..._args: R[]): void {
+	draw<R extends any>(screen: Display, ..._args: R[]): void {
 		screen.draw(
 			spriteRequestAdapter({
 				rect: this.rect,

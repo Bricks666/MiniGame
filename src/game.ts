@@ -1,7 +1,7 @@
-import { Engine, SceneDict, SceneMachine, Screen } from '@/packages/core';
+import { Engine, SceneDict, SceneMachine } from '@/packages/core';
 import { domEventEmitter, eventBus } from '@/packages/events';
 import { DISPLAY_SIZE } from './consts/display';
-import { fillRequestAdapter } from './packages/core/screen/lib';
+import { Display } from './packages/display';
 import { Level } from './scenes/Level';
 import { Loading } from './scenes/Loading';
 import { MainMenu } from './scenes/MainMenu';
@@ -10,7 +10,7 @@ type Scenes = 'level' | 'mainMenu' | 'loading';
 
 export class Game extends Engine<Scenes> {
 	constructor() {
-		const screen = new Screen({
+		const display = new Display({
 			...DISPLAY_SIZE,
 			style: {
 				display: 'block',
@@ -27,24 +27,14 @@ export class Game extends Engine<Scenes> {
 			states,
 			stateSceneKey: 'mainMenu',
 		});
-		super({ sceneMachine, screen });
+		super({ sceneMachine, display });
 
-		domEventEmitter.setDisplay(screen);
+		domEventEmitter.setDisplay(display);
 
 		this.#subscribe();
 	}
 
 	update() {
-		this.screen.draw(
-			fillRequestAdapter({
-				color: 'black',
-				rect: {
-					...DISPLAY_SIZE,
-					x: 0,
-					y: 0,
-				},
-			})
-		);
 		super.update();
 	}
 

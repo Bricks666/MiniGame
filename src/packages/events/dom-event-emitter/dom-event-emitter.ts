@@ -1,9 +1,10 @@
-import { Rect, Screen } from '../../core';
+import { Display } from '@/packages/display';
+import { Rectangle } from '@/packages/primitives';
 import { Listener, EventEmitter } from '../event-emitter';
 import { Events, MouseEvents } from './types';
 
 export class DOMEventEmitter extends EventEmitter {
-	#display!: Screen;
+	#display!: Display;
 
 	on(type: Events, listener: Listener): VoidFunction {
 		document.addEventListener(type, listener);
@@ -13,11 +14,11 @@ export class DOMEventEmitter extends EventEmitter {
 		};
 	}
 
-	setDisplay(display: Screen): void {
+	setDisplay(display: Display): void {
 		this.#display = display;
 	}
 
-	onMouseEvent(type: MouseEvents, rect: Rect, listener: Listener): void {
+	onMouseEvent(type: MouseEvents, rect: Rectangle, listener: Listener): void {
 		const eventListener = (evt: MouseEvent) => {
 			if (evt.target !== this.#display.canvas) {
 				return;

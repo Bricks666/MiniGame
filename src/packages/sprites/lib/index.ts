@@ -1,1 +1,1 @@
-export * from './sprite-request-adapter';
+export * from './image-loader';

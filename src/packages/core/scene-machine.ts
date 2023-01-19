@@ -1,5 +1,5 @@
 import { Scene } from './scene';
-import { Screen } from './screen';
+import { Display } from '../display';
 import { Key, StateDict, StateMachine, StateMachineOptions } from './types';
 
 export type SceneDict<K extends Key> = StateDict<K, Scene>;
@@ -20,7 +20,7 @@ export class SceneMachine<K extends Key> implements StateMachine<K, Scene> {
 		this.currentState = this.states[stateKey];
 	}
 
-	draw(screen: Screen): void {
+	draw(screen: Display): void {
 		this.currentState.draw(screen);
 	}
 

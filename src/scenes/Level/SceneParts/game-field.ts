@@ -5,7 +5,7 @@ import { Sprite } from '@/packages/sprites';
 export class GameField extends ScenePart {
 	constructor() {
 		super({
-			rect: { ...DISPLAY_SIZE },
+			rect: { ...DISPLAY_SIZE, x: 0, y: 0 },
 		});
 		this.#createSprites(10);
 	}

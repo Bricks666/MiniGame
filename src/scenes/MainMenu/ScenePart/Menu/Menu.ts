@@ -1,5 +1,5 @@
 import { DISPLAY_SIZE, HEADER_HEIGHT } from '@/consts/display';
-import { List } from '@/packages/components';
+import { List } from '@/packages/units';
 import { eventBus } from '@/packages/events';
 
 export class Menu extends List {
@@ -10,6 +10,7 @@ export class Menu extends List {
 				height: DISPLAY_SIZE.height - HEADER_HEIGHT,
 				y: HEADER_HEIGHT,
 			},
+			gap: 10,
 			items: [
 				{
 					text: 'Play',

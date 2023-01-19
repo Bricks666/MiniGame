@@ -1,6 +1,6 @@
 import { GAME_NAME } from './consts/game';
 import { Game } from './game';
-import { setTitle, setIcon } from './packages/core';
+import { setTitle, setIcon } from './packages/display';
 
 window.onload = () => {
 	setTitle(GAME_NAME);

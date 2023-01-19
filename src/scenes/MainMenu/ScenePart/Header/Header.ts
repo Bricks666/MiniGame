@@ -1,6 +1,6 @@
 import { DISPLAY_SIZE, HEADER_HEIGHT } from '@/consts/display';
 import { GAME_NAME } from '@/consts/game';
-import { Text } from '@/packages/components';
+import { Text } from '@/packages/units';
 import { ScenePart } from '@/packages/core';
 
 export class Header extends ScenePart {

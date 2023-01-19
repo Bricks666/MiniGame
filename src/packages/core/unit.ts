@@ -1,19 +1,19 @@
 import { Group } from './group';
-import { Rect, RectParams } from './rect';
-import { Screen } from './screen';
+import { Display } from '../display';
 import { Drawable } from './types';
+import { Rectangle, RectangleCoordinates } from '../primitives';
 
 export interface UnitOptions {
-	readonly rect?: RectParams;
+	readonly rect?: RectangleCoordinates;
 }
 
 export abstract class Unit implements Drawable {
-	rect: Rect;
+	rect: Rectangle;
 	readonly #groups: Set<Group<this>>;
 
 	constructor(options: UnitOptions) {
 		const { rect } = options;
-		this.rect = new Rect(rect);
+		this.rect = new Rectangle(rect);
 		this.#groups = new Set();
 	}
 
@@ -29,7 +29,7 @@ export abstract class Unit implements Drawable {
 		this.#groups.forEach((group) => group.remove(this));
 	}
 
-	abstract draw(screen: Screen, ...args: any[]): void;
+	abstract draw(screen: Display, ...args: any[]): void;
 
 	abstract update(): void;
 }

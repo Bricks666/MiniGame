@@ -1,1 +1,0 @@
-export { collide } from './collide';

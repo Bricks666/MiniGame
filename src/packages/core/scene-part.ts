@@ -1,5 +1,5 @@
 import { Group } from './group';
-import { Screen } from './screen';
+import { Display } from '../display';
 import { Unit, UnitOptions } from './unit';
 
 export interface ScenePartOptions extends UnitOptions {}
@@ -16,7 +16,7 @@ export class ScenePart<T extends Unit = Unit> extends Unit {
 		this.units.update();
 	}
 
-	draw(screen: Screen): void {
+	draw(screen: Display): void {
 		this.units.draw(screen);
 	}
 }
