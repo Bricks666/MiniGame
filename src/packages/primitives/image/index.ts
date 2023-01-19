@@ -1,1 +1,1 @@
-export const b = '';
+export { Image, type ImageOptions } from './image';

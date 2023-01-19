@@ -121,5 +121,7 @@ export class Renderer {
 					break;
 			}
 		});
+
+		this.#sequence.clear();
 	}
 }

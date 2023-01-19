@@ -9,7 +9,7 @@ export const rectangleRequestAdapter = (
 		y: rectangle.y,
 		height: rectangle.height,
 		width: rectangle.width,
-		color: rectangle.color || 'black',
+		color: rectangle.color || 'transparent',
 		type: 'rectangle',
 		variant: rectangle.variant || 'fill',
 		strokeWidth: rectangle.strokeWidth as never,

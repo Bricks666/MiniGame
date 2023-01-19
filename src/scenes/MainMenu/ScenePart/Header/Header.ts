@@ -1,18 +1,21 @@
-import { DISPLAY_SIZE, HEADER_HEIGHT } from '@/consts/display';
+import { ScenePart, Typography } from '@/packages/units';
 import { GAME_NAME } from '@/consts/game';
-import { Text } from '@/packages/units';
-import { ScenePart } from '@/packages/core';
+import { DISPLAY_SIZE, HEADER_HEIGHT } from '@/consts/display';
 
 export class Header extends ScenePart {
 	constructor() {
 		super({
-			rect: { height: HEADER_HEIGHT, width: DISPLAY_SIZE.width },
+			height: HEADER_HEIGHT,
+			width: DISPLAY_SIZE.width,
+			x: 0,
+			y: 0,
+			color: 'black',
 		});
-		const headerText = new Text({
+		const headerText = new Typography({
 			text: GAME_NAME,
-			fillStyle: 'white',
+			color: 'white',
 		});
-		headerText.rect.center = this.rect.center;
+		headerText.shape.center = this.shape.center;
 		this.units.add(headerText);
 	}
 }

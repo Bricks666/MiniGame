@@ -1,13 +1,13 @@
 import { domEventEmitter, Handler } from '../../events';
-import { Text, TextOptions } from '../text';
+import { Typography, TypographyOptions } from '../typography';
 
-export interface ButtonOptions extends TextOptions {
+export interface ButtonOptions extends TypographyOptions {
 	readonly onClick?: Handler;
 	readonly onHover?: Handler;
 	readonly onLeave?: Handler;
 }
 
-export class Button extends Text {
+export class Button extends Typography {
 	readonly #onClick?: Handler;
 	readonly #onHover?: Handler;
 	readonly #onLeave?: Handler;
@@ -23,15 +23,15 @@ export class Button extends Text {
 
 	#subscribe(): void {
 		if (this.#onClick) {
-			domEventEmitter.onMouseEvent('click', this.rect, this.#onClick);
+			domEventEmitter.onMouseEvent('click', this.shape, this.#onClick);
 		}
 
 		if (this.#onHover) {
-			domEventEmitter.onMouseEvent('hover', this.rect, this.#onHover);
+			domEventEmitter.onMouseEvent('mouseover', this.shape, this.#onHover);
 		}
 
 		if (this.#onLeave) {
-			domEventEmitter.onMouseEvent('leave', this.rect, this.#onLeave);
+			domEventEmitter.onMouseEvent('mouseleave', this.shape, this.#onLeave);
 		}
 	}
 }

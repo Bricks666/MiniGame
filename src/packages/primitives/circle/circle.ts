@@ -1,5 +1,5 @@
 import { Display } from '@/packages/display';
-import { RenderVariant } from '@/packages/renderer';
+import { circleRequestAdapter, RenderVariant } from '@/packages/renderer';
 import { Polygon, PolygonOptions } from '../polygon';
 
 export interface CircleOptions extends Pick<PolygonOptions, 'x' | 'y'> {
@@ -30,7 +30,9 @@ export class Circle extends Polygon {
 		this.variant = variant;
 	}
 
-	draw(screen: Display): void {}
+	draw(display: Display): void {
+		display.draw(circleRequestAdapter(this));
+	}
 
 	update(): void {}
 }

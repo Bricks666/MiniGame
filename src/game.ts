@@ -18,6 +18,7 @@ export class Game extends Engine<Scenes> {
 				border: '1px solid black',
 			},
 		});
+		//@ts-ignore
 		const states: SceneDict<Scenes> = {
 			level: new Level(),
 			mainMenu: new MainMenu(),

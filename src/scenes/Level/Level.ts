@@ -1,5 +1,5 @@
-import { Scene } from '@/packages/core';
-import { GameField } from './SceneParts/index';
+import { Scene } from '@/packages/units';
+import { GameField } from './SceneParts';
 
 export class Level extends Scene {
 	constructor() {

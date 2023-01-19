@@ -1,6 +1,6 @@
-import { Scene } from '@/packages/core';
+import { Scene } from '@/packages/units';
 import { Header } from './ScenePart/Header';
-import { Menu } from './ScenePart/Menu/Menu';
+import { Menu } from './ScenePart/Menu';
 
 export class MainMenu extends Scene {
 	constructor() {

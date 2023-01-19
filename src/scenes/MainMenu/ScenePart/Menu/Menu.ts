@@ -5,24 +5,27 @@ import { eventBus } from '@/packages/events';
 export class Menu extends List {
 	constructor() {
 		super({
-			rect: {
-				width: DISPLAY_SIZE.width,
-				height: DISPLAY_SIZE.height - HEADER_HEIGHT,
-				y: HEADER_HEIGHT,
-			},
+			width: DISPLAY_SIZE.width,
+			height: DISPLAY_SIZE.height - HEADER_HEIGHT,
+			y: HEADER_HEIGHT,
+			x: 0,
+			color: 'black',
 			gap: 10,
 			items: [
 				{
 					text: 'Play',
-					fillStyle: 'white',
+					color: 'white',
 					onClick: () => {
 						eventBus.emitChangeScene('level');
 					},
 				},
 				{
 					text: 'Exit',
-					fillStyle: 'white',
-					onClick: () => window.close(),
+					color: 'white',
+					onClick: () => {
+						console.log('close');
+						window.close();
+					},
 				},
 			],
 			align: 'center',

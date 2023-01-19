@@ -1,5 +1,5 @@
-import { ScenePart, ScenePartOptions } from '../../core';
 import { ButtonOptions, Button } from '../button';
+import { ScenePart, ScenePartOptions } from '../scene-part';
 
 export interface ListOptions extends ScenePartOptions, CreateItemsOptions {}
 
@@ -23,9 +23,9 @@ export class List extends ScenePart {
 
 		items.forEach((item, i) => {
 			const element = new Button(item);
-			element.rect.center = this.rect.center;
-			element.rect.centerY +=
-				(i - centredElementIndex) * element.rect.height + gap * i;
+			element.shape.center = this.shape.center;
+			element.shape.centerY +=
+				(i - centredElementIndex) * element.shape.height + gap * i;
 			this.units.add(element);
 		});
 	}

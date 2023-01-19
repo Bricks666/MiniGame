@@ -1,11 +1,11 @@
-import { Scene } from '@/packages/core';
+import { Scene } from '@/packages/units';
 
 export class Loading extends Scene {
-/* 	constructor() {
+	/* 	constructor() {
 		super();
 	}
  */
-/*   render(time) {
+	/*   render(time) {
 		this.game.fill('#000000');
 		this.game.print(310, 280, 'Loading...');
 

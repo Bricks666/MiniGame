@@ -1,5 +1,5 @@
-import { Scene } from './scene';
 import { Display } from '../display';
+import { Scene } from '../units';
 import { Key, StateDict, StateMachine, StateMachineOptions } from './types';
 
 export type SceneDict<K extends Key> = StateDict<K, Scene>;

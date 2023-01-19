@@ -1,11 +1,13 @@
 import { DISPLAY_SIZE } from '@/consts/display';
-import { ScenePart } from '@/packages/core';
-import { Sprite } from '@/packages/sprites';
+import { ScenePart, Sprite } from '@/packages/units';
 
 export class GameField extends ScenePart {
 	constructor() {
 		super({
-			rect: { ...DISPLAY_SIZE, x: 0, y: 0 },
+			...DISPLAY_SIZE,
+			x: 0,
+			y: 0,
+			color: 'black',
 		});
 		this.#createSprites(10);
 	}
@@ -14,16 +16,13 @@ export class GameField extends ScenePart {
 		for (let i = 0; i < count; i += 1) {
 			this.units.add(
 				new Sprite({
-					rect: {
-						height: 64,
-						width: 64,
-						x: 64 * i,
-						y: 64 * i,
-					},
+					height: 64,
+					width: 64,
+					x: 64 * i,
+					y: 64 * i,
 					src: 'sprites/hero.png',
 				})
 			);
 		}
-		console.log(this.units);
 	}
 }

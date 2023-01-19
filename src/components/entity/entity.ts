@@ -1,4 +1,4 @@
-import { Sprite, SpriteOptions } from '@/packages/sprites';
+import { Sprite, SpriteOptions } from '@/packages/units';
 
 export interface EntityOptions extends SpriteOptions {
 	readonly health: number;

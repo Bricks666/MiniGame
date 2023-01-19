@@ -1,5 +1,5 @@
 import { Display } from '@/packages/display';
-import { Rectangle } from '@/packages/primitives';
+import { Polygon } from '@/packages/primitives';
 import { Listener, EventEmitter } from '../event-emitter';
 import { Events, MouseEvents } from './types';
 
@@ -18,18 +18,23 @@ export class DOMEventEmitter extends EventEmitter {
 		this.#display = display;
 	}
 
-	onMouseEvent(type: MouseEvents, rect: Rectangle, listener: Listener): void {
+	onMouseEvent(type: MouseEvents, polygon: Polygon, listener: Listener): void {
 		const eventListener = (evt: MouseEvent) => {
 			if (evt.target !== this.#display.canvas) {
 				return;
 			}
 
+			console.log(evt.x, this.#display.canvas.offsetLeft);
+			console.log(evt.y, this.#display.canvas.offsetTop);
+
 			if (
-				rect.collidePoint({
+				polygon.collidePoint({
 					x: evt.x - this.#display.canvas.offsetLeft,
 					y: evt.y - this.#display.canvas.offsetTop,
 				})
 			) {
+				console.log(evt, polygon);
+				console.log('Collide');
 				listener();
 			}
 		};

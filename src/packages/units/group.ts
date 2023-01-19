@@ -1,5 +1,5 @@
-import { Drawable } from './index';
 import { Display } from '../display';
+import { Drawable } from '../primitives';
 import { Unit } from './unit';
 
 export interface GroupOptions<T extends Unit> {
@@ -19,11 +19,11 @@ export class Group<T extends Unit = Unit> implements Drawable {
 	}
 
 	update(): void {
-		this.units.forEach((sprite) => sprite.update());
+		this.units.forEach((unit) => unit.update());
 	}
 
 	draw(screen: Display): void {
-		this.units.forEach((sprite) => sprite.draw(screen));
+		this.units.forEach((unit) => unit.draw(screen));
 	}
 
 	add(sprite: T): void {
