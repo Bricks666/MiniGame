@@ -11,7 +11,7 @@ export class EventBus extends EventEmitter {
 		this.listeners = new Map();
 	}
 
-	on(type: string, listener: Listener): VoidFunction {
+	on(type: string, listener: Listener): globalThis.VoidFunction {
 		if (!this.listeners.get(type)) {
 			this.listeners.set(type, new Set());
 		}
@@ -33,9 +33,10 @@ export class EventBus extends EventEmitter {
 
 	onChangeScene<K extends Key>(
 		listener: ChangeSceneListeners<K>
-	): VoidFunction {
+	): globalThis.VoidFunction {
 		return this.on(EVENTS.CHANGE_SCENE, listener);
 	}
+
 	emitChangeScene(scene: string): void {
 		this.emit(EVENTS.CHANGE_SCENE, scene);
 	}

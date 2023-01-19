@@ -20,5 +20,7 @@ export class Image extends Polygon {
 		display.draw(imageRequestAdapter(this));
 	}
 
-	update(): void {}
+	update(): void {
+		return undefined;
+	}
 }

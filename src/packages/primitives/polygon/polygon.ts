@@ -9,8 +9,11 @@ export type Center = [number, number];
 
 export abstract class Polygon implements Drawable {
 	x: number;
+
 	y: number;
+
 	width: number;
+
 	height: number;
 
 	constructor(options: PolygonOptions) {
@@ -104,5 +107,6 @@ export abstract class Polygon implements Drawable {
 	}
 
 	abstract draw(display: Display): void;
+
 	abstract update(): void;
 }

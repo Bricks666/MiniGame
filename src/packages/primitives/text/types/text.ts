@@ -1,4 +1,4 @@
-import { RenderVariant } from '../../../renderer';
+import { RenderVariant } from '@/packages/renderer';
 
 export interface TextProperties {
 	readonly text: string;
@@ -7,8 +7,8 @@ export interface TextProperties {
 	readonly strokeWidth: number;
 	readonly color: string;
 	readonly lineHeight: number;
-	readonly align?: CanvasTextAlign;
-	readonly baseline?: CanvasTextBaseline;
+	readonly align?: globalThis.CanvasTextAlign;
+	readonly baseline?: globalThis.CanvasTextBaseline;
 	readonly variant: RenderVariant;
 }
 

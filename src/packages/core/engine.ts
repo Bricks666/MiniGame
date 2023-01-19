@@ -10,10 +10,11 @@ export interface EngineOptions<K extends Key> {
 
 export class Engine<K extends Key> {
 	readonly display: Display;
+
 	readonly sceneMachine: SceneMachine<K>;
 
 	constructor(options: EngineOptions<K>) {
-		const { display, sceneMachine } = options;
+		const { display, sceneMachine, } = options;
 		this.display = display;
 		this.sceneMachine = sceneMachine;
 

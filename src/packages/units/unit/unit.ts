@@ -21,13 +21,14 @@ export type GetShapeInstanceType<T extends Unit<typeof Polygon>> = InstanceType<
 >;
 
 export abstract class Unit<T extends typeof Polygon = typeof Polygon>
-	implements Drawable
+implements Drawable
 {
 	shape: InstanceType<T>;
+
 	readonly #groups: Set<Group<this>>;
 
 	constructor(options: UnitOptions<T>) {
-		const { shapeOptions, shape: Shape = Rectangle } = options;
+		const { shapeOptions, shape: Shape = Rectangle, } = options;
 		this.shape = new (Shape as any)(...shapeOptions);
 		this.#groups = new Set();
 	}
@@ -44,7 +45,7 @@ export abstract class Unit<T extends typeof Polygon = typeof Polygon>
 		this.#groups.forEach((group) => group.remove(this));
 	}
 
-	draw(display: Display, ...args: any[]): void {
+	draw(display: Display): void {
 		this.shape.draw(display);
 	}
 

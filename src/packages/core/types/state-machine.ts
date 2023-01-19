@@ -11,7 +11,10 @@ export interface StateMachineOptions<K extends Key, T> {
 
 export declare class StateMachine<K extends Key, T> {
 	constructor(options: StateMachineOptions<K, T>);
+
 	currentState: T;
+
 	readonly states: StateDict<K, T>;
+
 	changeState(stateKey: K): void;
 }

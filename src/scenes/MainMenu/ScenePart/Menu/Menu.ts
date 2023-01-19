@@ -25,7 +25,7 @@ export class Menu extends List {
 					onClick: () => {
 						window.close();
 					},
-				},
+				}
 			],
 			align: 'center',
 		});

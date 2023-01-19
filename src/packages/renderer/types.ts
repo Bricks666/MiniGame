@@ -26,8 +26,8 @@ export type TextRenderRequest = BaseRenderRequest<'text'> &
 		readonly text: string;
 		readonly maxWidth: number;
 		readonly font?: string;
-		readonly align?: CanvasTextAlign;
-		readonly baseline?: CanvasTextBaseline;
+		readonly align?: globalThis.CanvasTextAlign;
+		readonly baseline?: globalThis.CanvasTextBaseline;
 	};
 
 export type RectangleRenderRequest = BaseRenderRequest<'rectangle'> &
@@ -42,7 +42,7 @@ export type CircleRenderRequest = BaseRenderRequest<'circle'> &
 	};
 
 export interface ImageRenderRequest extends BaseRenderRequest<'image'> {
-	readonly image: CanvasImageSource;
+	readonly image: globalThis.CanvasImageSource;
 	readonly width: number;
 	readonly height: number;
 }

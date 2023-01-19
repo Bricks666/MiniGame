@@ -11,6 +11,7 @@ export interface TextOptions
 
 export class Text extends Polygon {
 	text: string;
+
 	styles: TextStyleProperties;
 
 	static defaultStyle: TextStyleProperties = {
@@ -31,16 +32,16 @@ export class Text extends Polygon {
 			y,
 		});
 		this.text = text;
-		this.styles = { ...Text.defaultStyle, ...styles };
+		this.styles = { ...Text.defaultStyle, ...styles, };
 		this.width = this.text.length * this.styles.fontSize;
 		this.height = this.styles.fontSize;
 	}
 
-	draw(display: Display, ...args: Partial<TextProperties>[]): void {
-		const passedStyles = args[0] || {};
-		const styles = { ...this.styles, ...passedStyles };
+	draw(display: Display): void {
 		display.draw(textRequestAdapter(this));
 	}
 
-	update(): void {}
+	update(): void {
+		return undefined;
+	}
 }

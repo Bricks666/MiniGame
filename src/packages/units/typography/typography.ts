@@ -1,16 +1,19 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Text, TextOptions } from '@/packages/primitives';
 import { Unit } from '../unit';
 
 export type TypographyOptions = TextOptions;
 
-//@ts-ignore
+// @ts-ignore
 export class Typography extends Unit<typeof Text> {
 	constructor(options: TextOptions) {
 		super({
-			shapeOptions: [{ ...options }],
+			shapeOptions: [{ ...options, }],
 			shape: Text,
 		});
 	}
 
-	update(): void {}
+	update(): void {
+		return undefined;
+	}
 }

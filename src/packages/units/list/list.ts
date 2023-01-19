@@ -13,11 +13,11 @@ export class List extends ScenePart {
 	constructor(options: ListOptions) {
 		const { items, align, gap, ...rest } = options;
 		super(rest);
-		this.#createItems({ items, align, gap });
+		this.#createItems({ items, align, gap, });
 	}
 
 	#createItems(options: CreateItemsOptions): void {
-		const { align, items, gap } = options;
+		const { align, items, gap, } = options;
 		const itemsCount = items.length;
 		const centredElementIndex = align === 'center' ? itemsCount / 2 : 0;
 

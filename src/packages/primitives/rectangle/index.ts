@@ -1,5 +1,5 @@
 export {
 	Rectangle,
 	type RectangleOptions,
-	type RectangleCoordinates,
+	type RectangleCoordinates
 } from './rectangle';

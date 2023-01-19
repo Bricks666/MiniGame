@@ -8,10 +8,11 @@ export type SceneMachineOptions<K extends Key> = StateMachineOptions<K, Scene>;
 
 export class SceneMachine<K extends Key> implements StateMachine<K, Scene> {
 	currentState: Scene;
+
 	states: SceneDict<K>;
 
 	constructor(options: SceneMachineOptions<K>) {
-		const { states, stateSceneKey } = options;
+		const { states, stateSceneKey, } = options;
 		this.states = states;
 		this.currentState = this.states[stateSceneKey];
 	}

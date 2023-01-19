@@ -1,6 +1,5 @@
-import { Size } from '../core';
-import { Rectangle, RectangleOptions } from '../primitives';
-import { Renderer, RenderRequest } from '../renderer';
+import { Rectangle, RectangleOptions } from '@/packages/primitives';
+import { Renderer, RenderRequest } from '@/packages/renderer';
 
 export interface ScreenOptions extends Partial<RectangleOptions> {
 	readonly container?: HTMLElement;
@@ -11,10 +10,11 @@ export class Display {
 	rect: Rectangle;
 
 	readonly #canvas: HTMLCanvasElement;
+
 	readonly #renderer: Renderer;
 
 	constructor(options: ScreenOptions = {}) {
-		const { height = 0, width = 0, container = document.body, style } = options;
+		const { height = 0, width = 0, container = document.body, style, } = options;
 
 		this.rect = new Rectangle({
 			height,

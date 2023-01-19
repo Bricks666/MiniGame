@@ -3,5 +3,5 @@ export {
 	type ExtractShapeOptions,
 	type ExtractShapeType,
 	type GetShapeInstanceType,
-	type UnitOptions,
+	type UnitOptions
 } from './unit';

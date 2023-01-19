@@ -7,8 +7,10 @@ export interface SpriteOptions extends ImageOptions {
 
 export class Sprite extends Unit<typeof Image> {
 	constructor(options: SpriteOptions) {
-		super({ shapeOptions: [options], shape: Image });
+		super({ shapeOptions: [options], shape: Image, });
 	}
 
-	update<R extends Array<unknown>>(..._args: R): void {}
+	update(): void {
+		return undefined;
+	}
 }

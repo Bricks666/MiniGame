@@ -20,8 +20,8 @@ export class Game extends Engine<Scenes> {
 		});
 
 		const states: SceneDict<Scenes> = {
-			level: new Level({ ...display.rect.sizes }),
-			mainMenu: new MainMenu({ ...display.rect.sizes }),
+			level: new Level({ ...display.rect.sizes, }),
+			mainMenu: new MainMenu({ ...display.rect.sizes, }),
 			loading: new Loading({
 				...display.rect.sizes,
 				createParts: () => [],
@@ -31,7 +31,7 @@ export class Game extends Engine<Scenes> {
 			states,
 			stateSceneKey: 'mainMenu',
 		});
-		super({ sceneMachine, display });
+		super({ sceneMachine, display, });
 
 		domEventEmitter.setDisplay(display);
 

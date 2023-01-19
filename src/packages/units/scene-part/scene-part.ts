@@ -13,7 +13,7 @@ export class ScenePart<
 	protected readonly units: Group<T>;
 
 	constructor(options: ScenePartOptions) {
-		super({ shapeOptions: [options], shape: Rectangle });
+		super({ shapeOptions: [options], shape: Rectangle, });
 		this.units = new Group();
 	}
 

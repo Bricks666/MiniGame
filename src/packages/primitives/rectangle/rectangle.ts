@@ -1,5 +1,5 @@
-import { rectangleRequestAdapter, RenderVariant } from '../../renderer';
-import { Display } from '../../display';
+import { rectangleRequestAdapter, RenderVariant } from '@/packages/renderer';
+import { Display } from '@/packages/display';
 import { Polygon, PolygonOptions } from '../polygon';
 
 export interface RectangleOptions extends PolygonOptions {
@@ -15,7 +15,9 @@ export type RectangleCoordinates = Omit<
 
 export class Rectangle extends Polygon {
 	color?: string;
+
 	strokeWidth?: number;
+
 	variant?: RenderVariant;
 
 	constructor(options: Partial<RectangleOptions> = {}) {
@@ -43,5 +45,7 @@ export class Rectangle extends Polygon {
 		display.draw(rectangleRequestAdapter(this));
 	}
 
-	update(): void {}
+	update(): void {
+		return undefined;
+	}
 }

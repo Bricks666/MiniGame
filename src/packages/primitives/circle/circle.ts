@@ -11,12 +11,15 @@ export interface CircleOptions extends Pick<PolygonOptions, 'x' | 'y'> {
 
 export class Circle extends Polygon {
 	radius: number;
+
 	color?: string;
+
 	variant?: RenderVariant;
+
 	strokeWidth?: number;
 
 	constructor(options: CircleOptions) {
-		const { radius, x, y, color, strokeWidth, variant } = options;
+		const { radius, x, y, color, strokeWidth, variant, } = options;
 		super({
 			height: radius ** 2,
 			width: radius ** 2,
@@ -34,5 +37,7 @@ export class Circle extends Polygon {
 		display.draw(circleRequestAdapter(this));
 	}
 
-	update(): void {}
+	update(): void {
+		return undefined;
+	}
 }

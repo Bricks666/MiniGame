@@ -3,7 +3,7 @@ import {
 	ImageRenderRequest,
 	RectangleRenderRequest,
 	TextRenderRequest,
-	RenderRequest,
+	RenderRequest
 } from './types';
 
 export interface RendererOptions {
@@ -12,10 +12,11 @@ export interface RendererOptions {
 
 export class Renderer {
 	readonly #sequence: Set<RenderRequest>;
+
 	readonly #context: CanvasRenderingContext2D;
 
 	constructor(options: RendererOptions) {
-		const { context } = options;
+		const { context, } = options;
 		this.#context = context;
 		this.#sequence = new Set();
 	}
@@ -25,7 +26,7 @@ export class Renderer {
 	}
 
 	#renderImage(request: ImageRenderRequest): void {
-		const { image, x, y, height, width } = request;
+		const { image, x, y, height, width, } = request;
 		this.#context.drawImage(image, x, y, width, height);
 	}
 
@@ -86,7 +87,7 @@ export class Renderer {
 	}
 
 	#renderCircle(request: CircleRenderRequest): void {
-		const { color, x, y, radius, strokeWidth, variant } = request;
+		const { color, x, y, radius, strokeWidth, variant, } = request;
 
 		const circle = new Path2D();
 		circle.arc(x, y, radius, 0, Math.PI * 2, false);
@@ -118,6 +119,8 @@ export class Renderer {
 					break;
 				case 'text':
 					this.#renderText(request);
+					break;
+				default:
 					break;
 			}
 		});

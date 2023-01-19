@@ -1,6 +1,6 @@
 {
-	"*.ts(x)?": [
-		"prettier --write --ignore-unknown --config ./.prettierrc",
+	"*.(ts|js)": [
+		"prettier --write --ignore-unknown --config ./.prettierrc src",
 		"eslint --fix -c ./.eslintrc.json"
 	]
 }

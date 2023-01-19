@@ -12,9 +12,9 @@ export const baseLoader = <
 	T extends SourceConstructor,
 	R extends ExtractReturnConstructorType<T> = ExtractReturnConstructorType<T>
 >(
-	Source: T,
-	src: string
-): Promise<R> => {
+		Source: T,
+		src: string
+	): Promise<R> => {
 	return new Promise<R>((resolve, reject) => {
 		const loader = new Source();
 		loader.addEventListener(

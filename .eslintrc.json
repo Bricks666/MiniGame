@@ -18,7 +18,7 @@
 		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
-	"plugins": ["react", "@typescript-eslint", "effector"],
+	"plugins": ["@typescript-eslint"],
 	"rules": {
 		/* STANDARD */
 		"no-use-before-define": "off",
@@ -52,17 +52,7 @@
 		"prefer-arrow-callback": "off",
 		"no-shadow": "off",
 		"default-param-last": "warn",
-
-		/* REACT */
-		"react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
-		"react/jsx-props-no-spreading": "off",
-		"react/prop-types": "off",
-		"react/require-default-props": "off",
-		"react/jsx-indent": ["error", "tab"],
-		"react/jsx-indent-props": ["error", "tab"],
-		"react/function-component-definition": "off",
-		"react/no-unused-prop-types": "off",
-		"react/no-array-index-key": "off",
+		"class-methods-use-this": "warn",
 
 		/* IMPORT */
 		"import/extensions": [

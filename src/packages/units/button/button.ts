@@ -9,7 +9,9 @@ export interface ButtonOptions extends TypographyOptions {
 
 export class Button extends Typography {
 	readonly #onClick?: Handler;
+
 	readonly #onHover?: Handler;
+
 	readonly #onLeave?: Handler;
 
 	constructor(options: ButtonOptions) {

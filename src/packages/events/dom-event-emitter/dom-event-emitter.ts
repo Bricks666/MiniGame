@@ -6,7 +6,7 @@ import { Events, MouseEvents } from './types';
 export class DOMEventEmitter extends EventEmitter {
 	#display!: Display;
 
-	on(type: Events, listener: Listener): VoidFunction {
+	on(type: Events, listener: Listener): globalThis.VoidFunction {
 		document.addEventListener(type, listener);
 
 		return () => {

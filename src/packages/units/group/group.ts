@@ -10,7 +10,7 @@ export class Group<T extends Unit = Unit> implements Drawable {
 	readonly units: Set<T>;
 
 	constructor(options: GroupOptions<T> = {}) {
-		const { units } = options;
+		const { units, } = options;
 		this.units = new Set<T>();
 
 		if (units) {
