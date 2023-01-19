@@ -1,7 +1,12 @@
+import { Rectangle } from '@/shared/packages/primitives';
 import { ButtonOptions, Button } from '../button';
-import { ScenePart, ScenePartOptions } from '../scene-part';
+import { Group } from '../group';
+import { Unit } from '../unit';
+import { UnitsBlock, UnitsBlockOptions } from '../units-block';
 
-export interface ListOptions extends ScenePartOptions, CreateItemsOptions {}
+export interface ListOptions
+	extends UnitsBlockOptions<CreateItemsOptions>,
+		CreateItemsOptions {}
 
 export interface CreateItemsOptions {
 	readonly items: ButtonOptions[];
@@ -9,24 +14,35 @@ export interface CreateItemsOptions {
 	readonly align?: 'center';
 }
 
-export class List extends ScenePart {
+export class List extends UnitsBlock<CreateItemsOptions> {
 	constructor(options: ListOptions) {
 		const { items, align, gap, ...rest } = options;
-		super(rest);
-		this.#createItems({ items, align, gap, });
+		super({
+			...rest,
+			generateOptions: {
+				items,
+				gap,
+				align,
+			},
+		});
 	}
 
-	#createItems(options: CreateItemsOptions): void {
-		const { align, items, gap, } = options;
-		const itemsCount = items.length;
-		const centredElementIndex = align === 'center' ? itemsCount / 2 : 0;
+	static generateUnits(
+		shape: Rectangle,
+		options: CreateItemsOptions
+	): Group<Unit> {
+		const itemsCount = options.items.length;
+		const centredElementIndex = options.align === 'center' ? itemsCount / 2 : 0;
 
-		items.forEach((item, i) => {
+		const units = options.items.map((item, i) => {
 			const element = new Button(item);
-			element.shape.center = this.shape.center;
+			element.shape.center = shape.center;
 			element.shape.centerY +=
-				(i - centredElementIndex) * element.shape.height + gap * i;
-			this.units.add(element);
+				(i - centredElementIndex) * element.shape.height + options.gap * i;
+
+			return element;
 		});
+
+		return new Group({ units, });
 	}
 }

@@ -1,6 +1,6 @@
 import { Display } from '@/shared/packages/display';
 
 export interface Drawable {
-	draw(screen: Display): void;
+	draw(display: Display): void;
 	update(): void;
 }

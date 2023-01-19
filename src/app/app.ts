@@ -1,4 +1,4 @@
-import { Level, MainMenu } from '@/pages';
+import { Level, Main } from '@/pages';
 import { DISPLAY_SIZE } from '@/shared/configs';
 import { Engine, SceneDict, SceneMachine } from '@/shared/packages/core';
 import { Display } from '@/shared/packages/display';
@@ -20,16 +20,12 @@ export class Game extends Engine<Scenes> {
 
 		const states: SceneDict<Scenes> = {
 			level: new Level({ ...display.rect.sizes, }),
-			mainMenu: new MainMenu({ ...display.rect.sizes, }),
-			loading: new Loading({
-				...display.rect.sizes,
-				color: 'tomato',
-				createParts: () => [],
-			}),
+			mainMenu: new Main({ ...display.rect.sizes, }),
+			loading: new Loading({ ...display.rect.sizes, }),
 		};
 		const sceneMachine = new SceneMachine<Scenes>({
 			states,
-			startKey: 'loading',
+			startKey: 'mainMenu',
 		});
 		super({ sceneMachine, display, });
 

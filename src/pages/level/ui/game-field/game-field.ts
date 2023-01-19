@@ -7,6 +7,8 @@ export class GameField extends ScenePart {
 			...DISPLAY_SIZE,
 			x: 0,
 			y: 0,
+			strokeWidth: 2,
+			variant: 'both',
 		});
 		this.#createSprites(10);
 	}

@@ -1,16 +1,26 @@
-import { Scene, SceneOptions, ScenePart } from '@/shared/packages/units';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Rectangle } from '@/shared/packages/primitives';
+import {
+	Group,
+	Unit,
+	UnitsBlock,
+	UnitsBlockOptions
+} from '@/shared/packages/units';
 import { Header, Menu } from './ui';
 
-export class MainMenu extends Scene {
-	constructor(options: Omit<SceneOptions, 'createParts'> = {}) {
+export type MainOptions = UnitsBlockOptions<never>;
+
+export class Main extends UnitsBlock {
+	constructor(options: MainOptions = {}) {
 		super({
 			...options,
 			color: 'black',
-			createParts: MainMenu.#createParts,
 		});
 	}
 
-	static #createParts(): Array<ScenePart> {
-		return [new Header(), new Menu()];
+	static generateUnits(shape: Rectangle): Group<Unit> {
+		const units = [new Header(), new Menu()];
+
+		return new Group({ units, });
 	}
 }

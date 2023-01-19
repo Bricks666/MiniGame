@@ -1,16 +1,23 @@
-import { Scene, SceneOptions, ScenePart } from '@/shared/packages/units';
+import {
+	Group,
+	Unit,
+	UnitsBlock,
+	UnitsBlockOptions
+} from '@/shared/packages/units';
 import { GameField } from './ui';
 
-export class Level extends Scene {
-	constructor(options: Omit<SceneOptions, 'createParts' | 'color'>) {
+export type LevelOptions = UnitsBlockOptions<never>;
+
+export class Level extends UnitsBlock {
+	constructor(options: LevelOptions = {}) {
 		super({
 			...options,
 			color: 'black',
-			createParts: Level.#createParts,
 		});
 	}
 
-	static #createParts(): Array<ScenePart> {
-		return [new GameField()];
+	static generateUnits(): Group<Unit> {
+		const units = [new GameField()];
+		return new Group({ units, });
 	}
 }

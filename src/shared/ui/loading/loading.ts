@@ -1,14 +1,16 @@
-import { Scene } from '@/shared/packages/units';
+import { Rectangle } from '@/shared/packages/primitives';
+import { Typography, UnitsBlock, Unit, Group } from '@/shared/packages/units';
 
-export class Loading extends Scene {
-	/* 	constructor() {
-		super();
+export class Loading extends UnitsBlock {
+	static generateUnits(shape: Rectangle): Group<Unit> {
+		const group = new Group();
+		const text = new Typography({
+			text: 'Loading...',
+			color: 'white',
+		});
+		text.shape.center = shape.center;
+		group.add(text);
+
+		return group;
 	}
- */
-	/*   render(time) {
-		this.game.fill('#000000');
-		this.game.print(310, 280, 'Loading...');
-
-		super.render(time);
-	} */
 }

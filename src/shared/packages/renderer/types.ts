@@ -18,6 +18,7 @@ export type RenderPrimitive = {
 	| {
 			readonly variant: Exclude<RenderVariant, 'fill'>;
 			readonly strokeWidth: number;
+			readonly strokeColor: string;
 	  }
 );
 
