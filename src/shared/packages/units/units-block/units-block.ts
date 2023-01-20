@@ -40,7 +40,7 @@ export class UnitsBlock<T extends Record<string, any> = never> extends Unit<
 	}
 
 	update(): void {
-		return undefined;
+		this.units.update();
 	}
 
 	onMount(): void {

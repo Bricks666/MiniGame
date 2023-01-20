@@ -20,7 +20,6 @@ export class Level extends UnitsBlock {
 	}
 
 	static generateUnits(shape: Rectangle): Group<Unit> {
-		console.log(shape);
 		const units = [
 			new GameField({
 				x: shape.innerLeft,

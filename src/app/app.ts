@@ -30,9 +30,7 @@ export class Game extends Engine<Scenes> {
 
 		domEventEmitter.setDisplay(display);
 		sceneMachine.changeState('level');
-		console.log('aaa');
 		this.#subscribe();
-		console.log('aaa');
 	}
 
 	update() {
@@ -41,7 +39,6 @@ export class Game extends Engine<Scenes> {
 
 	#subscribe() {
 		eventBus.onChangeScene<Scenes>((key) => {
-			console.log('CHange', key);
 			this.sceneMachine.changeState(key);
 		});
 	}

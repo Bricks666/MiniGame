@@ -70,7 +70,7 @@ export abstract class Polygon implements Drawable {
 		return this;
 	}
 
-	collideRect(polygon: Polygon): boolean {
+	collidePolygon(polygon: Polygon): boolean {
 		return Polygon.collidePolygon(this, polygon);
 	}
 

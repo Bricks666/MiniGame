@@ -35,19 +35,9 @@ export class DOMEventEmitter extends EventEmitter {
 			}
 
 			const isCollide = polygon.collidePoint({
-				x: evt.x - this.#display.canvas.offsetLeft,
-				y: evt.y - this.#display.canvas.offsetTop,
+				x: evt.pageX - this.#display.canvas.offsetLeft,
+				y: evt.pageY - this.#display.canvas.offsetTop,
 			});
-
-			if (type === 'click') {
-				console.log(
-					'evt',
-					evt.x - this.#display.canvas.offsetLeft,
-					evt.y - this.#display.canvas.offsetTop,
-					polygon,
-					isCollide
-				);
-			}
 
 			if (isCollide) {
 				listener();
@@ -60,7 +50,6 @@ export class DOMEventEmitter extends EventEmitter {
 	onKeyboardEvent(type: KeyboardEvents, key: string, listener: Listener): void {
 		const eventListener = (evt: KeyboardEvent) => {
 			if (evt.key !== key) {
-				console.log(evt, key);
 				return;
 			}
 

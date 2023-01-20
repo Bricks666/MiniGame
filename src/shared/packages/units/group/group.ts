@@ -18,38 +18,54 @@ export class Group<T extends Unit = Unit> implements Drawable {
 		}
 	}
 
+	get length(): number {
+		return this.#units.size;
+	}
+
 	onMount() {
 		this.#units.forEach((unit) => unit.onMount());
+		return this;
 	}
 
 	onUnmount() {
 		this.#units.forEach((unit) => unit.onUnmount());
+		return this;
 	}
 
-	update(): void {
+	update(): this {
 		this.#units.forEach((unit) => unit.update());
+		return this;
 	}
 
-	draw(screen: Display): void {
-		this.#units.forEach((unit) => unit.draw(screen));
+	draw(display: Display): this {
+		this.#units.forEach((unit) => unit.draw(display));
+		return this;
 	}
 
-	add(sprite: T): void {
-		this.#units.add(sprite);
-		sprite.add(this);
+	add(unit: T): this {
+		this.#units.add(unit);
+		unit.add(this);
+		return this;
 	}
 
-	remove(unit: T): void {
+	forEach(callback: (unit: T) => void): this {
+		this.#units.forEach(callback);
+		return this;
+	}
+
+	remove(unit: T): this {
 		this.#units.delete(unit);
 		unit.remove(this);
+		return this;
 	}
 
 	has(unit: T): boolean {
 		return this.#units.has(unit);
 	}
 
-	clear(): void {
+	clear(): this {
 		this.#units.forEach(this.remove.bind(this));
+		return this;
 	}
 
 	find(callback: (unit: T) => boolean): T | null {

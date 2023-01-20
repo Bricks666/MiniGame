@@ -6,7 +6,7 @@ import {
 	UnitsBlock,
 	UnitsBlockOptions
 } from '@/shared/packages/units';
-import { Player } from '@/components';
+import { Bullet, Player } from '@/components';
 
 export type GameFieldOptions = UnitsBlockOptions<GenerateOptions>;
 
@@ -15,12 +15,26 @@ interface GenerateOptions {
 }
 
 export class GameField extends UnitsBlock<GenerateOptions> {
+	#player: Player | null;
+
+	#bullets: Group<Bullet>;
+
+	readonly #maxBullets: number;
+
 	constructor(options: GameFieldOptions = {}) {
 		super({
 			variant: 'fill',
 			generateOptions: { count: 10, },
 			...options,
 		});
+
+		this.#player = null;
+		this.#bullets = new Group();
+		this.#maxBullets = 6;
+
+		this.#moveLeft = this.#moveLeft.bind(this);
+		this.#moveRight = this.#moveRight.bind(this);
+		this.#shoot = this.#shoot.bind(this);
 	}
 
 	static generateUnits(shape: Rectangle): Group<Unit> {
@@ -43,6 +57,8 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 			return;
 		}
 
+		this.#player = player;
+
 		domEventEmitter.onKeyboardEvent(
 			'keydown',
 			'ArrowLeft',
@@ -54,27 +70,48 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 			this.#moveRight.bind(this, player)
 		);
 
-		console.log('mount');
+		domEventEmitter.onKeyboardEvent('keydown', ' ', this.#shoot);
 	}
 
-	onUnmount(): void {
-		console.log('unmount');
+	update(): void {
+		this.#bullets.forEach((bullet) => {
+			const isOut = this.shape.innerTop <= bullet.shape.innerTop;
+			if (!isOut) {
+				bullet.kill();
+			}
+		});
+		super.update();
 	}
 
-	#moveLeft(player: Player) {
-		console.log(player);
-		if (this.shape.innerLeft > player.shape.x - 5) {
+	#moveLeft = () => {
+		if (this.shape.innerLeft > (this.#player?.shape.innerLeft ?? 0) - 5) {
 			return;
 		}
 
-		player.moveOn({ x: -5, y: 0, });
-	}
+		this.#player?.moveOn({ x: -5, y: 0, });
+	};
 
-	#moveRight(player: Player) {
-		if (this.shape.innerRight < player.shape.x + 5) {
+	#moveRight = () => {
+		if (this.shape.innerRight < (this.#player?.shape.innerRight ?? 0) + 5) {
 			return;
 		}
 
-		player.moveOn({ x: 5, y: 0, });
-	}
+		this.#player?.moveOn({ x: 5, y: 0, });
+	};
+
+	#shoot = () => {
+		const currentBulletsCount = this.#bullets.length;
+		if (currentBulletsCount === this.#maxBullets) {
+			return;
+		}
+
+		const bullet = this.#player?.shoot();
+
+		if (!bullet) {
+			return;
+		}
+
+		this.#bullets.add(bullet);
+		this.units.add(bullet);
+	};
 }

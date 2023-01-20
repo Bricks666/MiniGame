@@ -10,24 +10,12 @@ const items: Button[] = [
 		onClick() {
 			eventBus.emitChangeScene('level');
 		},
-		onHover() {
-			(this as unknown as Button).shape.styles.color = 'white';
-		},
-		onLeave() {
-			(this as unknown as Button).shape.styles.color = 'silver';
-		},
 	}),
 	new Button({
 		text: 'Выйти',
 		color: 'silver',
 		onClick() {
 			window.close();
-		},
-		onHover() {
-			(this as unknown as Button).shape.styles.color = 'white';
-		},
-		onLeave() {
-			(this as unknown as Button).shape.styles.color = 'silver';
 		},
 	})
 ];

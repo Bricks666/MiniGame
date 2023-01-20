@@ -1,7 +1,8 @@
 import { Coordinate } from '@/shared/packages/core';
 import { Sprite, SpriteOptions } from '@/shared/packages/units';
 
-export interface EntityOptions extends SpriteOptions {
+export interface EntityOptions
+	extends Pick<SpriteOptions, 'height' | 'src' | 'width' | 'x' | 'y'> {
 	readonly health: number;
 }
 
