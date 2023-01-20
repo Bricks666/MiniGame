@@ -10,6 +10,7 @@ export interface RectangleOptions extends PolygonOptions {
 	readonly variant?: RenderVariant;
 	readonly strokeWidth?: number;
 	readonly strokeColor?: string;
+	readonly padding?: number;
 }
 
 export type RectangleCoordinates = Omit<
@@ -20,11 +21,13 @@ export type RectangleCoordinates = Omit<
 export class Rectangle extends Polygon {
 	color?: string;
 
-	strokeWidth?: number;
-
 	variant?: RenderVariant;
 
 	strokeColor?: string;
+
+	strokeWidth: number;
+
+	padding: number;
 
 	constructor(options: Partial<RectangleOptions> = {}) {
 		const {
@@ -33,9 +36,10 @@ export class Rectangle extends Polygon {
 			x = 0,
 			y = 0,
 			color,
-			strokeWidth,
 			variant,
 			strokeColor,
+			strokeWidth = 0,
+			padding = 0,
 		} = options;
 		super({
 			height,
@@ -47,6 +51,31 @@ export class Rectangle extends Polygon {
 		this.variant = variant;
 		this.strokeWidth = strokeWidth;
 		this.strokeColor = strokeColor;
+		this.padding = padding;
+	}
+
+	get innerWidth(): number {
+		return this.width - this.strokeWidth * 2 - this.padding * 2;
+	}
+
+	get innerHeight(): number {
+		return this.height - this.strokeWidth * 2 - this.padding * 2;
+	}
+
+	get innerRight(): number {
+		return this.innerLeft + this.innerWidth;
+	}
+
+	get innerBottom(): number {
+		return this.innerTop + this.innerHeight;
+	}
+
+	get innerLeft(): number {
+		return this.x + this.strokeWidth + this.padding;
+	}
+
+	get innerTop(): number {
+		return this.y + this.strokeWidth + this.padding;
 	}
 
 	draw(display: Display): void {

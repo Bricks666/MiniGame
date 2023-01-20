@@ -19,11 +19,17 @@ export class SceneMachine<K extends Key>
 	extends StateMachine<K, UnitsBlock>
 	implements Drawable
 {
+	changeState(key: K): void {
+		this.current?.onUnmount();
+		super.changeState(key);
+		this.current?.onMount();
+	}
+
 	draw(display: Display): void {
-		this.current.draw(display);
+		this.current?.draw(display);
 	}
 
 	update(): void {
-		this.current.update();
+		this.current?.update();
 	}
 }

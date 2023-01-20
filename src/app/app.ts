@@ -25,13 +25,14 @@ export class Game extends Engine<Scenes> {
 		};
 		const sceneMachine = new SceneMachine<Scenes>({
 			states,
-			startKey: 'mainMenu',
 		});
 		super({ sceneMachine, display, });
 
 		domEventEmitter.setDisplay(display);
-
+		sceneMachine.changeState('level');
+		console.log('aaa');
 		this.#subscribe();
+		console.log('aaa');
 	}
 
 	update() {
@@ -40,6 +41,7 @@ export class Game extends Engine<Scenes> {
 
 	#subscribe() {
 		eventBus.onChangeScene<Scenes>((key) => {
+			console.log('CHange', key);
 			this.sceneMachine.changeState(key);
 		});
 	}

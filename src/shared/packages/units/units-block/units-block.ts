@@ -17,6 +17,13 @@ export class UnitsBlock<T extends Record<string, any> = never> extends Unit<
 > {
 	readonly units: Group<Unit>;
 
+	static generateUnits(
+		shape: Rectangle,
+		options: Record<string, any>
+	): Group<Unit> {
+		throw new Error('[Inheritance] generateUnits was not implemented');
+	}
+
 	constructor(options: UnitsBlockConstructorOptions<T>) {
 		const { generateOptions, ...rest } = options;
 		super({ shapeOptions: [rest], shape: Rectangle, });
@@ -36,10 +43,13 @@ export class UnitsBlock<T extends Record<string, any> = never> extends Unit<
 		return undefined;
 	}
 
-	static generateUnits(
-		shape: Rectangle,
-		options: Record<string, any>
-	): Group<Unit> {
-		throw new Error('[Inheritance] generateUnits was not implemented');
+	onMount(): void {
+		super.onMount();
+		this.units.onMount();
+	}
+
+	onUnmount(): void {
+		super.onUnmount();
+		this.units.onUnmount();
 	}
 }

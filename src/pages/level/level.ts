@@ -13,30 +13,31 @@ export type LevelOptions = UnitsBlockOptions<never>;
 export class Level extends UnitsBlock {
 	constructor(options: LevelOptions = {}) {
 		super({
-			...options,
+			padding: PADDING,
 			color: 'black',
+			...options,
 		});
 	}
 
 	static generateUnits(shape: Rectangle): Group<Unit> {
+		console.log(shape);
 		const units = [
 			new GameField({
-				width: shape.width * 0.75 - PADDING * 2,
-				x: PADDING,
-				y: PADDING,
+				x: shape.innerLeft,
+				y: shape.innerTop,
 				variant: 'both',
 				strokeColor: 'white',
 				strokeWidth: 6,
-				height: shape.height - PADDING * 2,
+				width: shape.innerWidth * 0.75,
+				height: shape.innerHeight,
 			}),
 			new Aside({
-				width: shape.width / 4,
-				x: shape.width * 0.75,
-				y: PADDING,
-				height: shape.height - PADDING * 2,
+				width: shape.innerWidth / 4,
+				x: shape.innerWidth * 0.75,
+				y: shape.innerTop,
+				height: shape.innerHeight,
 			})
 		];
-		console.log(shape, units);
 		return new Group({ units, });
 	}
 }

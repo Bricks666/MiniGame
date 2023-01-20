@@ -20,10 +20,9 @@ export class Button extends Typography {
 		this.#onClick = onClick?.bind(this);
 		this.#onHover = onHover?.bind(this);
 		this.#onLeave = onLeave?.bind(this);
-		this.#subscribe();
 	}
 
-	#subscribe(): void {
+	onMount(): void {
 		if (this.#onClick) {
 			domEventEmitter.onMouseEvent('click', this.shape, this.#onClick);
 		}

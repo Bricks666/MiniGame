@@ -1,10 +1,11 @@
+import { Coordinate } from '@/shared/packages/core';
 import { Sprite, SpriteOptions } from '@/shared/packages/units';
 
 export interface EntityOptions extends SpriteOptions {
 	readonly health: number;
 }
 
-export class Entity extends Sprite {
+export abstract class Entity extends Sprite {
 	readonly health: number;
 
 	constructor(options: EntityOptions) {
@@ -12,4 +13,6 @@ export class Entity extends Sprite {
 		super(spriteOptions);
 		this.health = health;
 	}
+
+	abstract moveOn(coordinate: Coordinate): this;
 }

@@ -1,7 +1,7 @@
 import { Display } from '@/shared/packages/display';
 import { Polygon } from '@/shared/packages/primitives';
 import { Listener, EventEmitter } from '../event-emitter';
-import { Events, MouseEvents } from './types';
+import { Events, KeyboardEvents, MouseEvents } from './types';
 
 export class DOMEventEmitter extends EventEmitter {
 	#display!: Display;
@@ -39,12 +39,35 @@ export class DOMEventEmitter extends EventEmitter {
 				y: evt.y - this.#display.canvas.offsetTop,
 			});
 
+			if (type === 'click') {
+				console.log(
+					'evt',
+					evt.x - this.#display.canvas.offsetLeft,
+					evt.y - this.#display.canvas.offsetTop,
+					polygon,
+					isCollide
+				);
+			}
+
 			if (isCollide) {
 				listener();
 			}
 		};
 
 		this.on(type, eventListener as Listener);
+	}
+
+	onKeyboardEvent(type: KeyboardEvents, key: string, listener: Listener): void {
+		const eventListener = (evt: KeyboardEvent) => {
+			if (evt.key !== key) {
+				console.log(evt, key);
+				return;
+			}
+
+			listener();
+		};
+
+		this.on(type, eventListener);
 	}
 }
 

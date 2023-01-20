@@ -1,12 +1,12 @@
 import { Display } from '@/shared/packages/display';
 import { imageRequestAdapter } from '@/shared/packages/renderer';
-import { Polygon, PolygonOptions } from '../polygon';
+import { Rectangle, RectangleOptions } from '../rectangle';
 
-export interface ImageOptions extends PolygonOptions {
+export interface ImageOptions extends Omit<RectangleOptions, 'color'> {
 	readonly src: string;
 }
 
-export class Image extends Polygon {
+export class Image extends Rectangle {
 	image: HTMLImageElement;
 
 	constructor(options: ImageOptions) {

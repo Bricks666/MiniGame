@@ -6,18 +6,17 @@ export type StateDict<K extends Key, T> = {
 
 export interface StateMachineOptions<K extends Key, T> {
 	readonly states: StateDict<K, T>;
-	readonly startKey: K;
 }
 
 export abstract class StateMachine<K extends Key, T> {
 	readonly states: StateDict<K, T>;
 
-	current: T;
+	current: T | null;
 
 	constructor(options: StateMachineOptions<K, T>) {
-		const { startKey, states, } = options;
+		const { states, } = options;
 		this.states = states;
-		this.current = this.states[startKey];
+		this.current = null;
 	}
 
 	changeState(key: K): void {

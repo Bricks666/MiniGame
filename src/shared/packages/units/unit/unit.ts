@@ -50,4 +50,12 @@ implements Drawable
 	}
 
 	abstract update(): void;
+
+	onMount(): void {
+		return undefined;
+	}
+
+	onUnmount(): void {
+		return undefined;
+	}
 }
