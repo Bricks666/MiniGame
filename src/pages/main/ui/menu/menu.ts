@@ -1,33 +1,45 @@
-import { DISPLAY_SIZE, HEADER_HEIGHT } from '@/shared/configs';
 import { eventBus } from '@/shared/packages/events';
-import { List } from '@/shared/packages/units';
+import { Button, List, ListOptions } from '@/shared/packages/units';
+
+export type MenuOptions = Omit<ListOptions, 'gap' | 'items' | 'align'>;
+
+const items: Button[] = [
+	new Button({
+		text: 'Играть',
+		color: 'silver',
+		onClick() {
+			eventBus.emitChangeScene('level');
+		},
+		onHover() {
+			(this as unknown as Button).shape.styles.color = 'white';
+		},
+		onLeave() {
+			(this as unknown as Button).shape.styles.color = 'silver';
+		},
+	}),
+	new Button({
+		text: 'Выйти',
+		color: 'silver',
+		onClick() {
+			window.close();
+		},
+		onHover() {
+			(this as unknown as Button).shape.styles.color = 'white';
+		},
+		onLeave() {
+			(this as unknown as Button).shape.styles.color = 'silver';
+		},
+	})
+];
 
 export class Menu extends List {
-	constructor() {
+	constructor(options: MenuOptions = {}) {
 		super({
-			width: DISPLAY_SIZE.width,
-			height: DISPLAY_SIZE.height - HEADER_HEIGHT,
-			y: HEADER_HEIGHT,
-			x: 0,
 			color: 'black',
-			gap: 20,
-			items: [
-				{
-					text: 'Play',
-					color: 'white',
-					onClick: () => {
-						eventBus.emitChangeScene('level');
-					},
-				},
-				{
-					text: 'Exit',
-					color: 'white',
-					onClick: () => {
-						window.close();
-					},
-				}
-			],
+			gap: 15,
+			items,
 			align: 'center',
+			...options,
 		});
 	}
 }

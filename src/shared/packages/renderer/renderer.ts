@@ -71,6 +71,7 @@ export class Renderer {
 			width,
 			x,
 			y,
+			strokeColor = 'black',
 			strokeWidth = 1,
 			variant = 'fill',
 		} = request;
@@ -80,7 +81,7 @@ export class Renderer {
 			this.#context.fillRect(x, y, width, height);
 		}
 		if (variant !== 'fill') {
-			this.#context.strokeStyle = color;
+			this.#context.strokeStyle = strokeColor;
 			this.#context.lineWidth = strokeWidth;
 			this.#context.strokeRect(x, y, width, height);
 		}

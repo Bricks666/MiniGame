@@ -16,7 +16,7 @@ export class Text extends Polygon {
 
 	static defaultStyle: TextStyleProperties = {
 		fontFamily: "'Public Pixel', monospace",
-		fontSize: 20,
+		fontSize: 18,
 		strokeWidth: 20,
 		lineHeight: 1.2,
 		color: 'black',

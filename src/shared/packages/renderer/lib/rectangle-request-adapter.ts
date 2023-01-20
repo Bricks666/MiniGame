@@ -13,5 +13,6 @@ export const rectangleRequestAdapter = (
 		type: 'rectangle',
 		variant: rectangle.variant || 'fill',
 		strokeWidth: rectangle.strokeWidth as never,
+		strokeColor: rectangle.strokeColor as never,
 	};
 };

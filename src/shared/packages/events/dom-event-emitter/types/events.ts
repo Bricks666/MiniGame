@@ -1,4 +1,4 @@
-export type MouseEvents = 'mouseover' | 'mouseleave' | 'click' | 'dbclick';
+export type MouseEvents = 'mousemove' | 'mouseleave' | 'click' | 'dbclick';
 
 export type KeyboardEvents = 'keydown' | 'keyup';
 

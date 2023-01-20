@@ -1,4 +1,4 @@
-import { DISPLAY_SIZE, HEADER_HEIGHT, GAME_NAME } from '@/shared/configs';
+import { GAME_NAME } from '@/shared/configs';
 import { Rectangle } from '@/shared/packages/primitives';
 import {
 	Group,
@@ -13,10 +13,6 @@ export type HeaderOptions = UnitsBlockOptions<never>;
 export class Header extends UnitsBlock {
 	constructor(options: HeaderOptions = {}) {
 		super({
-			height: HEADER_HEIGHT,
-			width: DISPLAY_SIZE.width,
-			x: 0,
-			y: 0,
 			color: 'black',
 			...options,
 		});
@@ -26,6 +22,7 @@ export class Header extends UnitsBlock {
 		const headerText = new Typography({
 			text: GAME_NAME,
 			color: 'white',
+			fontSize: 24,
 		});
 		headerText.shape.center = shape.center;
 		return new Group({ units: [headerText], });

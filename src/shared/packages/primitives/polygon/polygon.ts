@@ -24,7 +24,7 @@ export abstract class Polygon implements Drawable {
 	}
 
 	get centerX(): number {
-		return (this.x + this.width) / 2;
+		return this.x + this.width / 2;
 	}
 
 	set centerX(otherCenterX: number) {
@@ -32,7 +32,7 @@ export abstract class Polygon implements Drawable {
 	}
 
 	get centerY(): number {
-		return (this.y + this.height) / 2;
+		return this.y + this.height / 2;
 	}
 
 	set centerY(otherCenterY: number) {

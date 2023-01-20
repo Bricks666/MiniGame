@@ -19,7 +19,20 @@ export class Main extends UnitsBlock {
 	}
 
 	static generateUnits(shape: Rectangle): Group<Unit> {
-		const units = [new Header(), new Menu()];
+		const units = [
+			new Header({
+				height: 50,
+				x: shape.x,
+				y: shape.y,
+				width: shape.width,
+			}),
+			new Menu({
+				width: shape.width,
+				height: shape.height - 50,
+				y: 50,
+				x: 0,
+			})
+		];
 
 		return new Group({ units, });
 	}

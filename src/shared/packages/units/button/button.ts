@@ -17,9 +17,9 @@ export class Button extends Typography {
 	constructor(options: ButtonOptions) {
 		const { onClick, onHover, onLeave, ...textOptions } = options;
 		super(textOptions);
-		this.#onClick = onClick;
-		this.#onHover = onHover;
-		this.#onLeave = onLeave;
+		this.#onClick = onClick?.bind(this);
+		this.#onHover = onHover?.bind(this);
+		this.#onLeave = onLeave?.bind(this);
 		this.#subscribe();
 	}
 
@@ -29,7 +29,7 @@ export class Button extends Typography {
 		}
 
 		if (this.#onHover) {
-			domEventEmitter.onMouseEvent('mouseover', this.shape, this.#onHover);
+			domEventEmitter.onMouseEvent('mousemove', this.shape, this.#onHover);
 		}
 
 		if (this.#onLeave) {

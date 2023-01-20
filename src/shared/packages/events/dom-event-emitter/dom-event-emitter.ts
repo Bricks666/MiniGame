@@ -7,10 +7,17 @@ export class DOMEventEmitter extends EventEmitter {
 	#display!: Display;
 
 	on(type: Events, listener: Listener): globalThis.VoidFunction {
-		document.addEventListener(type, listener);
+		const handler = (evt: Event) => {
+			if (!this.#display) {
+				return;
+			}
+			listener(evt);
+		};
+
+		document.addEventListener(type, handler);
 
 		return () => {
-			document.removeEventListener(type, listener);
+			document.removeEventListener(type, handler);
 		};
 	}
 
@@ -18,6 +25,9 @@ export class DOMEventEmitter extends EventEmitter {
 		this.#display = display;
 	}
 
+	/**
+	 * TODO: Исправить поведение mouseleave
+	 */
 	onMouseEvent(type: MouseEvents, polygon: Polygon, listener: Listener): void {
 		const eventListener = (evt: MouseEvent) => {
 			if (evt.target !== this.#display.canvas) {

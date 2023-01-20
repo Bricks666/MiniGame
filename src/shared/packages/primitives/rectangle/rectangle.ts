@@ -7,8 +7,9 @@ import { Polygon, PolygonOptions } from '../polygon';
 
 export interface RectangleOptions extends PolygonOptions {
 	readonly color?: string;
-	readonly variant: RenderVariant;
-	readonly strokeWidth: number;
+	readonly variant?: RenderVariant;
+	readonly strokeWidth?: number;
+	readonly strokeColor?: string;
 }
 
 export type RectangleCoordinates = Omit<
@@ -23,6 +24,8 @@ export class Rectangle extends Polygon {
 
 	variant?: RenderVariant;
 
+	strokeColor?: string;
+
 	constructor(options: Partial<RectangleOptions> = {}) {
 		const {
 			height = 0,
@@ -32,6 +35,7 @@ export class Rectangle extends Polygon {
 			color,
 			strokeWidth,
 			variant,
+			strokeColor,
 		} = options;
 		super({
 			height,
@@ -42,6 +46,7 @@ export class Rectangle extends Polygon {
 		this.color = color;
 		this.variant = variant;
 		this.strokeWidth = strokeWidth;
+		this.strokeColor = strokeColor;
 	}
 
 	draw(display: Display): void {

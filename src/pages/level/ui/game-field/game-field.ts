@@ -1,4 +1,3 @@
-import { DISPLAY_SIZE } from '@/shared/configs';
 import { Rectangle } from '@/shared/packages/primitives';
 import {
 	Group,
@@ -15,13 +14,9 @@ interface GenerateOptions {
 }
 
 export class GameField extends UnitsBlock<GenerateOptions> {
-	constructor(options: GameFieldOptions) {
+	constructor(options: GameFieldOptions = {}) {
 		super({
-			...DISPLAY_SIZE,
-			x: 0,
-			y: 0,
-			strokeWidth: 2,
-			variant: 'both',
+			variant: 'fill',
 			generateOptions: { count: 10, },
 			...options,
 		});
