@@ -5,7 +5,10 @@ import { Group } from '../group';
 import { Unit, ExtractShapeOptions, UnitOptions } from '../unit';
 
 export type UnitsBlockOptions<T extends Record<string, any>> =
-	ExtractShapeOptions<UnitOptions<typeof Rectangle>> & {
+	ExtractShapeOptions<UnitOptions<typeof Rectangle>>;
+
+type UnitsBlockConstructorOptions<T extends Record<string, any>> =
+	UnitsBlockOptions<T> & {
 		readonly generateOptions?: T;
 	};
 
@@ -14,7 +17,7 @@ export class UnitsBlock<T extends Record<string, any> = never> extends Unit<
 > {
 	readonly units: Group<Unit>;
 
-	constructor(options: UnitsBlockOptions<T>) {
+	constructor(options: UnitsBlockConstructorOptions<T>) {
 		const { generateOptions, ...rest } = options;
 		super({ shapeOptions: [rest], shape: Rectangle, });
 

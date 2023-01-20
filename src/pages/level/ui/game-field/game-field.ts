@@ -1,29 +1,48 @@
 import { DISPLAY_SIZE } from '@/shared/configs';
-import { ScenePart, Sprite } from '@/shared/packages/units';
+import { Rectangle } from '@/shared/packages/primitives';
+import {
+	Group,
+	Sprite,
+	Unit,
+	UnitsBlock,
+	UnitsBlockOptions
+} from '@/shared/packages/units';
 
-export class GameField extends ScenePart {
-	constructor() {
+export type GameFieldOptions = UnitsBlockOptions<GenerateOptions>;
+
+interface GenerateOptions {
+	readonly count: number;
+}
+
+export class GameField extends UnitsBlock<GenerateOptions> {
+	constructor(options: GameFieldOptions) {
 		super({
 			...DISPLAY_SIZE,
 			x: 0,
 			y: 0,
 			strokeWidth: 2,
 			variant: 'both',
+			generateOptions: { count: 10, },
+			...options,
 		});
-		this.#createSprites(10);
 	}
 
-	#createSprites(count: number) {
-		for (let i = 0; i < count; i += 1) {
-			this.units.add(
-				new Sprite({
+	static generateUnits(
+		shape: Rectangle,
+		options: GenerateOptions
+	): Group<Unit> {
+		const units = Array(options.count)
+			.fill(true)
+			.map((_, i) => {
+				return new Sprite({
 					height: 64,
 					width: 64,
-					x: 64 * i,
-					y: 64 * i,
+					x: shape.x + 64 * i,
+					y: shape.y + 64 * i,
 					src: 'sprites/hero.png',
-				})
-			);
-		}
+				});
+			});
+
+		return new Group({ units, });
 	}
 }
