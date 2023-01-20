@@ -45,6 +45,7 @@ export class Group<T extends Unit = Unit> implements Drawable {
 	add(unit: T): this {
 		this.#units.add(unit);
 		unit.add(this);
+		unit.onMount();
 		return this;
 	}
 

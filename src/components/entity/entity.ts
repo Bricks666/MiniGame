@@ -15,5 +15,9 @@ export abstract class Entity extends Sprite {
 		this.health = health;
 	}
 
-	abstract moveOn(coordinate: Coordinate): this;
+	moveOn(coordinate: Coordinate): this {
+		this.shape.x += coordinate.x;
+		this.shape.y += coordinate.y;
+		return this;
+	}
 }

@@ -1,8 +1,8 @@
-import { Coordinate } from '@/shared/packages/core';
 import { Entity, EntityOptions } from '../entity';
 import { HeroBullet } from './hero-bullet';
 
-export interface PlayerOptions extends Omit<EntityOptions, 'src'> {}
+export interface PlayerOptions
+	extends Omit<EntityOptions, 'src' | 'direction'> {}
 
 export class Player extends Entity {
 	readonly #recharge: number;
@@ -13,12 +13,6 @@ export class Player extends Entity {
 		super({ ...options, src: '/sprites/hero.png', });
 		this.#lastShoot = 0;
 		this.#recharge = 500;
-	}
-
-	moveOn(coordinate: Coordinate): this {
-		this.shape.x += coordinate.x;
-		this.shape.y += coordinate.y;
-		return this;
 	}
 
 	shoot(): HeroBullet | void {

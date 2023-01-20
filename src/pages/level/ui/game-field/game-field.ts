@@ -1,4 +1,4 @@
-import { domEventEmitter } from '@/shared/packages/events';
+import { keyNames, pressedKeys } from '@/shared/packages/events';
 import { Rectangle } from '@/shared/packages/primitives';
 import {
 	Group,
@@ -6,7 +6,7 @@ import {
 	UnitsBlock,
 	UnitsBlockOptions
 } from '@/shared/packages/units';
-import { Bullet, Player } from '@/components';
+import { Bullet, Enemy, Player } from '@/components';
 
 export type GameFieldOptions = UnitsBlockOptions<GenerateOptions>;
 
@@ -18,6 +18,8 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 	#player: Player | null;
 
 	#bullets: Group<Bullet>;
+
+	#enemies: Group<Enemy>;
 
 	readonly #maxBullets: number;
 
@@ -46,7 +48,15 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 			y: shape.innerBottom - 64,
 		});
 
-		return new Group({ units: [player], });
+		const enemy = new Enemy({
+			health: 4,
+			height: 64,
+			width: 64,
+			x: shape.innerLeft,
+			y: shape.innerTop,
+		});
+
+		return new Group({ units: [player, enemy], });
 	}
 
 	onMount(): void {
@@ -58,19 +68,6 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 		}
 
 		this.#player = player;
-
-		domEventEmitter.onKeyboardEvent(
-			'keydown',
-			'ArrowLeft',
-			this.#moveLeft.bind(this, player)
-		);
-		domEventEmitter.onKeyboardEvent(
-			'keydown',
-			'ArrowRight',
-			this.#moveRight.bind(this, player)
-		);
-
-		domEventEmitter.onKeyboardEvent('keydown', ' ', this.#shoot);
 	}
 
 	update(): void {
@@ -80,6 +77,17 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 				bullet.kill();
 			}
 		});
+
+		if (pressedKeys[keyNames.LEFT]) {
+			this.#moveLeft();
+		}
+		if (pressedKeys[keyNames.RIGHT]) {
+			this.#moveRight();
+		}
+		if (pressedKeys[keyNames.SPACE]) {
+			this.#shoot();
+		}
+
 		super.update();
 	}
 

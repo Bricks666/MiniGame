@@ -43,6 +43,7 @@ implements Drawable
 
 	kill(): void {
 		this.#groups.forEach((group) => group.remove(this));
+		this.onUnmount();
 	}
 
 	draw(display: Display): void {

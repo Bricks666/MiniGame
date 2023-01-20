@@ -3,7 +3,7 @@ import { Polygon } from '@/shared/packages/primitives';
 import { Listener, EventEmitter } from '../event-emitter';
 import { Events, KeyboardEvents, MouseEvents } from './types';
 
-export class DOMEventEmitter extends EventEmitter {
+export class DOMEvents extends EventEmitter {
 	#display!: Display;
 
 	on(type: Events, listener: Listener): globalThis.VoidFunction {
@@ -60,4 +60,4 @@ export class DOMEventEmitter extends EventEmitter {
 	}
 }
 
-export const domEventEmitter = new DOMEventEmitter();
+export const domEvents = new DOMEvents();

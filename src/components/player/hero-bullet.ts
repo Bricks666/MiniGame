@@ -1,7 +1,7 @@
 import { Bullet, BulletOptions } from '../bullet';
 
 export interface HeroBulletOptions
-	extends Omit<BulletOptions, 'damage' | 'src'> {}
+	extends Omit<BulletOptions, 'damage' | 'src' | 'direction'> {}
 
 export class HeroBullet extends Bullet {
 	constructor(options: HeroBulletOptions) {
@@ -9,6 +9,7 @@ export class HeroBullet extends Bullet {
 			...options,
 			src: 'sprites/hero_bullet.png',
 			damage: 1,
+			direction: -1,
 		});
 	}
 }
