@@ -4,6 +4,8 @@ export interface VectorLike {
 }
 
 export class Vector {
+	static ZERO: Vector = new Vector(0, 0);
+
 	x: number;
 
 	y: number;

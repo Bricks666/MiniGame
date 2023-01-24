@@ -1,26 +1,32 @@
+import { GameObject } from '../game-objects';
 import { Vector, VectorLike } from '../math';
+import { AABB, AABBOptions } from '../math/aabb';
 
-export interface BodyOptions {
-	readonly position?: VectorLike;
+export interface BodyOptions extends AABBOptions {
 	readonly velocity?: VectorLike;
-	readonly width: number;
-	readonly height: number;
+	readonly gameObject: GameObject;
 }
 
-export class Body {
-	min: Vector;
-
-	max: Vector;
-
+export class Body extends AABB {
 	velocity: Vector;
+
+	gameObject: GameObject;
 
 	readonly isBody: true;
 
 	constructor(options: BodyOptions) {
-		const { height, velocity, width, position, } = options;
+		const { velocity, gameObject, ...rest } = options;
+		const { x, y, width, height } = gameObject;
+
+		super({
+			x,
+			y,
+			width,
+			height,
+			...rest,
+		});
+		this.gameObject = gameObject;
 		this.velocity = new Vector(velocity?.x, velocity?.y);
-		this.min = new Vector(position?.x, position?.y);
-		this.max = new Vector(this.min.x + width, this.min.y + height);
 		this.isBody = true;
 	}
 
@@ -28,12 +34,7 @@ export class Body {
 		const vx = this.velocity.x;
 		const vy = this.velocity.y;
 
-		this.min.add(vx, vy);
-		this.max.add(vx, vy);
-	}
-
-	onCollision(): void {
-		return undefined;
+		this.moveOn({ x: vx, y: vy });
 	}
 
 	destroy(): void {

@@ -10,7 +10,7 @@ export class Player extends Entity {
 	#lastShoot: number;
 
 	constructor(options: PlayerOptions) {
-		super({ ...options, src: '/sprites/hero.png', });
+		super({ ...options, src: '/sprites/hero.png' });
 		this.#lastShoot = 0;
 		this.#recharge = 500;
 	}
@@ -24,8 +24,14 @@ export class Player extends Entity {
 		this.#lastShoot = current;
 
 		return new HeroBullet({
-			x: this.shape.centerX,
-			y: this.shape.innerTop,
+			x: this.centerX,
+			y: this.y,
+			bodyOptions: {
+				velocity: {
+					x: 0,
+					y: -5,
+				},
+			},
 			height: 17,
 			width: 5,
 		});

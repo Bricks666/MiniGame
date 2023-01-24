@@ -19,8 +19,4 @@ export class Sprite extends GameObject {
 	draw(display: Display) {
 		display.draw(imageRequestAdapter(this));
 	}
-
-	update(): void {
-		return undefined;
-	}
 }

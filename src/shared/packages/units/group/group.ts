@@ -1,12 +1,13 @@
 import { Display } from '@/shared/packages/display';
+import { GameObject } from '@/shared/packages/game-objects';
 import { Drawable } from '@/shared/packages/primitives';
 import { Unit } from '../unit';
 
-export interface GroupOptions<T extends Unit> {
+export interface GroupOptions<T extends Unit | GameObject> {
 	readonly units?: T[];
 }
 
-export class Group<T extends Unit = Unit> implements Drawable {
+export class Group<T extends Unit | GameObject = Unit> implements Drawable {
 	readonly #units: Set<T>;
 
 	constructor(options: GroupOptions<T> = {}) {
@@ -23,12 +24,12 @@ export class Group<T extends Unit = Unit> implements Drawable {
 	}
 
 	onMount() {
-		this.#units.forEach((unit) => unit.onMount());
+		this.#units.forEach((unit) => unit.onMount?.());
 		return this;
 	}
 
 	onUnmount() {
-		this.#units.forEach((unit) => unit.onUnmount());
+		this.#units.forEach((unit) => unit.onUnmount?.());
 		return this;
 	}
 
@@ -38,14 +39,14 @@ export class Group<T extends Unit = Unit> implements Drawable {
 	}
 
 	draw(display: Display): this {
-		this.#units.forEach((unit) => unit.draw(display));
+		this.#units.forEach((unit) => unit.draw?.(display));
 		return this;
 	}
 
 	add(unit: T): this {
 		this.#units.add(unit);
 		unit.add(this);
-		unit.onMount();
+		unit.onMount?.();
 		return this;
 	}
 

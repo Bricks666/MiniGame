@@ -9,7 +9,6 @@ export class HeroBullet extends Bullet {
 			...options,
 			src: 'sprites/hero_bullet.png',
 			damage: 1,
-			direction: -1,
 		});
 	}
 }

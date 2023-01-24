@@ -1,10 +1,11 @@
 import { keyNames, pressedKeys } from '@/shared/packages/events';
+import { Vector } from '@/shared/packages/math';
 import { Rectangle } from '@/shared/packages/primitives';
 import {
 	Group,
 	Unit,
 	UnitsBlock,
-	UnitsBlockOptions
+	UnitsBlockOptions,
 } from '@/shared/packages/units';
 import { Bullet, Enemy, Player } from '@/components';
 
@@ -26,7 +27,7 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 	constructor(options: GameFieldOptions = {}) {
 		super({
 			variant: 'fill',
-			generateOptions: { count: 10, },
+			generateOptions: { count: 10 },
 			...options,
 		});
 
@@ -46,6 +47,9 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 			width: 64,
 			x: shape.innerLeft,
 			y: shape.innerBottom - 64,
+			bodyOptions: {
+				velocity: Vector.ZERO,
+			},
 		});
 
 		const enemy = new Enemy({
@@ -54,9 +58,12 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 			width: 64,
 			x: shape.innerLeft,
 			y: shape.innerTop,
+			bodyOptions: {
+				velocity: Vector.ZERO,
+			},
 		});
 
-		return new Group({ units: [player, enemy], });
+		return new Group({ units: [player, enemy] });
 	}
 
 	onMount(): void {
@@ -71,13 +78,6 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 	}
 
 	update(): void {
-		this.#bullets.forEach((bullet) => {
-			const isOut = this.shape.innerTop <= bullet.shape.innerTop;
-			if (!isOut) {
-				bullet.kill();
-			}
-		});
-
 		if (pressedKeys[keyNames.LEFT]) {
 			this.#moveLeft();
 		}
@@ -92,19 +92,22 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 	}
 
 	#moveLeft = () => {
-		if (this.shape.innerLeft > (this.#player?.shape.innerLeft ?? 0) - 5) {
+		if (this.shape.innerLeft > (this.#player?.x ?? 0) - 5) {
 			return;
 		}
 
-		this.#player?.moveOn({ x: -5, y: 0, });
+		this.#player?.moveOn({ x: -5, y: 0 });
 	};
 
 	#moveRight = () => {
-		if (this.shape.innerRight < (this.#player?.shape.innerRight ?? 0) + 5) {
+		if (this.shape.innerRight < (this.#player?.endX ?? 0) + 5) {
 			return;
 		}
 
-		this.#player?.moveOn({ x: 5, y: 0, });
+		this.#player?.moveOn({
+			x: 5,
+			y: 0,
+		});
 	};
 
 	#shoot = () => {

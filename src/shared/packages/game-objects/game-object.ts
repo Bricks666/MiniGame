@@ -1,66 +1,23 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Vector, VectorLike } from '../math';
+import { AABB, AABBOptions, VectorLike } from '../math';
 import { Body, BodyOptions } from '../physics';
 import { Group } from '../units';
 
-export interface GameObjectOptions {
-	readonly position: VectorLike;
-	readonly width: number;
-	readonly height: number;
+export interface GameObjectOptions extends AABBOptions {
 	readonly bodyOptions: Pick<BodyOptions, 'velocity'>;
 }
-export class GameObject {
-	#position: Vector;
-
-	#width: number;
-
-	#height: number;
-
-	#center!: Vector;
-
+export class GameObject extends AABB {
 	// @ts-ignore
 	readonly #groups: Set<Group<this>>;
 
 	body: Body;
 
 	constructor(options: GameObjectOptions) {
-		const { height, position, width, bodyOptions, } = options;
-
-		this.#position = new Vector(position);
-		this.#height = height;
-		this.#width = width;
+		const { bodyOptions, ...rest } = options;
+		super(rest);
 		this.#groups = new Set();
-		this.body = new Body({ ...bodyOptions, width, height, position, });
-
-		this.#calculateCenter();
+		this.body = new Body({ ...bodyOptions, gameObject: this });
 	}
-
-	get x(): number {
-		return this.#position.x;
-	}
-
-	set x(x: number) {
-		this.#position.x = x;
-		this.#calculateCenter();
-	}
-
-	get y(): number {
-		return this.#position.y;
-	}
-
-	set y(y: number) {
-		this.#position.y = y;
-		this.#calculateCenter();
-	}
-
-	get width(): number {
-		return this.#width;
-	}
-
-	get height(): number {
-		return this.#height;
-	}
-
 	// @ts-ignore
 
 	add(group: Group<this>): this {
@@ -80,9 +37,18 @@ export class GameObject {
 
 	update(): void {
 		this.body.update();
-		this.#position.copy(this.body.min);
+		this.moveTo({
+			x: this.body.x,
+			y: this.body.y,
+		});
 
 		return undefined;
+	}
+
+	moveOn(vector: VectorLike): this {
+		super.moveOn(vector);
+		this.body.moveOn(vector);
+		return this;
 	}
 
 	destroy(): void {
@@ -90,12 +56,5 @@ export class GameObject {
 
 		// @ts-ignore
 		this.body = undefined;
-	}
-
-	#calculateCenter() {
-		this.#center = new Vector(
-			this.#position.x + this.#width * 0.5,
-			this.#position.y + this.#height * 0.5
-		);
 	}
 }
