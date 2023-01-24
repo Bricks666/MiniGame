@@ -23,14 +23,8 @@ export class Group<T extends Unit | GameObject = Unit> implements Drawable {
 		return this.#units.size;
 	}
 
-	onMount() {
-		this.#units.forEach((unit) => unit.onMount?.());
-		return this;
-	}
-
-	onUnmount() {
-		this.#units.forEach((unit) => unit.onUnmount?.());
-		return this;
+	start(): void {
+		this.#units.forEach((unit) => unit.start?.());
 	}
 
 	update(): this {

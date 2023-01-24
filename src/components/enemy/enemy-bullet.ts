@@ -8,7 +8,6 @@ export class EnemyBullet extends Bullet {
 		super({
 			...options,
 			damage: 1,
-			direction: 1,
 			src: 'sprites/enemy_bullet.png',
 		});
 	}

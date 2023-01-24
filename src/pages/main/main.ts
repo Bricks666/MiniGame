@@ -18,17 +18,17 @@ export class Main extends UnitsBlock {
 		});
 	}
 
-	static generateUnits(shape: Rectangle): Group<Unit> {
+	static generateUnits(block: UnitsBlock): Group<Unit> {
 		const units = [
 			new Header({
 				height: 50,
-				x: shape.x,
-				y: shape.y,
-				width: shape.width,
+				x: block.shape.x,
+				y: block.shape.y,
+				width: block.shape.width,
 			}),
 			new Menu({
-				width: shape.width,
-				height: shape.height - 50,
+				width: block.shape.width,
+				height: block.shape.height - 50,
 				y: 50,
 				x: 0,
 			})

@@ -1,11 +1,6 @@
 import { PADDING } from '@/shared/configs';
-import { Rectangle } from '@/shared/packages/primitives';
-import {
-	Group,
-	Unit,
-	UnitsBlock,
-	UnitsBlockOptions
-} from '@/shared/packages/units';
+import { GameObject } from '@/shared/packages/game-objects';
+import { Group, UnitsBlock, UnitsBlockOptions } from '@/shared/packages/units';
 import { Aside, GameField } from './ui';
 
 export type LevelOptions = UnitsBlockOptions<never>;
@@ -19,22 +14,22 @@ export class Level extends UnitsBlock {
 		});
 	}
 
-	static generateUnits(shape: Rectangle): Group<Unit> {
+	static generateUnits(block: UnitsBlock): Group<GameObject> {
 		const units = [
 			new GameField({
-				x: shape.innerLeft,
-				y: shape.innerTop,
+				x: block.shape.innerLeft,
+				y: block.shape.innerTop,
 				variant: 'both',
 				strokeColor: 'white',
 				strokeWidth: 6,
-				width: shape.innerWidth * 0.75,
-				height: shape.innerHeight,
+				width: block.shape.innerWidth * 0.75,
+				height: block.shape.innerHeight,
 			}),
 			new Aside({
-				width: shape.innerWidth / 4,
-				x: shape.innerWidth * 0.75,
-				y: shape.innerTop,
-				height: shape.innerHeight,
+				width: block.shape.innerWidth / 4,
+				x: block.shape.innerWidth * 0.75,
+				y: block.shape.innerTop,
+				height: block.shape.innerHeight,
 			})
 		];
 		return new Group({ units, });

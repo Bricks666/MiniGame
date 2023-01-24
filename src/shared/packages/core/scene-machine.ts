@@ -20,9 +20,10 @@ export class SceneMachine<K extends Key>
 	implements Drawable
 {
 	changeState(key: K): void {
-		this.current?.onUnmount();
+		this.current?.destroy?.();
 		super.changeState(key);
 		this.current?.onMount();
+		this.current?.start();
 	}
 
 	draw(display: Display): void {

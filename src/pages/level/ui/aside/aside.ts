@@ -1,6 +1,5 @@
 import { PADDING } from '@/shared/configs';
 import { eventBus } from '@/shared/packages/events';
-import { Rectangle } from '@/shared/packages/primitives';
 import {
 	Button,
 	Group,
@@ -33,16 +32,16 @@ const options: TypographyOptions[] = [
 ];
 
 export class Aside extends UnitsBlock {
-	static generateUnits(shape: Rectangle): Group<Unit> {
+	static generateUnits(block: UnitsBlock): Group<Unit> {
 		let offsetY = 0;
 
 		const units = options.map((option) => {
 			const unit = new Typography({
-				x: shape.x,
-				y: shape.y + offsetY,
+				x: block.shape.x,
+				y: block.shape.y + offsetY,
 				...option,
 			});
-			unit.shape.centerX = shape.centerX;
+			unit.shape.centerX = block.shape.centerX;
 
 			offsetY += unit.shape.height + PADDING;
 
@@ -50,14 +49,14 @@ export class Aside extends UnitsBlock {
 		});
 		const button = new Button({
 			text: 'В меню',
-			y: shape.height,
+			y: block.shape.height,
 			onClick() {
 				eventBus.emitChangeScene('mainMenu');
 			},
 			color: 'silver',
 		});
 
-		button.shape.centerX = shape.centerX;
+		button.shape.centerX = block.shape.centerX;
 
 		units.push(button);
 

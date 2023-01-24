@@ -1,5 +1,4 @@
 import { GAME_NAME } from '@/shared/configs';
-import { Rectangle } from '@/shared/packages/primitives';
 import {
 	Group,
 	Typography,
@@ -18,13 +17,13 @@ export class Header extends UnitsBlock {
 		});
 	}
 
-	static generateUnits(shape: Rectangle): Group<Unit> {
+	static generateUnits(block: UnitsBlock): Group<Unit> {
 		const headerText = new Typography({
 			text: GAME_NAME,
 			color: 'white',
 			fontSize: 24,
 		});
-		headerText.shape.center = shape.center;
+		headerText.shape.center = block.shape.center;
 		return new Group({ units: [headerText], });
 	}
 }

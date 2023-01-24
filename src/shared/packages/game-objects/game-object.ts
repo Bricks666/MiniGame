@@ -1,31 +1,34 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import { Display } from '../display';
 import { AABB, AABBOptions, VectorLike } from '../math';
 import { Body, BodyOptions } from '../physics';
-import { Group } from '../units';
+import { rectangleRequestAdapter } from '../renderer';
+import { Group, UnitsBlock } from '../units';
 
 export interface GameObjectOptions extends AABBOptions {
 	readonly bodyOptions: Pick<BodyOptions, 'velocity'>;
+	readonly block: UnitsBlock;
 }
+
 export class GameObject extends AABB {
-	// @ts-ignore
 	readonly #groups: Set<Group<this>>;
+
+	block: UnitsBlock;
 
 	body: Body;
 
 	constructor(options: GameObjectOptions) {
-		const { bodyOptions, ...rest } = options;
+		const { bodyOptions, block, ...rest } = options;
 		super(rest);
 		this.#groups = new Set();
-		this.body = new Body({ ...bodyOptions, gameObject: this });
+		this.block = block;
+		this.body = new Body({ ...bodyOptions, gameObject: this, });
 	}
-	// @ts-ignore
 
 	add(group: Group<this>): this {
 		this.#groups.add(group);
 		return this;
 	}
-
-	// @ts-ignore
 
 	remove(group: Group<this>): void {
 		this.#groups.delete(group);
@@ -33,6 +36,14 @@ export class GameObject extends AABB {
 
 	kill(): void {
 		this.#groups.forEach((group) => group.remove(this));
+	}
+
+	start(): void {
+		return undefined;
+	}
+
+	draw(display: Display): void {
+		display.draw(rectangleRequestAdapter(this));
 	}
 
 	update(): void {
@@ -53,8 +64,12 @@ export class GameObject extends AABB {
 
 	destroy(): void {
 		this.body.destroy();
+		this.#groups.forEach((group) => group.remove(this));
 
 		// @ts-ignore
 		this.body = undefined;
+
+		// @ts-ignore
+		this.block = undefined;
 	}
 }

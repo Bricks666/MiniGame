@@ -1,10 +1,15 @@
 import { Audio } from '@/shared/packages/audio';
+import { withScript } from '@/shared/packages/scripts';
 import { Entity, EntityOptions } from '../entity';
+import { BulletScript } from './bullet-script';
 
 export interface BulletOptions extends Omit<EntityOptions, 'health'> {
 	readonly damage: number;
 }
 
+@withScript({
+	script: BulletScript,
+})
 export class Bullet extends Entity {
 	readonly #damage: number;
 

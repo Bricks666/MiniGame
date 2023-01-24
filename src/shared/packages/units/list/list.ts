@@ -1,4 +1,3 @@
-import { Rectangle } from '@/shared/packages/primitives';
 import { Group } from '../group';
 import { Typography } from '../typography';
 import { Unit } from '../unit';
@@ -28,14 +27,14 @@ export class List extends UnitsBlock<CreateItemsOptions> {
 	}
 
 	static generateUnits(
-		shape: Rectangle,
+		block: UnitsBlock,
 		options: CreateItemsOptions
 	): Group<Unit> {
 		const itemsCount = options.items.length;
 		const centredElementIndex = options.align === 'center' ? itemsCount / 2 : 0;
 
 		const units = options.items.map((item, i) => {
-			item.shape.center = shape.center;
+			item.shape.center = block.shape.center;
 			item.shape.centerY +=
 				(i - centredElementIndex) * item.shape.height + options.gap * i;
 

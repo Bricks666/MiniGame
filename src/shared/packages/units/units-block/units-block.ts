@@ -1,37 +1,36 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Display } from '@/shared/packages/display';
 import { Rectangle } from '@/shared/packages/primitives';
+import { GameObject, GameObjectOptions } from '../../game-objects';
 import { Group } from '../group';
-import { Unit, ExtractShapeOptions, UnitOptions } from '../unit';
 
-export type UnitsBlockOptions<T extends Record<string, any>> =
-	ExtractShapeOptions<UnitOptions<typeof Rectangle>>;
+export interface UnitsBlockOptions<T extends Record<string, any> = never>
+	extends GameObjectOptions {
+	readonly generateOptions: T;
+}
 
-type UnitsBlockConstructorOptions<T extends Record<string, any>> =
-	UnitsBlockOptions<T> & {
-		readonly generateOptions?: T;
-	};
-
-export class UnitsBlock<T extends Record<string, any> = never> extends Unit<
-	typeof Rectangle
-> {
-	readonly units: Group<Unit>;
+export class UnitsBlock<
+	T extends Record<string, any> = never
+> extends GameObject {
+	readonly units: Group<GameObject>;
 
 	static generateUnits(
-		shape: Rectangle,
+		block: UnitsBlock,
 		options: Record<string, any>
-	): Group<Unit> {
+	): Group<GameObject> {
 		throw new Error('[Inheritance] generateUnits was not implemented');
 	}
 
-	constructor(options: UnitsBlockConstructorOptions<T>) {
+	constructor(options: UnitsBlockOptions<T>) {
 		const { generateOptions, ...rest } = options;
-		super({ shapeOptions: [rest], shape: Rectangle, });
+		super(rest);
 
-		this.units = (this as any).constructor.generateUnits(
-			this.shape,
-			generateOptions
-		);
+		this.units = (this as any).constructor.generateUnits(this, generateOptions);
+	}
+
+	start() {
+		super.start();
+		this.units.start();
 	}
 
 	draw(display: Display): void {
@@ -43,13 +42,7 @@ export class UnitsBlock<T extends Record<string, any> = never> extends Unit<
 		this.units.update();
 	}
 
-	onMount(): void {
-		super.onMount();
-		this.units.onMount();
-	}
-
-	onUnmount(): void {
-		super.onUnmount();
-		this.units.onUnmount();
+	destroy(): void {
+		this.units.destroy();
 	}
 }
