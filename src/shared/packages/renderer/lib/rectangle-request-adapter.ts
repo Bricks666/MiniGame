@@ -2,7 +2,17 @@ import { Rectangle } from '../../primitives';
 import { RectangleRenderRequest } from '../types';
 
 export const rectangleRequestAdapter = (
-	rectangle: Rectangle
+	rectangle: Pick<
+		Rectangle,
+		| 'x'
+		| 'y'
+		| 'height'
+		| 'width'
+		| 'variant'
+		| 'strokeWidth'
+		| 'strokeColor'
+		| 'color'
+	>
 ): RectangleRenderRequest => {
 	return {
 		x: rectangle.x,

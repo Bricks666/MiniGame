@@ -1,19 +1,17 @@
-import { Group } from '../group';
-import { Typography } from '../typography';
-import { Unit } from '../unit';
-import { UnitsBlock, UnitsBlockOptions } from '../units-block';
+import { Block, BlockOptions, Group } from '@/shared/packages/game-objects';
+import { Text } from '../text';
 
 export interface ListOptions
-	extends UnitsBlockOptions<CreateItemsOptions>,
+	extends BlockOptions<CreateItemsOptions>,
 		CreateItemsOptions {}
 
 export interface CreateItemsOptions {
-	readonly items: Typography[];
+	readonly items: Text[];
 	readonly gap: number;
 	readonly align?: 'center';
 }
 
-export class List extends UnitsBlock<CreateItemsOptions> {
+export class List extends Block<CreateItemsOptions> {
 	constructor(options: ListOptions) {
 		const { items, align, gap, ...rest } = options;
 		super({
@@ -26,17 +24,14 @@ export class List extends UnitsBlock<CreateItemsOptions> {
 		});
 	}
 
-	static generateUnits(
-		block: UnitsBlock,
-		options: CreateItemsOptions
-	): Group<Unit> {
+	static generateUnits(block: Block, options: CreateItemsOptions): Group {
 		const itemsCount = options.items.length;
 		const centredElementIndex = options.align === 'center' ? itemsCount / 2 : 0;
 
 		const units = options.items.map((item, i) => {
-			item.shape.center = block.shape.center;
-			item.shape.centerY +=
-				(i - centredElementIndex) * item.shape.height + options.gap * i;
+			item.centerX = block.centerX;
+			item.centerY = block.centerY;
+			item.centerY += (i - centredElementIndex) * item.height + options.gap * i;
 
 			return item;
 		});

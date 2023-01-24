@@ -1,15 +1,15 @@
 import { Display } from '@/shared/packages/display';
+import { GameObject, GameObjectOptions } from '@/shared/packages/game-objects';
 import { textRequestAdapter } from '@/shared/packages/renderer';
-import { Polygon, PolygonOptions } from '../polygon';
 import { TextProperties, TextStyleProperties } from './types';
 
 export interface TextOptions
-	extends Partial<PolygonOptions>,
+	extends Partial<GameObjectOptions>,
 		Partial<TextProperties> {
 	readonly text: string;
 }
 
-export class Text extends Polygon {
+export class Text extends GameObject {
 	text: string;
 
 	styles: TextStyleProperties;
@@ -24,12 +24,13 @@ export class Text extends Polygon {
 	};
 
 	constructor(options: TextOptions) {
-		const { text, height = 0, width = 0, x = 0, y = 0, ...styles } = options;
+		const { text, height, width, x, y, block, ...styles } = options;
 		super({
 			height,
 			width,
 			x,
 			y,
+			block,
 		});
 		this.text = text;
 		this.styles = { ...Text.defaultStyle, ...styles, };

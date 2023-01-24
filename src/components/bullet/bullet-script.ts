@@ -3,11 +3,8 @@ import { Bullet } from './bullet';
 
 export class BulletScript extends Script<Bullet> {
 	update(): void {
-		const { shape, } = this.gameObject.block;
-		if (
-			shape.innerTop >= this.gameObject.y ||
-			shape.innerBottom <= this.gameObject.endY
-		) {
+		const { innerTop, innerBottom, } = this.gameObject.block!;
+		if (innerTop >= this.gameObject.y || innerBottom <= this.gameObject.endY) {
 			this.gameObject.destroy();
 		}
 	}

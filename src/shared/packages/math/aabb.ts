@@ -13,7 +13,7 @@ export class AABB {
 	#max: Vector;
 
 	constructor(options: AABBOptions) {
-		const { height = 0, width = 0, x = 0, y = 0 } = options;
+		const { height = 0, width = 0, x = 0, y = 0, } = options;
 		this.#min = new Vector(x, y);
 
 		this.#max = new Vector(this.#min.x + width, this.#min.y + height);
@@ -48,6 +48,12 @@ export class AABB {
 		return (this.#max.x + this.#min.x) / 2;
 	}
 
+	set centerX(centerX: number) {
+		const { width, } = this;
+		this.#min.x = centerX - width / 2;
+		this.#max.x = centerX + width / 2;
+	}
+
 	get endX(): number {
 		return this.#max.x;
 	}
@@ -65,6 +71,12 @@ export class AABB {
 		return (this.#max.y + this.#min.y) / 2;
 	}
 
+	set centerY(centerY: number) {
+		const { height, } = this;
+		this.#min.y = centerY - height / 2;
+		this.#max.y = centerY + height / 2;
+	}
+
 	get endY(): number {
 		return this.#max.y;
 	}
@@ -77,7 +89,7 @@ export class AABB {
 	}
 
 	moveTo(vector: VectorLike): this {
-		const { height, width } = this;
+		const { height, width, } = this;
 		this.#min.copy(vector);
 		this.#max.copy({
 			x: vector.x + width,

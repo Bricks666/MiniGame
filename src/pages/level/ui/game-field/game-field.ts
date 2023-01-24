@@ -1,19 +1,19 @@
-import { Vector } from '@/shared/packages/math';
 import {
-	Group,
-	Unit,
-	UnitsBlock,
-	UnitsBlockOptions
-} from '@/shared/packages/units';
+	Block,
+	BlockOptions,
+	GameObject,
+	Group
+} from '@/shared/packages/game-objects';
+import { Vector } from '@/shared/packages/math';
 import { Enemy, Player } from '@/components';
 
-export type GameFieldOptions = UnitsBlockOptions<GenerateOptions>;
+export type GameFieldOptions = BlockOptions<GenerateOptions>;
 
 interface GenerateOptions {
 	readonly count: number;
 }
 
-export class GameField extends UnitsBlock<GenerateOptions> {
+export class GameField extends Block<GenerateOptions> {
 	constructor(options: GameFieldOptions = {}) {
 		super({
 			variant: 'fill',
@@ -22,13 +22,13 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 		});
 	}
 
-	static generateUnits(block: UnitsBlock): Group<Unit> {
+	static generateUnits(block: Block): Group<GameObject> {
 		const player = new Player({
 			health: 100,
 			height: 64,
 			width: 64,
-			x: block.shape.innerLeft,
-			y: block.shape.innerBottom - 64,
+			x: block.innerLeft,
+			y: block.innerBottom - 64,
 			bodyOptions: {
 				velocity: Vector.ZERO,
 			},
@@ -39,8 +39,8 @@ export class GameField extends UnitsBlock<GenerateOptions> {
 			health: 4,
 			height: 64,
 			width: 64,
-			x: block.shape.innerLeft,
-			y: block.shape.innerTop,
+			x: block.innerLeft,
+			y: block.innerTop,
 			bodyOptions: {
 				velocity: Vector.ZERO,
 			},

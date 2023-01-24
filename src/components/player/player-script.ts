@@ -21,8 +21,8 @@ export class PlayerScript extends Script<Player> {
 	}
 
 	#moveLeft() {
-		const { shape, } = this.gameObject.block;
-		if (shape.innerLeft >= this.gameObject.x) {
+		const { innerLeft, } = this.gameObject.block!;
+		if (innerLeft >= this.gameObject.x) {
 			return;
 		}
 
@@ -30,8 +30,8 @@ export class PlayerScript extends Script<Player> {
 	}
 
 	#moveRight() {
-		const { shape, } = this.gameObject.block;
-		if (shape.innerRight <= this.gameObject.endX) {
+		const { innerRight, } = this.gameObject.block!;
+		if (innerRight <= this.gameObject.endX) {
 			return;
 		}
 
@@ -64,6 +64,6 @@ export class PlayerScript extends Script<Player> {
 			width: 5,
 			block: gameObject.block,
 		});
-		this.gameObject.block.units.add(bullet as any);
+		this.gameObject.block?.units.add(bullet as any);
 	}
 }

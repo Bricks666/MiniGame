@@ -1,5 +1,6 @@
 import { eventBus } from '@/shared/packages/events';
-import { Button, List, ListOptions } from '@/shared/packages/units';
+import { Button } from '@/shared/packages/game-objects/button';
+import { ListOptions, List } from '@/shared/packages/game-objects/list';
 
 export type MenuOptions = Omit<ListOptions, 'gap' | 'items' | 'align'>;
 

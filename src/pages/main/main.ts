@@ -1,16 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Rectangle } from '@/shared/packages/primitives';
-import {
-	Group,
-	Unit,
-	UnitsBlock,
-	UnitsBlockOptions
-} from '@/shared/packages/units';
+import { BlockOptions, Block, Group } from '@/shared/packages/game-objects';
 import { Header, Menu } from './ui';
 
-export type MainOptions = UnitsBlockOptions<never>;
+export type MainOptions = BlockOptions<never>;
 
-export class Main extends UnitsBlock {
+export class Main extends Block {
 	constructor(options: MainOptions = {}) {
 		super({
 			...options,
@@ -18,17 +12,17 @@ export class Main extends UnitsBlock {
 		});
 	}
 
-	static generateUnits(block: UnitsBlock): Group<Unit> {
+	static generateUnits(block: Block): Group {
 		const units = [
 			new Header({
 				height: 50,
-				x: block.shape.x,
-				y: block.shape.y,
-				width: block.shape.width,
+				x: block.x,
+				y: block.y,
+				width: block.width,
 			}),
 			new Menu({
-				width: block.shape.width,
-				height: block.shape.height - 50,
+				width: block.width,
+				height: block.height - 50,
 				y: 50,
 				x: 0,
 			})

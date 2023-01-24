@@ -31,22 +31,14 @@ export class Rectangle extends GameObject {
 
 	constructor(options: RectangleOptions) {
 		const {
-			bodyOptions: body,
-			height,
-			position,
-			width,
 			color,
 			variant,
 			strokeColor,
 			strokeWidth = 0,
 			padding = 0,
+			...rest
 		} = options;
-		super({
-			bodyOptions: body,
-			height,
-			position,
-			width,
-		});
+		super(rest);
 		this.color = color;
 		this.variant = variant;
 		this.strokeWidth = strokeWidth;
@@ -80,9 +72,5 @@ export class Rectangle extends GameObject {
 
 	draw(display: Display): void {
 		display.draw(rectangleRequestAdapter(this));
-	}
-
-	update(): void {
-		return undefined;
 	}
 }

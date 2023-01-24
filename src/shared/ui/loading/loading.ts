@@ -1,14 +1,14 @@
-import { Rectangle } from '@/shared/packages/primitives';
-import { Typography, UnitsBlock, Unit, Group } from '@/shared/packages/units';
+import { Block, Group, Text } from '@/shared/packages/game-objects';
 
-export class Loading extends UnitsBlock {
-	static generateUnits(shape: Rectangle): Group<Unit> {
+export class Loading extends Block {
+	static generateUnits(shape: Block): Group {
 		const group = new Group();
-		const text = new Typography({
+		const text = new Text({
 			text: 'Loading...',
 			color: 'white',
 		});
-		text.shape.center = shape.center;
+		text.centerX = shape.centerX;
+		text.centerY = shape.centerY;
 		group.add(text);
 
 		return group;

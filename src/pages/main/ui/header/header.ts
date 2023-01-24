@@ -1,15 +1,15 @@
 import { GAME_NAME } from '@/shared/configs';
 import {
+	Block,
+	BlockOptions,
+	GameObject,
 	Group,
-	Typography,
-	Unit,
-	UnitsBlock,
-	UnitsBlockOptions
-} from '@/shared/packages/units';
+	Text
+} from '@/shared/packages/game-objects';
 
-export type HeaderOptions = UnitsBlockOptions<never>;
+export type HeaderOptions = BlockOptions<never>;
 
-export class Header extends UnitsBlock {
+export class Header extends Block {
 	constructor(options: HeaderOptions = {}) {
 		super({
 			color: 'black',
@@ -17,13 +17,14 @@ export class Header extends UnitsBlock {
 		});
 	}
 
-	static generateUnits(block: UnitsBlock): Group<Unit> {
-		const headerText = new Typography({
+	static generateUnits(block: Block): Group<GameObject> {
+		const headerText = new Text({
 			text: GAME_NAME,
 			color: 'white',
 			fontSize: 24,
 		});
-		headerText.shape.center = block.shape.center;
+		headerText.centerX = block.centerX;
+		headerText.centerY = block.centerY;
 		return new Group({ units: [headerText], });
 	}
 }

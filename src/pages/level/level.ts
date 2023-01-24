@@ -1,11 +1,15 @@
 import { PADDING } from '@/shared/configs';
-import { GameObject } from '@/shared/packages/game-objects';
-import { Group, UnitsBlock, UnitsBlockOptions } from '@/shared/packages/units';
+import {
+	Block,
+	BlockOptions,
+	GameObject,
+	Group
+} from '@/shared/packages/game-objects';
 import { Aside, GameField } from './ui';
 
-export type LevelOptions = UnitsBlockOptions<never>;
+export interface LevelOptions extends BlockOptions {}
 
-export class Level extends UnitsBlock {
+export class Level extends Block {
 	constructor(options: LevelOptions = {}) {
 		super({
 			padding: PADDING,
@@ -14,22 +18,22 @@ export class Level extends UnitsBlock {
 		});
 	}
 
-	static generateUnits(block: UnitsBlock): Group<GameObject> {
+	static generateUnits(block: Block): Group<GameObject> {
 		const units = [
 			new GameField({
-				x: block.shape.innerLeft,
-				y: block.shape.innerTop,
+				x: block.innerLeft,
+				y: block.innerTop,
 				variant: 'both',
 				strokeColor: 'white',
 				strokeWidth: 6,
-				width: block.shape.innerWidth * 0.75,
-				height: block.shape.innerHeight,
+				width: block.innerWidth * 0.75,
+				height: block.innerHeight,
 			}),
 			new Aside({
-				width: block.shape.innerWidth / 4,
-				x: block.shape.innerWidth * 0.75,
-				y: block.shape.innerTop,
-				height: block.shape.innerHeight,
+				width: block.innerWidth / 4,
+				x: block.innerWidth * 0.75,
+				y: block.innerTop,
+				height: block.innerHeight,
 			})
 		];
 		return new Group({ units, });

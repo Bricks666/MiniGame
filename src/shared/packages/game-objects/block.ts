@@ -1,36 +1,37 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Display } from '@/shared/packages/display';
-import { Rectangle } from '@/shared/packages/primitives';
-import { GameObject, GameObjectOptions } from '../../game-objects';
-import { Group } from '../group';
+import { GameObject, GameObjectLifeCycle } from './game-object';
+import { Group } from './group';
+import { Rectangle, RectangleOptions } from './rectangle';
 
-export interface UnitsBlockOptions<T extends Record<string, any> = never>
-	extends GameObjectOptions {
-	readonly generateOptions: T;
+export interface BlockOptions<T extends Record<string, any> = never>
+	extends Omit<RectangleOptions, 'layer'> {
+	readonly generateOptions?: T;
 }
 
-export class UnitsBlock<
-	T extends Record<string, any> = never
-> extends GameObject {
+export class Block<T extends Record<string, any> = never>
+	extends Rectangle
+	implements GameObjectLifeCycle
+{
 	readonly units: Group<GameObject>;
 
 	static generateUnits(
-		block: UnitsBlock,
+		block: Block,
 		options: Record<string, any>
 	): Group<GameObject> {
 		throw new Error('[Inheritance] generateUnits was not implemented');
 	}
 
-	constructor(options: UnitsBlockOptions<T>) {
+	constructor(options: BlockOptions<T>) {
 		const { generateOptions, ...rest } = options;
-		super(rest);
-
+		super({ ...rest, });
+		this.block = this;
 		this.units = (this as any).constructor.generateUnits(this, generateOptions);
 	}
 
 	start() {
-		super.start();
 		this.units.start();
+		super.start();
 	}
 
 	draw(display: Display): void {
@@ -40,9 +41,11 @@ export class UnitsBlock<
 
 	update(): void {
 		this.units.update();
+		super.update();
 	}
 
 	destroy(): void {
 		this.units.destroy();
+		super.destroy();
 	}
 }

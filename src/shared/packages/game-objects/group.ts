@@ -1,13 +1,14 @@
 import { Display } from '@/shared/packages/display';
-import { GameObject } from '@/shared/packages/game-objects';
 import { Drawable } from '@/shared/packages/primitives';
-import { Unit } from '../unit';
+import { GameObject, GameObjectLifeCycle } from './game-object';
 
-export interface GroupOptions<T extends Unit | GameObject> {
+export interface GroupOptions<T extends GameObject> {
 	readonly units?: T[];
 }
 
-export class Group<T extends Unit | GameObject = Unit> implements Drawable {
+export class Group<T extends GameObject = GameObject>
+implements Drawable, GameObjectLifeCycle
+{
 	readonly #units: Set<T>;
 
 	constructor(options: GroupOptions<T> = {}) {
@@ -24,7 +25,7 @@ export class Group<T extends Unit | GameObject = Unit> implements Drawable {
 	}
 
 	start(): void {
-		this.#units.forEach((unit) => unit.start?.());
+		this.#units.forEach((unit) => unit.start());
 	}
 
 	update(): this {
@@ -33,14 +34,18 @@ export class Group<T extends Unit | GameObject = Unit> implements Drawable {
 	}
 
 	draw(display: Display): this {
-		this.#units.forEach((unit) => unit.draw?.(display));
+		this.#units.forEach((unit) => unit.draw(display));
 		return this;
+	}
+
+	destroy() {
+		this.#units.forEach((unit) => unit.destroy());
 	}
 
 	add(unit: T): this {
 		this.#units.add(unit);
 		unit.add(this);
-		unit.onMount?.();
+		unit.start();
 		return this;
 	}
 

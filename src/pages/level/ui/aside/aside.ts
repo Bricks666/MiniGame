@@ -1,18 +1,17 @@
 import { PADDING } from '@/shared/configs';
 import { eventBus } from '@/shared/packages/events';
 import {
+	Block,
+	BlockOptions,
 	Button,
 	Group,
-	Typography,
-	TypographyOptions,
-	Unit,
-	UnitsBlock,
-	UnitsBlockOptions
-} from '@/shared/packages/units';
+	Text,
+	TextOptions
+} from '@/shared/packages/game-objects';
 
-export type AsideOptions = UnitsBlockOptions<never>;
+export type AsideOptions = BlockOptions<never>;
 
-const options: TypographyOptions[] = [
+const options: TextOptions[] = [
 	{
 		text: 'Current score',
 		color: 'silver',
@@ -31,32 +30,32 @@ const options: TypographyOptions[] = [
 	}
 ];
 
-export class Aside extends UnitsBlock {
-	static generateUnits(block: UnitsBlock): Group<Unit> {
+export class Aside extends Block {
+	static generateUnits(block: Block): Group {
 		let offsetY = 0;
 
 		const units = options.map((option) => {
-			const unit = new Typography({
-				x: block.shape.x,
-				y: block.shape.y + offsetY,
+			const unit = new Text({
+				x: block.x,
+				y: block.y + offsetY,
 				...option,
 			});
-			unit.shape.centerX = block.shape.centerX;
+			unit.centerX = block.centerX;
 
-			offsetY += unit.shape.height + PADDING;
+			offsetY += unit.height + PADDING;
 
 			return unit;
 		});
 		const button = new Button({
 			text: 'В меню',
-			y: block.shape.height,
+			y: block.height,
 			onClick() {
 				eventBus.emitChangeScene('mainMenu');
 			},
 			color: 'silver',
 		});
 
-		button.shape.centerX = block.shape.centerX;
+		button.centerX = block.centerX;
 
 		units.push(button);
 

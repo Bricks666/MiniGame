@@ -1,5 +1,4 @@
 import { Display } from '@/shared/packages/display';
-import { Polygon } from '@/shared/packages/primitives';
 import { Listener, EventEmitter } from '../event-emitter';
 import { Events, KeyboardEvents, MouseEvents } from './types';
 
@@ -28,7 +27,7 @@ export class DOMEvents extends EventEmitter {
 	/**
 	 * TODO: Исправить поведение mouseleave
 	 */
-	onMouseEvent(type: MouseEvents, polygon: Polygon, listener: Listener): void {
+	onMouseEvent(type: MouseEvents, polygon: any, listener: Listener): void {
 		const eventListener = (evt: MouseEvent) => {
 			if (evt.target !== this.#display.canvas) {
 				return;

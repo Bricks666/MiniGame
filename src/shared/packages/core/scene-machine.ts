@@ -1,28 +1,19 @@
 import { Display } from '../display';
-import { UnitsBlock } from '../units';
-import {
-	Drawable,
-	Key,
-	StateDict,
-	StateMachine,
-	StateMachineOptions
-} from './types';
+import { Block } from '../game-objects';
+import { Drawable } from '../types';
+import { Key, StateDict, StateMachine, StateMachineOptions } from './types';
 
-export type SceneDict<K extends Key> = StateDict<K, UnitsBlock>;
+export type SceneDict<K extends Key> = StateDict<K, Block>;
 
-export type SceneMachineOptions<K extends Key> = StateMachineOptions<
-	K,
-	UnitsBlock
->;
+export type SceneMachineOptions<K extends Key> = StateMachineOptions<K, Block>;
 
 export class SceneMachine<K extends Key>
-	extends StateMachine<K, UnitsBlock>
+	extends StateMachine<K, Block>
 	implements Drawable
 {
 	changeState(key: K): void {
-		this.current?.destroy?.();
+		this.current?.destroy();
 		super.changeState(key);
-		this.current?.onMount();
 		this.current?.start();
 	}
 
