@@ -1,4 +1,4 @@
-import { RenderVariant } from '@/shared/packages/renderer';
+import { RenderVariant } from '~/renderer';
 
 export interface TextProperties {
 	text: string;

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BlockOptions, Block, Group } from '@/shared/packages/game-objects';
 import { Header, Menu } from './ui';
+import { BlockOptions, Block, Group } from '~/game-objects';
 
 export type MainOptions = BlockOptions<never>;
 

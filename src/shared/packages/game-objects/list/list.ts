@@ -1,5 +1,5 @@
-import { Block, BlockOptions, Group } from '@/shared/packages/game-objects';
 import { Text } from '../text';
+import { Block, BlockOptions, Group } from '~/game-objects';
 
 export interface ListOptions
 	extends BlockOptions<CreateItemsOptions>,

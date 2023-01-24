@@ -1,11 +1,6 @@
 import { PADDING } from '@/shared/configs';
-import {
-	Block,
-	BlockOptions,
-	GameObject,
-	Group
-} from '@/shared/packages/game-objects';
 import { Aside, GameField } from './ui';
+import { Block, BlockOptions, GameObject, Group } from '~/game-objects';
 
 export interface LevelOptions extends BlockOptions {}
 

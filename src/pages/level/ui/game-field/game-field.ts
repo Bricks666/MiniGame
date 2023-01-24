@@ -1,11 +1,6 @@
-import {
-	Block,
-	BlockOptions,
-	GameObject,
-	Group
-} from '@/shared/packages/game-objects';
-import { Vector } from '@/shared/packages/math';
 import { Enemy, Player } from '@/components';
+import { Block, BlockOptions, GameObject, Group } from '~/game-objects';
+import { Vector } from '~/math';
 
 export type GameFieldOptions = BlockOptions<GenerateOptions>;
 

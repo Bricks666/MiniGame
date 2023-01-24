@@ -1,9 +1,9 @@
 import { Level, Main } from '@/pages';
 import { DISPLAY_SIZE } from '@/shared/configs';
-import { Engine, SceneDict, SceneMachine } from '@/shared/packages/core';
-import { Display } from '@/shared/packages/display';
-import { domEventEmitter, eventBus } from '@/shared/packages/events';
 import { Loading } from '@/shared/ui';
+import { Engine, SceneDict, SceneMachine } from '~/core';
+import { Display } from '~/display';
+import { domEventEmitter, eventBus } from '~/events';
 
 type Scenes = 'level' | 'mainMenu' | 'loading';
 

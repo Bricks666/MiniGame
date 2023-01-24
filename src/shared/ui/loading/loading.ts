@@ -1,4 +1,4 @@
-import { Block, Group, Text } from '@/shared/packages/game-objects';
+import { Block, Group, Text } from '~/game-objects';
 
 export class Loading extends Block {
 	static generateUnits(shape: Block): Group {

@@ -1,6 +1,6 @@
-import { eventBus } from '@/shared/packages/events';
-import { Button } from '@/shared/packages/game-objects/button';
-import { ListOptions, List } from '@/shared/packages/game-objects/list';
+import { eventBus } from '~/events';
+import { Button } from '~/game-objects/button';
+import { ListOptions, List } from '~/game-objects/list';
 
 export type MenuOptions = Omit<ListOptions, 'gap' | 'items' | 'align'>;
 

@@ -1,6 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { domEventEmitter, Handler } from '@/shared/packages/events';
 import { Text, TextOptions } from '../text';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { domEventEmitter, Handler } from '~/events';
 
 export interface ButtonOptions extends TextOptions {
 	readonly onClick?: Handler;

@@ -1,5 +1,5 @@
-import { Text } from '@/shared/packages/primitives';
 import { TextRenderRequest } from '../types';
+import { Text } from '~/primitives';
 
 export const textRequestAdapter = (text: Text): TextRenderRequest => {
 	return {

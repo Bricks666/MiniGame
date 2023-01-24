@@ -1,6 +1,6 @@
-import { Display } from '@/shared/packages/display';
-import { Drawable } from '@/shared/packages/primitives';
 import { GameObject, GameObjectLifeCycle } from './game-object';
+import { Display } from '~/display';
+import { Drawable } from '~/primitives';
 
 export interface GroupOptions<T extends GameObject> {
 	readonly units?: T[];

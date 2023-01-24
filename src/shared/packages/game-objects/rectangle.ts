@@ -1,9 +1,6 @@
-import { Display } from '@/shared/packages/display';
-import {
-	rectangleRequestAdapter,
-	RenderVariant
-} from '@/shared/packages/renderer';
 import { GameObject, GameObjectOptions } from './game-object';
+import { Display } from '~/display';
+import { rectangleRequestAdapter, RenderVariant } from '~/renderer';
 
 export interface RectangleOptions extends GameObjectOptions {
 	readonly color?: string;

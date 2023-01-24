@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Display } from '@/shared/packages/display';
 import { GameObject, GameObjectLifeCycle } from './game-object';
 import { Group } from './group';
 import { Rectangle, RectangleOptions } from './rectangle';
+import { Display } from '~/display';
 
 export interface BlockOptions<T extends Record<string, any> = never>
 	extends Omit<RectangleOptions, 'layer'> {

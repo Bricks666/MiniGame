@@ -1,6 +1,6 @@
-import { Display } from '@/shared/packages/display';
 import { Listener, EventEmitter } from '../event-emitter';
 import { Events, KeyboardEvents, MouseEvents } from './types';
+import { Display } from '~/display';
 
 export class DOMEvents extends EventEmitter {
 	#display!: Display;

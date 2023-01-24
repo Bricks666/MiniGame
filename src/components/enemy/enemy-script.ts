@@ -1,11 +1,10 @@
-import { Script } from '@/shared/packages/scripts';
 import { Enemy } from './enemy';
+import { Script } from '~/scripts';
 
 export class EnemyScript extends Script<Enemy> {
 	intervalId: number | null = null;
 
 	start(): void {
-		console.log(this.gameObject);
 		this.intervalId = setInterval(() => {
 			this.gameObject.moveOn({
 				x: this.gameObject.width / 2,

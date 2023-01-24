@@ -1,7 +1,7 @@
-import { Audio } from '@/shared/packages/audio';
-import { withScript } from '@/shared/packages/scripts';
 import { Entity, EntityOptions } from '../entity';
 import { BulletScript } from './bullet-script';
+import { Audio } from '~/audio';
+import { withScript } from '~/scripts';
 
 export interface BulletOptions extends Omit<EntityOptions, 'health'> {
 	readonly damage: number;
@@ -24,13 +24,5 @@ export class Bullet extends Entity {
 
 	get damage(): number {
 		return this.damage;
-	}
-
-	onMount(): void {
-		this.#audio.play();
-	}
-
-	onUnmount(): void {
-		this.#audio.stop();
 	}
 }

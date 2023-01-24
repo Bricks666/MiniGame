@@ -1,9 +1,6 @@
-import { Display } from '@/shared/packages/display';
-import {
-	rectangleRequestAdapter,
-	RenderVariant
-} from '@/shared/packages/renderer';
 import { Polygon, PolygonOptions } from '../polygon';
+import { Display } from '~/display';
+import { rectangleRequestAdapter, RenderVariant } from '~/renderer';
 
 export interface RectangleOptions extends PolygonOptions {
 	readonly color?: string;

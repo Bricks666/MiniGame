@@ -1,7 +1,7 @@
-import { withScript } from '@/shared/packages/scripts';
 import { Entity, EntityOptions } from '../entity';
 import { EnemyBullet } from './enemy-bullet';
 import { EnemyScript } from './enemy-script';
+import { withScript } from '~/scripts';
 
 export interface EnemyOptions extends Omit<EntityOptions, 'src'> {}
 

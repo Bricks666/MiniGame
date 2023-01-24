@@ -1,9 +1,6 @@
-import { Display } from '@/shared/packages/display';
-import {
-	circleRequestAdapter,
-	RenderVariant
-} from '@/shared/packages/renderer';
 import { Polygon, PolygonOptions } from '../polygon';
+import { Display } from '~/display';
+import { circleRequestAdapter, RenderVariant } from '~/renderer';
 
 export interface CircleOptions extends Pick<PolygonOptions, 'x' | 'y'> {
 	readonly radius: number;

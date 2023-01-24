@@ -1,5 +1,5 @@
-import { Circle } from '@/shared/packages/primitives';
 import { CircleRenderRequest } from '../types';
+import { Circle } from '~/primitives';
 
 export const circleRequestAdapter = (circle: Circle): CircleRenderRequest => {
 	return {

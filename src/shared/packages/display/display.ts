@@ -1,5 +1,5 @@
-import { Rectangle, RectangleOptions } from '@/shared/packages/primitives';
-import { Renderer, RenderRequest } from '@/shared/packages/renderer';
+import { Rectangle, RectangleOptions } from '~/primitives';
+import { Renderer, RenderRequest } from '~/renderer';
 
 export interface ScreenOptions extends Partial<RectangleOptions> {
 	readonly container?: HTMLElement;

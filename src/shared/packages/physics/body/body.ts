@@ -1,6 +1,5 @@
-import { GameObject } from '../game-objects';
-import { Vector, VectorLike } from '../math';
-import { AABB, AABBOptions } from '../math/aabb';
+import { GameObject } from '~/game-objects';
+import { AABB, AABBOptions, Vector, VectorLike } from '~/math';
 
 export interface BodyOptions extends AABBOptions {
 	readonly velocity?: VectorLike;
@@ -16,7 +15,7 @@ export class Body extends AABB {
 
 	constructor(options: BodyOptions) {
 		const { velocity, gameObject, ...rest } = options;
-		const { x, y, width, height } = gameObject;
+		const { x, y, width, height, } = gameObject;
 
 		super({
 			x,
@@ -34,7 +33,7 @@ export class Body extends AABB {
 		const vx = this.velocity.x;
 		const vy = this.velocity.y;
 
-		this.moveOn({ x: vx, y: vy });
+		this.moveOn({ x: vx, y: vy, });
 	}
 
 	destroy(): void {

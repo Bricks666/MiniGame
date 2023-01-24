@@ -1,11 +1,5 @@
 import { GAME_NAME } from '@/shared/configs';
-import {
-	Block,
-	BlockOptions,
-	GameObject,
-	Group,
-	Text
-} from '@/shared/packages/game-objects';
+import { Block, BlockOptions, GameObject, Group, Text } from '~/game-objects';
 
 export type HeaderOptions = BlockOptions<never>;
 

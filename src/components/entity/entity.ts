@@ -1,9 +1,11 @@
-import { Sprite, SpriteOptions } from '@/shared/packages/game-objects';
+import { Sprite, SpriteOptions } from '~/game-objects';
+import { withBody } from '~/physics';
 
 export interface EntityOptions extends SpriteOptions {
 	readonly health: number;
 }
 
+@withBody()
 export abstract class Entity extends Sprite {
 	readonly health: number;
 

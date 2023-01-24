@@ -1,7 +1,7 @@
-import { Display } from '@/shared/packages/display';
-import { GameObject, GameObjectOptions } from '@/shared/packages/game-objects';
-import { textRequestAdapter } from '@/shared/packages/renderer';
 import { TextProperties, TextStyleProperties } from './types';
+import { Display } from '~/display';
+import { GameObject, GameObjectOptions } from '~/game-objects';
+import { textRequestAdapter } from '~/renderer';
 
 export interface TextOptions
 	extends Partial<GameObjectOptions>,

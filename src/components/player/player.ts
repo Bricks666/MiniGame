@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import { withScript } from '@/shared/packages/scripts';
 import { Entity, EntityOptions } from '../entity';
 import { PlayerScript } from './player-script';
+import { withScript } from '~/scripts';
 
 export interface PlayerOptions
 	extends Omit<EntityOptions, 'src' | 'direction'> {}

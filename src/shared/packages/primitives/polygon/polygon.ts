@@ -1,7 +1,7 @@
-import { Coordinate, Size } from '@/shared/packages/core';
-import { Display } from '@/shared/packages/display';
-import { Drawable } from '@/shared/packages/types';
 import { collide } from './lib';
+import { Coordinate, Size } from '~/core';
+import { Display } from '~/display';
+import { Drawable } from '~/types';
 
 export interface PolygonOptions extends Coordinate, Size {}
 

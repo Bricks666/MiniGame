@@ -1,7 +1,7 @@
-import { pressedKeys, keyNames } from '@/shared/packages/events';
-import { Script } from '@/shared/packages/scripts';
 import { HeroBullet } from './hero-bullet';
 import { Player } from './player';
+import { pressedKeys, keyNames } from '~/events';
+import { Script } from '~/scripts';
 
 export class PlayerScript extends Script<Player> {
 	#lastShoot = 0;
@@ -54,12 +54,6 @@ export class PlayerScript extends Script<Player> {
 		const bullet = new HeroBullet({
 			x: gameObject.centerX,
 			y: gameObject.y,
-			bodyOptions: {
-				velocity: {
-					x: 0,
-					y: -5,
-				},
-			},
 			height: 17,
 			width: 5,
 			block: gameObject.block,

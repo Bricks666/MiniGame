@@ -52,10 +52,6 @@ export class GameObject extends AABB implements GameObjectLifeCycle {
 	destroy(): void {
 		this.#groups.forEach((group) => group.remove(this));
 
-		// @ts-ignore
-		this.body = undefined;
-
-		// @ts-ignore
-		this.block = undefined;
+		this.block = null;
 	}
 }

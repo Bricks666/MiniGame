@@ -1,5 +1,5 @@
 import { PADDING } from '@/shared/configs';
-import { eventBus } from '@/shared/packages/events';
+import { eventBus } from '~/events';
 import {
 	Block,
 	BlockOptions,
@@ -7,7 +7,7 @@ import {
 	Group,
 	Text,
 	TextOptions
-} from '@/shared/packages/game-objects';
+} from '~/game-objects';
 
 export type AsideOptions = BlockOptions<never>;
 
