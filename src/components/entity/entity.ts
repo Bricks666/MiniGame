@@ -1,8 +1,6 @@
-import { Coordinate } from '@/shared/packages/core';
-import { Sprite, SpriteOptions } from '@/shared/packages/units';
+import { Sprite, SpriteOptions } from '@/shared/packages/game-objects';
 
-export interface EntityOptions
-	extends Pick<SpriteOptions, 'height' | 'src' | 'width' | 'x' | 'y'> {
+export interface EntityOptions extends SpriteOptions {
 	readonly health: number;
 }
 
@@ -13,11 +11,5 @@ export abstract class Entity extends Sprite {
 		const { health, ...spriteOptions } = options;
 		super(spriteOptions);
 		this.health = health;
-	}
-
-	moveOn(coordinate: Coordinate): this {
-		this.shape.x += coordinate.x;
-		this.shape.y += coordinate.y;
-		return this;
 	}
 }
