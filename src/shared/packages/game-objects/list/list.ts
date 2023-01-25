@@ -1,9 +1,7 @@
 import { Text } from '../text';
 import { Block, BlockOptions, Group } from '~/game-objects';
 
-export interface ListOptions
-	extends BlockOptions<CreateItemsOptions>,
-		CreateItemsOptions {}
+export interface ListOptions extends BlockOptions, CreateItemsOptions {}
 
 export interface CreateItemsOptions {
 	readonly items: Text[];
@@ -11,16 +9,11 @@ export interface CreateItemsOptions {
 	readonly align?: 'center';
 }
 
-export class List extends Block<CreateItemsOptions> {
+export abstract class List extends Block {
 	constructor(options: ListOptions) {
-		const { items, align, gap, ...rest } = options;
+		const { /* items, align, gap, */ ...rest } = options;
 		super({
 			...rest,
-			generateOptions: {
-				items,
-				gap,
-				align,
-			},
 		});
 	}
 

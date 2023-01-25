@@ -1,12 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Display } from '../display';
 import { AABB, AABBOptions } from '../math';
-import { Block } from './block';
 import { Group } from './group';
 
-export interface GameObjectOptions extends AABBOptions {
-	readonly block: Block;
-}
+export interface GameObjectOptions extends AABBOptions {}
 
 export interface GameObjectLifeCycle {
 	start(): void;
@@ -18,13 +14,11 @@ export interface GameObjectLifeCycle {
 export class GameObject extends AABB implements GameObjectLifeCycle {
 	readonly #groups: Set<Group<this>>;
 
-	block: Block | null;
+	started = false;
 
 	constructor(options: GameObjectOptions) {
-		const { block, ...rest } = options;
-		super(rest);
+		super(options);
 		this.#groups = new Set();
-		this.block = block;
 	}
 
 	add(group: Group<this>): this {
@@ -51,7 +45,5 @@ export class GameObject extends AABB implements GameObjectLifeCycle {
 
 	destroy(): void {
 		this.#groups.forEach((group) => group.remove(this));
-
-		this.block = null;
 	}
 }

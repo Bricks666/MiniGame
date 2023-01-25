@@ -15,11 +15,15 @@ specifiers:
   eslint-plugin-boundaries: ^3.1.0
   eslint-plugin-import: ^2.27.5
   eslint-plugin-sonarjs: ^0.18.0
+  eventemitter3: ^5.0.0
   husky: ^8.0.3
   lint-staged: ^13.1.0
   prettier: ^2.8.3
   typescript: ^4.9.4
   vite: ^4.0.4
+
+dependencies:
+  eventemitter3: 5.0.0
 
 devDependencies:
   '@babel/core': 7.20.12
@@ -2485,6 +2489,10 @@ packages:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /eventemitter3/5.0.0:
+    resolution: {integrity: sha512-riuVbElZZNXLeLEoprfNYoDSwTBRR44X3mnhdI1YcnENpWTCsTTVZ2zFuqQcpoyqPQIUXdiPEU0ECAq0KQRaHg==}
+    dev: false
 
   /execa/6.1.0:
     resolution: {integrity: sha512-QVWlX2e50heYJcCPG0iWtf8r0xjEYfz/OYLGDYH+IyjWezzPNxz63qNFOu0l4YftGWuizFVZHHs8PrLU5p2IDA==}

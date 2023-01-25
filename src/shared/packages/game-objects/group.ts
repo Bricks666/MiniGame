@@ -1,14 +1,10 @@
-import { GameObject, GameObjectLifeCycle } from './game-object';
-import { Display } from '~/display';
-import { Drawable } from '~/primitives';
+import { GameObject } from './game-object';
 
 export interface GroupOptions<T extends GameObject> {
 	readonly units?: T[];
 }
 
-export class Group<T extends GameObject = GameObject>
-implements Drawable, GameObjectLifeCycle
-{
+export class Group<T extends GameObject = GameObject> {
 	readonly #units: Set<T>;
 
 	constructor(options: GroupOptions<T> = {}) {
@@ -24,28 +20,9 @@ implements Drawable, GameObjectLifeCycle
 		return this.#units.size;
 	}
 
-	start(): void {
-		this.#units.forEach((unit) => unit.start());
-	}
-
-	update(): this {
-		this.#units.forEach((unit) => unit.update());
-		return this;
-	}
-
-	draw(display: Display): this {
-		this.#units.forEach((unit) => unit.draw(display));
-		return this;
-	}
-
-	destroy() {
-		this.#units.forEach((unit) => unit.destroy());
-	}
-
 	add(unit: T): this {
 		this.#units.add(unit);
 		unit.add(this);
-		unit.start();
 		return this;
 	}
 

@@ -1,24 +1,25 @@
 import { GAME_NAME } from '@/shared/configs';
-import { Block, BlockOptions, GameObject, Group, Text } from '~/game-objects';
+import { Block, BlockOptions, Text } from '~/game-objects';
 
-export type HeaderOptions = BlockOptions<never>;
+export type HeaderOptions = BlockOptions;
 
 export class Header extends Block {
-	constructor(options: HeaderOptions = {}) {
+	constructor(options: HeaderOptions) {
 		super({
 			color: 'black',
 			...options,
 		});
 	}
 
-	static generateUnits(block: Block): Group<GameObject> {
+	init(): void {
 		const headerText = new Text({
 			text: GAME_NAME,
 			color: 'white',
 			fontSize: 24,
 		});
-		headerText.centerX = block.centerX;
-		headerText.centerY = block.centerY;
-		return new Group({ units: [headerText], });
+		headerText.centerX = this.centerX;
+		headerText.centerY = this.centerY;
+
+		this.units.add(headerText);
 	}
 }

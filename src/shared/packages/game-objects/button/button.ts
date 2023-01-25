@@ -24,14 +24,14 @@ export class Button extends Text {
 	}
 
 	onMount(): void {
-		// if (this.#onClick) {
-		// 	domEventEmitter.onMouseEvent('click', this, this.#onClick);
-		// }
-		// if (this.#onHover) {
-		// 	domEventEmitter.onMouseEvent('mousemove', this, this.#onHover);
-		// }
-		// if (this.#onLeave) {
-		// 	domEventEmitter.onMouseEvent('mouseleave', this, this.#onLeave);
-		// }
+		if (this.#onClick) {
+			domEventEmitter.onMouseEvent('click', this, this.#onClick);
+		}
+		if (this.#onHover) {
+			domEventEmitter.onMouseEvent('mousemove', this, this.#onHover);
+		}
+		if (this.#onLeave) {
+			domEventEmitter.onMouseEvent('mouseleave', this, this.#onLeave);
+		}
 	}
 }

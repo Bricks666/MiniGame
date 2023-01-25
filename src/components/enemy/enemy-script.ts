@@ -34,12 +34,12 @@ export class EnemyScript extends Script<WithBody<Enemy>> {
 	}
 
 	checkEnd(): void {
-		const { innerLeft, innerRight, } = this.gameObject.block!;
-		const { x, } = this.gameObject.body.velocity;
+		const { innerLeft, innerRight, } = this.gameObject.block;
+		const step = this.gameObject.width / 4;
 
 		this.isEnd =
-			this.gameObject.x + x < innerLeft ||
-			this.gameObject.endX + x > innerRight;
+			this.gameObject.x + step < innerLeft ||
+			this.gameObject.endX + step > innerRight;
 	}
 
 	destroy(): void {

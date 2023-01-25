@@ -21,7 +21,7 @@ export class PlayerScript extends Script<Player> {
 	}
 
 	#moveLeft() {
-		const { innerLeft, } = this.gameObject.block!;
+		const { innerLeft, } = this.gameObject.block;
 		if (innerLeft >= this.gameObject.x) {
 			return;
 		}
@@ -30,7 +30,7 @@ export class PlayerScript extends Script<Player> {
 	}
 
 	#moveRight() {
-		const { innerRight, } = this.gameObject.block!;
+		const { innerRight, } = this.gameObject.block;
 		if (innerRight <= this.gameObject.endX) {
 			return;
 		}
@@ -51,13 +51,13 @@ export class PlayerScript extends Script<Player> {
 
 		const { gameObject, } = this;
 
-		const bullet = new HeroBullet({
+		new HeroBullet({
 			x: gameObject.centerX,
 			y: gameObject.y,
 			height: 17,
 			width: 5,
-			block: gameObject.block,
-		});
-		this.gameObject.block?.units.add(bullet as any);
+		})
+			.addToBlock(this.gameObject.block)
+			.start();
 	}
 }

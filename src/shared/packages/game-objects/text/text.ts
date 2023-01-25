@@ -1,15 +1,13 @@
 import { TextProperties, TextStyleProperties } from './types';
 import { Display } from '~/display';
-import { GameObject, GameObjectOptions } from '~/game-objects';
+import { Unit, UnitOptions } from '~/game-objects';
 import { textRequestAdapter } from '~/renderer';
 
-export interface TextOptions
-	extends Partial<GameObjectOptions>,
-		Partial<TextProperties> {
+export interface TextOptions extends UnitOptions, Partial<TextProperties> {
 	readonly text: string;
 }
 
-export class Text extends GameObject {
+export class Text extends Unit {
 	text: string;
 
 	styles: TextStyleProperties;
@@ -40,9 +38,5 @@ export class Text extends GameObject {
 
 	draw(display: Display): void {
 		display.draw(textRequestAdapter(this));
-	}
-
-	update(): void {
-		return undefined;
 	}
 }

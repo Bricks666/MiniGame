@@ -1,15 +1,8 @@
 import { PADDING } from '@/shared/configs';
-import { eventBus } from '~/events';
-import {
-	Block,
-	BlockOptions,
-	Button,
-	Group,
-	Text,
-	TextOptions
-} from '~/game-objects';
+import { eventBus, EVENTS } from '@/shared/packages/events';
+import { Block, BlockOptions, Button, Text, TextOptions } from '~/game-objects';
 
-export type AsideOptions = BlockOptions<never>;
+export type AsideOptions = BlockOptions;
 
 const options: TextOptions[] = [
 	{
@@ -31,34 +24,32 @@ const options: TextOptions[] = [
 ];
 
 export class Aside extends Block {
-	static generateUnits(block: Block): Group {
+	init(): void {
 		let offsetY = 0;
 
-		const units = options.map((option) => {
+		const { x, y, centerX, height, } = this;
+
+		options.forEach((option) => {
 			const unit = new Text({
-				x: block.x,
-				y: block.y + offsetY,
+				x,
+				y: y + offsetY,
 				...option,
 			});
-			unit.centerX = block.centerX;
+			unit.centerX = centerX;
 
 			offsetY += unit.height + PADDING;
-
-			return unit;
+			unit.addToBlock(this);
 		});
-		const button = new Button({
+
+		new Button({
 			text: 'В меню',
-			y: block.height,
-			onClick() {
-				eventBus.emitChangeScene('mainMenu');
-			},
+			y: height,
 			color: 'silver',
-		});
+			onClick: () => {
+				eventBus.emit(EVENTS.CHANGE_SCENE, 'mainMenu');
+			},
+		}).addToBlock(this).centerX = centerX;
 
-		button.centerX = block.centerX;
-
-		units.push(button);
-
-		return new Group({ units, });
+		super.init();
 	}
 }

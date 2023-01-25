@@ -1,4 +1,4 @@
-import { eventBus } from '~/events';
+import { eventBus, EVENTS } from '~/events';
 import { Button } from '~/game-objects/button';
 import { ListOptions, List } from '~/game-objects/list';
 
@@ -9,7 +9,7 @@ const items: Button[] = [
 		text: 'Играть',
 		color: 'silver',
 		onClick() {
-			eventBus.emitChangeScene('level');
+			eventBus.emit(EVENTS.CHANGE_SCENE, 'level');
 		},
 	}),
 	new Button({
@@ -22,7 +22,7 @@ const items: Button[] = [
 ];
 
 export class Menu extends List {
-	constructor(options: MenuOptions = {}) {
+	constructor(options: MenuOptions) {
 		super({
 			color: 'black',
 			gap: 15,

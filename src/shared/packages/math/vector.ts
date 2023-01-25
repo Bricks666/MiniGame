@@ -36,7 +36,7 @@ export class Vector {
 		return this;
 	}
 
-	copy(src: VectorLike): this {
+	set(src: VectorLike): this {
 		this.x = src.x;
 		this.y = src.y;
 

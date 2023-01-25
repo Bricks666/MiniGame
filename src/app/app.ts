@@ -1,13 +1,11 @@
 import { Level, Main } from '@/pages';
 import { DISPLAY_SIZE } from '@/shared/configs';
 import { Loading } from '@/shared/ui';
-import { Engine, SceneDict, SceneMachine } from '~/core';
+import { Engine } from '~/core';
 import { Display } from '~/display';
-import { domEventEmitter, eventBus } from '~/events';
+import { domEventEmitter } from '~/events';
 
-type Scenes = 'level' | 'mainMenu' | 'loading';
-
-export class Game extends Engine<Scenes> {
+export class Game extends Engine {
 	constructor() {
 		const display = new Display({
 			...DISPLAY_SIZE,
@@ -18,24 +16,23 @@ export class Game extends Engine<Scenes> {
 			},
 		});
 
-		const states: SceneDict<Scenes> = {
-			level: new Level({ ...display.rect.sizes, }),
-			mainMenu: new Main({ ...display.rect.sizes, }),
-			loading: new Loading({ ...display.rect.sizes, }),
-		};
-		const sceneMachine = new SceneMachine<Scenes>({
-			states,
-		});
-		super({ sceneMachine, display, });
+		const states = {};
 
+		super({ scenes: states, display, });
+		states.level = new Level({
+			shapeOptions: { ...display.rect.sizes, },
+			engine: this,
+		});
+		states.mainMenu = new Main({
+			shapeOptions: { ...display.rect.sizes, },
+			engine: this,
+		});
+		states.loading = new Loading({
+			shapeOptions: { ...display.rect.sizes, },
+			engine: this,
+		});
+
+		this.sceneMachine.changeState('level');
 		domEventEmitter.setDisplay(display);
-		sceneMachine.changeState('level');
-		this.#subscribe();
-	}
-
-	#subscribe() {
-		eventBus.onChangeScene<Scenes>((key) => {
-			this.sceneMachine.changeState(key);
-		});
 	}
 }

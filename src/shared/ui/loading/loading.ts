@@ -1,16 +1,21 @@
-import { Block, Group, Text } from '~/game-objects';
+import { Block, Text } from '~/game-objects';
+import { Scene } from '~/scene';
 
-export class Loading extends Block {
-	static generateUnits(shape: Block): Group {
-		const group = new Group();
+export class Loading extends Scene {
+	init() {
+		const block = new Block(this.shape);
+
 		const text = new Text({
 			text: 'Loading...',
 			color: 'white',
 		});
-		text.centerX = shape.centerX;
-		text.centerY = shape.centerY;
-		group.add(text);
+		text.centerX = this.shape.centerX;
+		text.centerY = this.shape.centerY;
 
-		return group;
+		text.addToBlock(block);
+
+		block.addToScene(this);
+
+		super.init();
 	}
 }

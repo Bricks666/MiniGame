@@ -1,12 +1,12 @@
-import { Display } from '../display';
-import { imageRequestAdapter } from '../renderer';
-import { GameObject, GameObjectOptions } from './game-object';
+import { Unit, UnitOptions } from './unit';
+import { Display } from '~/display';
+import { imageRequestAdapter } from '~/renderer';
 
-export interface SpriteOptions extends GameObjectOptions {
+export interface SpriteOptions extends UnitOptions {
 	readonly src: string;
 }
 
-export class Sprite extends GameObject {
+export class Sprite extends Unit {
 	readonly image: HTMLImageElement;
 
 	constructor(options: SpriteOptions) {

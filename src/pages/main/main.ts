@@ -1,35 +1,33 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Header, Menu } from './ui';
-import { BlockOptions, Block, Group } from '~/game-objects';
+import { Scene, SceneOptions } from '~/scene';
 
-export type MainOptions = BlockOptions<never>;
+export type MainOptions = SceneOptions;
 
-export class Main extends Block {
-	constructor(options: MainOptions = {}) {
+export class Main extends Scene {
+	constructor(options: MainOptions) {
 		super({
 			...options,
-			color: 'black',
+			shapeOptions: { color: 'black', ...options.shapeOptions, },
 		});
 	}
 
-	static generateUnits(block: Block): Group {
-		const units = [
-			new Header({
-				height: 50,
-				x: block.x,
-				y: block.y,
-				width: block.width,
-				block,
-			}),
-			new Menu({
-				width: block.width,
-				height: block.height - 50,
-				y: 50,
-				x: 0,
-				block,
-			})
-		];
+	init(): void {
+		const { x, y, width, height, } = this.shape;
 
-		return new Group({ units, });
+		new Header({
+			height: 50,
+			x,
+			y,
+			width,
+		}).addToScene(this);
+		new Menu({
+			width,
+			height: height - 50,
+			y: 50,
+			x: 0,
+		}).addToScene(this);
+
+		super.init();
 	}
 }

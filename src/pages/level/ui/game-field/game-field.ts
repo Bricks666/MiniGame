@@ -1,47 +1,31 @@
 import { Enemy, Player } from '@/components';
-import { Block, BlockOptions, GameObject, Group } from '~/game-objects';
-import { Vector } from '~/math';
+import { Block, BlockOptions } from '~/game-objects';
 
-export type GameFieldOptions = BlockOptions<GenerateOptions>;
+export type GameFieldOptions = BlockOptions;
 
-interface GenerateOptions {
-	readonly count: number;
-}
-
-export class GameField extends Block<GenerateOptions> {
-	constructor(options: GameFieldOptions = {}) {
+export class GameField extends Block {
+	constructor(options: GameFieldOptions) {
 		super({
 			variant: 'fill',
-			generateOptions: { count: 10, },
 			...options,
 		});
 	}
 
-	static generateUnits(block: Block): Group<GameObject> {
-		const player = new Player({
+	init(): void {
+		new Player({
 			health: 100,
 			height: 64,
 			width: 64,
-			x: block.innerLeft,
-			y: block.innerBottom - 64,
-			bodyOptions: {
-				velocity: Vector.ZERO,
-			},
-			block,
-		});
+			x: this.innerLeft,
+			y: this.innerBottom - 64,
+		}).addToBlock(this);
 
-		const enemy = new Enemy({
+		new Enemy({
 			health: 4,
 			height: 64,
 			width: 64,
-			x: block.innerLeft,
-			y: block.innerTop,
-			bodyOptions: {
-				velocity: Vector.ZERO,
-			},
-			block,
-		});
-
-		return new Group({ units: [player, enemy], });
+			x: this.innerLeft,
+			y: this.innerTop,
+		}).addToBlock(this);
 	}
 }

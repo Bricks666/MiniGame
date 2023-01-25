@@ -90,8 +90,8 @@ export class AABB {
 
 	moveTo(vector: VectorLike): this {
 		const { height, width, } = this;
-		this.#min.copy(vector);
-		this.#max.copy({
+		this.#min.set(vector);
+		this.#max.set({
 			x: vector.x + width,
 			y: vector.y + height,
 		});

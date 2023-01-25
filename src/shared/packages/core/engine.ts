@@ -1,25 +1,38 @@
-import { Display } from '../display';
-import { rectangleRequestAdapter } from '../renderer';
-import { Timer } from '../time';
+import EventEmitter from 'eventemitter3';
 import { SceneMachine } from './scene-machine';
-import { Key } from './types';
+import { Display } from '~/display';
+import { eventBus, EVENTS } from '~/events';
+import { rectangleRequestAdapter } from '~/renderer';
+import { Scene } from '~/scene';
+import { Timer } from '~/time';
 
-export interface EngineOptions<K extends Key> {
+export interface EngineOptions {
 	readonly display: Display;
-	readonly sceneMachine: SceneMachine<K>;
+	readonly scenes: Record<string, Scene>;
 }
 
-export class Engine<K extends Key> {
+export class Engine {
 	readonly display: Display;
 
-	readonly sceneMachine: SceneMachine<K>;
+	readonly sceneMachine: SceneMachine<string>;
 
-	constructor(options: EngineOptions<K>) {
-		const { display, sceneMachine, } = options;
+	readonly events: EventEmitter;
+
+	constructor(options: EngineOptions) {
+		const { display, scenes, } = options;
 		this.display = display;
-		this.sceneMachine = sceneMachine;
+		this.sceneMachine = new SceneMachine({
+			states: scenes,
+		});
+		this.events = new EventEmitter();
 
 		this.update = this.update.bind(this);
+
+		eventBus.on(
+			EVENTS.CHANGE_SCENE,
+			this.sceneMachine.changeState,
+			this.sceneMachine
+		);
 	}
 
 	start(): void {

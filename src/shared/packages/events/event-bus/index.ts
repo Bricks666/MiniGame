@@ -1,3 +1,2 @@
-export { EventBus, eventBus } from './event-bus';
-export * from './types';
+export { eventBus } from './event-bus';
 export * from './events';
