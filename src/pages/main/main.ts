@@ -19,12 +19,14 @@ export class Main extends Block {
 				x: block.x,
 				y: block.y,
 				width: block.width,
+				block,
 			}),
 			new Menu({
 				width: block.width,
 				height: block.height - 50,
 				y: 50,
 				x: 0,
+				block,
 			})
 		];
 

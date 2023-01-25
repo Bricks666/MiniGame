@@ -1,5 +1,6 @@
 import { GameObject } from '~/game-objects';
 import { AABB, AABBOptions, Vector, VectorLike } from '~/math';
+import { Timer } from '~/time';
 
 export interface BodyOptions extends AABBOptions {
 	readonly velocity?: VectorLike;
@@ -30,8 +31,8 @@ export class Body extends AABB {
 	}
 
 	update(): void {
-		const vx = this.velocity.x;
-		const vy = this.velocity.y;
+		const vx = this.velocity.x * Timer.deltaS;
+		const vy = this.velocity.y * Timer.deltaS;
 
 		this.moveOn({ x: vx, y: vy, });
 	}

@@ -1,5 +1,6 @@
 import { Display } from '../display';
 import { rectangleRequestAdapter } from '../renderer';
+import { Timer } from '../time';
 import { SceneMachine } from './scene-machine';
 import { Key } from './types';
 
@@ -26,6 +27,7 @@ export class Engine<K extends Key> {
 	}
 
 	update(): void {
+		Timer.tick();
 		this.display.draw(rectangleRequestAdapter(this.display.rect));
 		this.sceneMachine.update();
 		this.sceneMachine.draw(this.display);

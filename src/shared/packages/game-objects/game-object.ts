@@ -5,7 +5,7 @@ import { Block } from './block';
 import { Group } from './group';
 
 export interface GameObjectOptions extends AABBOptions {
-	readonly block?: Block | null;
+	readonly block: Block;
 }
 
 export interface GameObjectLifeCycle {
@@ -24,7 +24,7 @@ export class GameObject extends AABB implements GameObjectLifeCycle {
 		const { block, ...rest } = options;
 		super(rest);
 		this.#groups = new Set();
-		this.block = block ?? null;
+		this.block = block;
 	}
 
 	add(group: Group<this>): this {

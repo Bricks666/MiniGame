@@ -4,7 +4,7 @@ import path from 'path';
 import { babel } from '@rollup/plugin-babel';
 import { defineConfig } from 'vite';
 
-import pkg from './package.json' assert { type: 'json' };
+import pkg from './package.json';
 
 export default defineConfig({
 	server: {

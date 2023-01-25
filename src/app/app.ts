@@ -33,10 +33,6 @@ export class Game extends Engine<Scenes> {
 		this.#subscribe();
 	}
 
-	update() {
-		super.update();
-	}
-
 	#subscribe() {
 		eventBus.onChangeScene<Scenes>((key) => {
 			this.sceneMachine.changeState(key);

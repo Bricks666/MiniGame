@@ -42,4 +42,11 @@ export class Vector {
 
 		return this;
 	}
+
+	invert(): this {
+		this.x = -this.x;
+		this.y = -this.y;
+
+		return this;
+	}
 }

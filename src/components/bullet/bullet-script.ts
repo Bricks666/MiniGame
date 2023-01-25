@@ -6,7 +6,7 @@ export class BulletScript extends Script<WithBody<Bullet>> {
 	start(): void {
 		this.gameObject.body.velocity.copy({
 			x: 0,
-			y: -5,
+			y: -350,
 		});
 	}
 
