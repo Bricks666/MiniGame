@@ -1,7 +1,7 @@
 import { TextRenderRequest } from '../types';
-import { Text } from '~/primitives';
+import { Text } from '~/sprites';
 
-export const textRequestAdapter = (text: Text): TextRenderRequest => {
+export const textRequestAdapter = (text: Text<any>): TextRenderRequest => {
 	return {
 		type: 'text',
 		color: text.styles.color,
@@ -13,5 +13,6 @@ export const textRequestAdapter = (text: Text): TextRenderRequest => {
 		variant: text.styles.variant || 'fill',
 		strokeWidth: (text.styles.strokeWidth ?? 1) as never,
 		font: `${text.styles.fontSize}px ${text.styles.fontFamily}`,
+		strokeColor: (text.styles.strokeWidth ?? 'black') as never,
 	};
 };

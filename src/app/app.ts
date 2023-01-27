@@ -20,15 +20,15 @@ export class Game extends Engine {
 
 		super({ scenes: states, display, });
 		states.level = new Level({
-			shapeOptions: { ...display.rect.sizes, },
+			shapeOptions: { width: display.rect.width, height: display.rect.height, },
 			engine: this,
 		});
 		states.mainMenu = new Main({
-			shapeOptions: { ...display.rect.sizes, },
+			shapeOptions: { width: display.rect.width, height: display.rect.height, },
 			engine: this,
 		});
 		states.loading = new Loading({
-			shapeOptions: { ...display.rect.sizes, },
+			shapeOptions: { width: display.rect.width, height: display.rect.height, },
 			engine: this,
 		});
 

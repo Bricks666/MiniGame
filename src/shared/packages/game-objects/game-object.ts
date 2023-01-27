@@ -127,6 +127,7 @@ export class GameObject extends AABB implements GameObjectLifeCycle, Groupable {
 	}
 
 	init(): void {
+		this.scripts.forEach((script) => script.init());
 		this.#children.forEach((child) => child.init());
 	}
 

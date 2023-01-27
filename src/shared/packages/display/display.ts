@@ -1,13 +1,13 @@
-import { Rectangle, RectangleOptions } from '~/primitives';
 import { Renderer, RenderRequest } from '~/renderer';
+import { Rectangle, RectangleOptions } from '~/sprites';
 
-export interface ScreenOptions extends Partial<RectangleOptions> {
+export interface ScreenOptions extends Partial<RectangleOptions<any>> {
 	readonly container?: HTMLElement;
 	readonly style?: Partial<CSSStyleDeclaration>;
 }
 
 export class Display {
-	rect: Rectangle;
+	rect: Rectangle<any>;
 
 	readonly #canvas: HTMLCanvasElement;
 
@@ -21,6 +21,7 @@ export class Display {
 			width,
 			x: 0,
 			y: 0,
+			gameObject: null as any,
 		});
 
 		this.#canvas = document.createElement('canvas');

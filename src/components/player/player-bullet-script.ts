@@ -1,5 +1,5 @@
 import { Bullet, BulletScript } from '../bullet';
-import { Enemy } from '../enemies';
+import { Player } from './player';
 import { GameObject } from '~/game-objects';
 import { WithBody } from '~/physics';
 import { ScriptOptions } from '~/scripts';
@@ -18,9 +18,8 @@ export class PlayerBulletScript extends BulletScript {
 	}
 
 	onCollision(gameObject: GameObject) {
-		if (gameObject instanceof Enemy) {
+		if (!(gameObject instanceof Player)) {
 			this.gameObject.destroy();
-			gameObject.destroy();
 		}
 	}
 }

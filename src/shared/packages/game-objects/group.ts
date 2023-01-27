@@ -8,11 +8,11 @@ export interface Groupable {
 }
 
 export class Group<T extends Groupable = Groupable> {
-	readonly #units: Set<T>;
+	readonly #items: Set<T>;
 
 	constructor(options: GroupOptions<T> = {}) {
 		const { units, } = options;
-		this.#units = new Set<T>();
+		this.#items = new Set<T>();
 
 		if (units) {
 			units.forEach((unit) => this.add(unit));
@@ -20,36 +20,40 @@ export class Group<T extends Groupable = Groupable> {
 	}
 
 	get length(): number {
-		return this.#units.size;
+		return this.#items.size;
 	}
 
-	add(unit: T): this {
-		this.#units.add(unit);
-		unit.add(this);
+	get items(): Set<T> {
+		return this.#items;
+	}
+
+	add(item: T): this {
+		this.#items.add(item);
+		item.add(this);
 		return this;
 	}
 
-	forEach(callback: (unit: T) => void): this {
-		this.#units.forEach(callback);
+	forEach(callback: (item: T) => void): this {
+		this.#items.forEach(callback);
 		return this;
 	}
 
-	remove(unit: T): this {
-		this.#units.delete(unit);
-		unit.remove(this);
+	remove(item: T): this {
+		this.#items.delete(item);
+		item.remove(this);
 		return this;
 	}
 
-	has(unit: T): boolean {
-		return this.#units.has(unit);
+	has(item: T): boolean {
+		return this.#items.has(item);
 	}
 
 	clear(): this {
-		this.#units.forEach(this.remove.bind(this));
+		this.#items.forEach(this.remove.bind(this));
 		return this;
 	}
 
 	find(callback: (unit: T) => boolean): T | null {
-		return Array.from(this.#units).find(callback) ?? null;
+		return Array.from(this.#items).find(callback) ?? null;
 	}
 }

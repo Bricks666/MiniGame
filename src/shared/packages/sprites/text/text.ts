@@ -1,13 +1,16 @@
+import { Sprite, SpriteOptions } from '../sprite';
 import { TextProperties, TextStyleProperties } from './types';
 import { Display } from '~/display';
-import { AABB, AABBOptions } from '~/math';
+import { GameObject } from '~/game-objects';
 import { textRequestAdapter } from '~/renderer';
 
-export interface TextOptions extends AABBOptions, Partial<TextProperties> {
+export interface TextOptions<O extends GameObject>
+	extends SpriteOptions<O>,
+		Partial<TextProperties> {
 	readonly text: string;
 }
 
-export class Text extends AABB {
+export class Text<O extends GameObject> extends Sprite<O> {
 	text: string;
 
 	styles: TextStyleProperties;
@@ -21,13 +24,14 @@ export class Text extends AABB {
 		variant: 'fill',
 	};
 
-	constructor(options: TextOptions) {
-		const { text, height, width, x, y, ...styles } = options;
+	constructor(options: TextOptions<O>) {
+		const { text, height, width, x, y, gameObject, ...styles } = options;
 		super({
 			height,
 			width,
 			x,
 			y,
+			gameObject,
 		});
 		this.text = text;
 		this.styles = { ...Text.defaultStyle, ...styles, };

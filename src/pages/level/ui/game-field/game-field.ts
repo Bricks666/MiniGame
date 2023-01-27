@@ -1,10 +1,9 @@
+import { SPRITE_SIZE } from '@/shared/configs';
 import { Enemies, Player } from '@/components';
 import { GameObject } from '~/game-objects';
 import { AttachSprite, Rectangle } from '~/sprites';
 
 export type GameFieldOptions = GameObject;
-
-const SPRITE_SIZE = 32;
 
 @AttachSprite({
 	Sprite: Rectangle,

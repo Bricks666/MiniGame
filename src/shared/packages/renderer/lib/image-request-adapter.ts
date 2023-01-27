@@ -1,8 +1,8 @@
-import { Image } from '../../primitives';
 import { ImageRenderRequest } from '../types';
+import { Image } from '~/sprites';
 
 export const imageRequestAdapter = (
-	image: Pick<Image, 'x' | 'y' | 'height' | 'width' | 'image'>
+	image: Pick<Image<any>, 'x' | 'y' | 'height' | 'width' | 'image'>
 ): ImageRenderRequest => {
 	return {
 		x: image.x,

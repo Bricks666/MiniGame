@@ -5,7 +5,6 @@ import { World } from '~/physics';
 import { Rectangle, RectangleOptions } from '~/sprites';
 
 export interface SceneOptions {
-	readonly blocks?: Group<GameObject>;
 	readonly shapeOptions?: Omit<RectangleOptions<GameObject>, 'gameObject'>;
 }
 
@@ -21,9 +20,9 @@ export class Scene implements GameObjectLifeCycle {
 	isInit = false;
 
 	constructor(options: SceneOptions) {
-		const { blocks, shapeOptions, } = options;
+		const { shapeOptions, } = options;
 
-		this.gameObjects = blocks ?? new Group();
+		this.gameObjects = new Group();
 		this.engine = null as unknown as Engine;
 		this.shape = new Rectangle({
 			...shapeOptions,

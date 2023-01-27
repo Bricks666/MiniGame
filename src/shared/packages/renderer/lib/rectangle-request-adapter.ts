@@ -1,9 +1,9 @@
-import { Rectangle } from '../../primitives';
 import { RectangleRenderRequest } from '../types';
+import { Rectangle } from '~/sprites';
 
 export const rectangleRequestAdapter = (
 	rectangle: Pick<
-		Rectangle,
+		Rectangle<any>,
 		| 'x'
 		| 'y'
 		| 'height'

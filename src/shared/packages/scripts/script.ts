@@ -1,10 +1,10 @@
-import { GameObject } from '../game-objects';
+import { GameObject, GameObjectLifeCycle } from '~/game-objects';
 
 export interface ScriptOptions<O extends GameObject> {
 	readonly gameObject: O;
 }
 
-export class Script<O extends GameObject> {
+export class Script<O extends GameObject> implements GameObjectLifeCycle {
 	readonly gameObject: O;
 
 	constructor(options: ScriptOptions<O>) {
@@ -12,11 +12,19 @@ export class Script<O extends GameObject> {
 		this.gameObject = gameObject;
 	}
 
+	init(): void {
+		return undefined;
+	}
+
 	start(): void {
 		return undefined;
 	}
 
 	update(): void {
+		return undefined;
+	}
+
+	render(): void {
 		return undefined;
 	}
 
