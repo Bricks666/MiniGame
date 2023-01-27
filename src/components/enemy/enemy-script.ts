@@ -1,17 +1,20 @@
 import { Enemy } from './enemy';
+import { EnemyBullet } from './enemy-bullet';
 import { Vector } from '~/math';
 import { WithBody } from '~/physics';
 import { Script } from '~/scripts';
 
 export class EnemyScript extends Script<WithBody<Enemy>> {
-	intervalId: number | null = null;
+	movementId: number | null = null;
+
+	shootId: number | null = null;
 
 	direction: Vector = new Vector(1, 0);
 
 	isEnd = false;
 
 	start(): void {
-		this.intervalId = setInterval(() => {
+		this.movementId = setInterval(() => {
 			if (this.isEnd) {
 				this.gameObject.moveOn({
 					x: 0,
@@ -30,7 +33,11 @@ export class EnemyScript extends Script<WithBody<Enemy>> {
 			});
 
 			this.checkEnd();
-		}, 1000) as unknown as number;
+		}, 500) as unknown as number;
+
+		this.shootId = setInterval(() => {
+			this.#shoot();
+		}, 1500) as unknown as number;
 	}
 
 	checkEnd(): void {
@@ -38,14 +45,32 @@ export class EnemyScript extends Script<WithBody<Enemy>> {
 		const step = this.gameObject.width / 4;
 
 		this.isEnd =
-			this.gameObject.x + step < innerLeft ||
+			this.gameObject.x - step < innerLeft ||
 			this.gameObject.endX + step > innerRight;
 	}
 
+	#shoot() {
+		new EnemyBullet({
+			height: 17,
+			width: 5,
+			x: this.gameObject.centerX,
+			y: this.gameObject.endY,
+		})
+			.addToBlock(this.gameObject.block)
+			.start();
+	}
+
 	destroy(): void {
-		if (this.intervalId) {
-			clearInterval(this.intervalId);
+		if (this.movementId) {
+			clearInterval(this.movementId);
 		}
-		this.intervalId = null;
+
+		this.movementId = null;
+
+		if (this.shootId) {
+			clearInterval(this.shootId);
+		}
+
+		this.shootId = null;
 	}
 }

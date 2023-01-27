@@ -1,6 +1,8 @@
+import { Enemy } from '../enemy';
 import { HeroBullet } from './hero-bullet';
 import { Player } from './player';
 import { pressedKeys, keyNames } from '~/events';
+import { GameObject } from '~/game-objects';
 import { Script } from '~/scripts';
 
 export class PlayerScript extends Script<Player> {
@@ -17,6 +19,12 @@ export class PlayerScript extends Script<Player> {
 		}
 		if (pressedKeys[keyNames.SPACE]) {
 			this.#shoot();
+		}
+	}
+
+	onCollision(gameObject: GameObject): void {
+		if (gameObject instanceof Enemy) {
+			this.destroy();
 		}
 	}
 
