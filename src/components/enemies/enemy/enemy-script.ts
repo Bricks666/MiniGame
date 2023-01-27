@@ -1,5 +1,5 @@
+import { EnemyBullet } from '../enemy-bullet';
 import { Enemy } from './enemy';
-import { EnemyBullet } from './enemy-bullet';
 import { Vector } from '~/math';
 import { WithBody } from '~/physics';
 import { Script } from '~/scripts';
@@ -14,34 +14,29 @@ export class EnemyScript extends Script<WithBody<Enemy>> {
 	isEnd = false;
 
 	start(): void {
-		this.movementId = setInterval(() => {
-			if (this.isEnd) {
-				this.gameObject.moveOn({
-					x: 0,
-					y: this.gameObject.width,
-				});
-				this.isEnd = false;
-
-				this.direction.invert();
-
-				return;
-			}
-
-			this.gameObject.moveOn({
-				x: (this.gameObject.width / 4) * this.direction.x,
-				y: 0,
-			});
-
-			this.checkEnd();
-		}, 500) as unknown as number;
-
+		// this.movementId = setInterval(() => {
+		// 	if (this.isEnd) {
+		// 		this.gameObject.moveOn({
+		// 			x: 0,
+		// 			y: this.gameObject.width,
+		// 		});
+		// 		this.isEnd = false;
+		// 		this.direction.invert();
+		// 		return;
+		// 	}
+		// 	this.gameObject.moveOn({
+		// 		x: (this.gameObject.width / 4) * this.direction.x,
+		// 		y: 0,
+		// 	});
+		// 	this.checkEnd();
+		// }, 500) as unknown as number;
 		// this.shootId = setInterval(() => {
 		// 	this.#shoot();
 		// }, 1500) as unknown as number;
 	}
 
 	checkEnd(): void {
-		const { innerLeft, innerRight, } = this.gameObject.block;
+		const { innerLeft, innerRight, } = this.gameObject.scene.shape;
 		const step = this.gameObject.width / 4;
 
 		this.isEnd =
@@ -56,7 +51,7 @@ export class EnemyScript extends Script<WithBody<Enemy>> {
 			x: this.gameObject.centerX,
 			y: this.gameObject.endY,
 		})
-			.addToBlock(this.gameObject.block)
+			.addOnScene(this.gameObject.scene)
 			.start();
 	}
 

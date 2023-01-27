@@ -23,7 +23,7 @@ export class BulletScript extends Script<WithBody<Bullet>> {
 	}
 
 	update(): void {
-		const { innerTop, innerBottom, } = this.gameObject.block;
+		const { innerTop, innerBottom, } = this.gameObject.scene.shape;
 		if (innerTop >= this.gameObject.y || innerBottom <= this.gameObject.endY) {
 			this.gameObject.destroy();
 		}

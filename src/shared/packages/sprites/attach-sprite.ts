@@ -21,11 +21,12 @@ export const AttachSprite = <S extends typeof Sprite>(
 			constructor(...args: any[]) {
 				// @ts-ignore
 				super(...args);
+				const { width, height, x, y, } = this;
 				this.view = new Spr({
-					height: this.height,
-					width: this.width,
-					x: this.x,
-					y: this.y,
+					width,
+					height,
+					x,
+					y,
 					...rest,
 					gameObject: this,
 				});

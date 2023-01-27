@@ -1,4 +1,4 @@
-import { Entity } from '../entity';
+import { Entity } from '../../entity';
 import { EnemyScript } from './enemy-script';
 import { AttachScript } from '~/scripts';
 import { AttachSprite, Image } from '~/sprites';

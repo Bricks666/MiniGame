@@ -1,9 +1,10 @@
-import { Enemy } from '../enemy';
+import { Enemy } from '../enemies';
 import { Player } from './player';
 import { PlayerBullet } from './player-bullet';
 import { pressedKeys, keyNames } from '~/events';
 import { GameObject } from '~/game-objects';
 import { Script } from '~/scripts';
+import { Rectangle } from '~/sprites';
 
 export class PlayerScript extends Script<Player> {
 	#lastShoot = 0;
@@ -29,7 +30,9 @@ export class PlayerScript extends Script<Player> {
 	}
 
 	#moveLeft() {
-		const { innerLeft, } = this.gameObject.block;
+		const { innerLeft, } =
+			(this.gameObject.parent?.view as Rectangle<any> | null) ||
+			this.gameObject.scene.shape;
 		if (innerLeft >= this.gameObject.x) {
 			return;
 		}
@@ -38,7 +41,9 @@ export class PlayerScript extends Script<Player> {
 	}
 
 	#moveRight() {
-		const { innerRight, } = this.gameObject.block;
+		const { innerRight, } =
+			(this.gameObject.parent?.view as Rectangle<any> | null) ||
+			this.gameObject.scene.shape;
 		if (innerRight <= this.gameObject.endX) {
 			return;
 		}
@@ -65,7 +70,7 @@ export class PlayerScript extends Script<Player> {
 			height: 17,
 			width: 5,
 		})
-			.addToBlock(this.gameObject.block)
+			.addOnScene(this.gameObject.scene)
 			.start();
 	}
 }

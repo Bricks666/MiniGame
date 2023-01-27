@@ -1,16 +1,14 @@
 import { GAME_NAME } from '@/shared/configs';
-import { Block, BlockOptions, Text } from '~/game-objects';
+import { GameObject, GameObjectOptions } from '~/game-objects';
+import { AttachSprite, Rectangle, Text } from '~/sprites';
 
-export type HeaderOptions = BlockOptions;
+export type HeaderOptions = GameObjectOptions;
 
-export class Header extends Block {
-	constructor(options: HeaderOptions) {
-		super({
-			color: 'black',
-			...options,
-		});
-	}
-
+@AttachSprite({
+	Sprite: Rectangle,
+	color: 'black',
+})
+export class Header extends GameObject {
 	init(): void {
 		const headerText = new Text({
 			text: GAME_NAME,
@@ -19,7 +17,5 @@ export class Header extends Block {
 		});
 		headerText.centerX = this.centerX;
 		headerText.centerY = this.centerY;
-
-		this.units.add(headerText);
 	}
 }

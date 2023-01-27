@@ -1,7 +1,7 @@
-import { AttachScript } from '@/shared/packages/scripts';
-import { AttachSprite, Image } from '@/shared/packages/sprites';
 import { Bullet } from '../bullet';
 import { PlayerBulletScript } from './player-bullet-script';
+import { AttachScript } from '~/scripts';
+import { AttachSprite, Image } from '~/sprites';
 
 @AttachScript({
 	Script: PlayerBulletScript,

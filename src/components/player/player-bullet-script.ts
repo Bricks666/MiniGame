@@ -1,5 +1,5 @@
 import { Bullet, BulletScript } from '../bullet';
-import { Enemy } from '../enemy';
+import { Enemy } from '../enemies';
 import { GameObject } from '~/game-objects';
 import { WithBody } from '~/physics';
 import { ScriptOptions } from '~/scripts';

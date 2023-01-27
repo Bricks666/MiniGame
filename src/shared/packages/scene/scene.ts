@@ -1,23 +1,18 @@
 import { Engine } from '~/core';
 import { Display } from '~/display';
-import {
-	Block,
-	GameObjectLifeCycle,
-	Group,
-	Rectangle,
-	RectangleOptions
-} from '~/game-objects';
+import { GameObject, GameObjectLifeCycle, Group } from '~/game-objects';
 import { World } from '~/physics';
+import { Rectangle, RectangleOptions } from '~/sprites';
 
 export interface SceneOptions {
-	readonly blocks?: Group<Block>;
-	readonly shapeOptions?: RectangleOptions;
+	readonly blocks?: Group<GameObject>;
+	readonly shapeOptions?: Omit<RectangleOptions<GameObject>, 'gameObject'>;
 }
 
 export class Scene implements GameObjectLifeCycle {
-	readonly blocks: Group<Block>;
+	readonly gameObjects: Group<GameObject>;
 
-	readonly shape: Rectangle;
+	readonly shape: Rectangle<GameObject>;
 
 	readonly engine: Engine;
 
@@ -28,45 +23,45 @@ export class Scene implements GameObjectLifeCycle {
 	constructor(options: SceneOptions) {
 		const { blocks, shapeOptions, } = options;
 
-		this.blocks = blocks ?? new Group();
+		this.gameObjects = blocks ?? new Group();
 		this.engine = null as unknown as Engine;
-		this.shape = new Rectangle({ ...shapeOptions, });
+		this.shape = new Rectangle({
+			...shapeOptions,
+			gameObject: null as unknown as GameObject,
+		});
 		this.world = new World();
 	}
 
-	addBlock(block: Block): this {
-		this.blocks.add(block);
+	addGameObject(gameObject: GameObject): this {
+		this.gameObjects.add(gameObject);
 		return this;
 	}
 
-	removeBlock(block: Block): this {
-		this.blocks.remove(block);
+	removeGameObject(gameObject: GameObject): this {
+		this.gameObjects.remove(gameObject);
 		return this;
 	}
 
 	init(): void {
 		this.isInit = true;
-		this.blocks.forEach((block) => block.init());
+		this.gameObjects.forEach((gameObject) => gameObject.init());
 	}
 
 	start(): void {
-		this.shape.start();
-		this.blocks.forEach((block) => block.start());
-	}
-
-	draw(display: Display): void {
-		this.shape.draw(display);
-		this.blocks.forEach((block) => block.draw(display));
+		this.gameObjects.forEach((gameObject) => gameObject.start());
 	}
 
 	update(): void {
 		this.world.update();
-		this.shape.update();
-		this.blocks.forEach((block) => block.update());
+		this.gameObjects.forEach((gameObject) => gameObject.update());
+	}
+
+	render(display: Display): void {
+		this.shape.render(display);
+		this.gameObjects.forEach((gameObject) => gameObject.render(display));
 	}
 
 	destroy(): void {
-		this.shape.destroy();
-		this.blocks.forEach((block) => block.destroy());
+		this.gameObjects.forEach((gameObject) => gameObject.destroy());
 	}
 }

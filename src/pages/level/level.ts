@@ -22,17 +22,14 @@ export class Level extends Scene {
 			x: this.shape.innerWidth * 0.75,
 			y: this.shape.innerTop,
 			height: this.shape.innerHeight,
-		}).addToScene(this);
+		}).addOnScene(this);
 
 		new GameField({
 			x: this.shape.innerLeft,
 			y: this.shape.innerTop,
-			variant: 'both',
-			strokeColor: 'white',
-			strokeWidth: 6,
 			width: this.shape.innerWidth * 0.75,
 			height: this.shape.innerHeight,
-		}).addToScene(this);
+		}).addOnScene(this);
 
 		super.init();
 	}

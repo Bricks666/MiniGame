@@ -1,39 +1,35 @@
-import { Enemy, Player } from '@/components';
-import { Block, BlockOptions } from '~/game-objects';
+import { Enemies, Player } from '@/components';
+import { GameObject } from '~/game-objects';
+import { AttachSprite, Rectangle } from '~/sprites';
 
-export type GameFieldOptions = BlockOptions;
+export type GameFieldOptions = GameObject;
 
 const SPRITE_SIZE = 32;
 
-export class GameField extends Block {
-	constructor(options: GameFieldOptions) {
-		super({
-			variant: 'fill',
-			...options,
-		});
-	}
-
+@AttachSprite({
+	Sprite: Rectangle,
+	color: 'black',
+	variant: 'both',
+	strokeColor: 'white',
+	strokeWidth: 6,
+})
+export class GameField extends GameObject {
 	init(): void {
+		const view = this.view as Rectangle<this>;
 		new Player({
 			height: SPRITE_SIZE,
 			width: SPRITE_SIZE,
-			x: this.innerLeft,
-			y: this.innerBottom - SPRITE_SIZE,
-		}).addToBlock(this);
+			x: view.innerLeft,
+			y: view.innerBottom - SPRITE_SIZE,
+		}).addParent(this);
 
-		const gap = SPRITE_SIZE;
+		new Enemies({
+			height: view.innerHeight,
+			width: view.innerWidth,
+			x: view.innerLeft,
+			y: view.innerTop,
+		}).addParent(this);
 
-		const columnCount = Math.floor(this.innerWidth / (SPRITE_SIZE + gap * 2));
-
-		for (let i = 0; i < columnCount; i += 1) {
-			for (let j = 0; j < 8; j += 1) {
-				new Enemy({
-					height: SPRITE_SIZE,
-					width: SPRITE_SIZE,
-					x: this.innerLeft + gap + (SPRITE_SIZE + gap) * i,
-					y: this.innerTop + gap + (SPRITE_SIZE + gap) * j,
-				}).addToBlock(this);
-			}
-		}
+		super.init();
 	}
 }

@@ -10,8 +10,4 @@ import { AttachSprite, Image } from '~/sprites';
 	Sprite: Image,
 	src: '/sprites/hero.png',
 })
-export class Player extends Entity {
-	update(): void {
-		super.update();
-	}
-}
+export class Player extends Entity {}

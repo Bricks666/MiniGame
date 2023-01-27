@@ -1,4 +1,4 @@
-import { Bullet } from '../bullet';
+import { Bullet } from '../../bullet';
 import { EnemyBulletScript } from './enemy-bullet-script';
 import { AttachScript } from '~/scripts';
 import { AttachSprite, Image } from '~/sprites';

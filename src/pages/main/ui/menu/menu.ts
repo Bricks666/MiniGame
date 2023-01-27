@@ -1,6 +1,5 @@
 import { eventBus, EVENTS } from '~/events';
-import { Button } from '~/game-objects/button';
-import { ListOptions, List } from '~/game-objects/list';
+import { Button, List, ListOptions } from '~/sprites';
 
 export type MenuOptions = Omit<ListOptions, 'gap' | 'items' | 'align'>;
 
@@ -24,7 +23,6 @@ const items: Button[] = [
 export class Menu extends List {
 	constructor(options: MenuOptions) {
 		super({
-			color: 'black',
 			gap: 15,
 			items,
 			align: 'center',

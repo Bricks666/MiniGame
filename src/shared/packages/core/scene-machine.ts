@@ -29,7 +29,7 @@ export class SceneMachine<K extends Key>
 	}
 
 	draw(display: Display): void {
-		this.current?.draw(display);
+		this.current?.render(display);
 	}
 
 	update(): void {

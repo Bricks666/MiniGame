@@ -1,7 +1,7 @@
 import { Text } from '../text';
-import { Block, BlockOptions, Group } from '~/game-objects';
+import { GameObject, GameObjectOptions, Group } from '~/game-objects';
 
-export interface ListOptions extends BlockOptions, CreateItemsOptions {}
+export interface ListOptions extends GameObjectOptions, CreateItemsOptions {}
 
 export interface CreateItemsOptions {
 	readonly items: Text[];
@@ -9,7 +9,7 @@ export interface CreateItemsOptions {
 	readonly align?: 'center';
 }
 
-export abstract class List extends Block {
+export abstract class List extends GameObject {
 	constructor(options: ListOptions) {
 		const { /* items, align, gap, */ ...rest } = options;
 		super({
@@ -17,7 +17,7 @@ export abstract class List extends Block {
 		});
 	}
 
-	static generateUnits(block: Block, options: CreateItemsOptions): Group {
+	static generateUnits(block: GameObject, options: CreateItemsOptions): Group {
 		const itemsCount = options.items.length;
 		const centredElementIndex = options.align === 'center' ? itemsCount / 2 : 0;
 

@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PADDING } from '@/shared/configs';
-import { eventBus, EVENTS } from '@/shared/packages/events';
-import { Block, BlockOptions, Button, Text, TextOptions } from '~/game-objects';
+import { eventBus, EVENTS } from '~/events';
+import { GameObject, GameObjectOptions } from '~/game-objects';
+import { AttachSprite, Button, Rectangle, Text, TextOptions } from '~/sprites';
 
-export type AsideOptions = BlockOptions;
+export type AsideOptions = GameObjectOptions;
 
 const options: TextOptions[] = [
 	{
@@ -22,33 +24,35 @@ const options: TextOptions[] = [
 		color: 'silver',
 	}
 ];
-
-export class Aside extends Block {
+@AttachSprite({
+	Sprite: Rectangle,
+})
+export class Aside extends GameObject {
 	init(): void {
-		let offsetY = 0;
+		const offsetY = 0;
 
 		const { x, y, centerX, height, } = this;
 
-		options.forEach((option) => {
-			const unit = new Text({
-				x,
-				y: y + offsetY,
-				...option,
-			});
-			unit.centerX = centerX;
+		// options.forEach((option) => {
+		// 	const unit = new Text({
+		// 		x,
+		// 		y: y + offsetY,
+		// 		...option,
+		// 	});
+		// 	unit.centerX = centerX;
 
-			offsetY += unit.height + PADDING;
-			unit.addToBlock(this);
-		});
+		// 	offsetY += unit.height + PADDING;
+		// 	unit.addToBlock(this);
+		// });
 
-		new Button({
-			text: 'В меню',
-			y: height,
-			color: 'silver',
-			onClick: () => {
-				eventBus.emit(EVENTS.CHANGE_SCENE, 'mainMenu');
-			},
-		}).addToBlock(this).centerX = centerX;
+		// new Button({
+		// 	text: 'В меню',
+		// 	y: height,
+		// 	color: 'silver',
+		// 	onClick: () => {
+		// 		eventBus.emit(EVENTS.CHANGE_SCENE, 'mainMenu');
+		// 	},
+		// }).addToBlock(this).centerX = centerX;
 
 		super.init();
 	}
