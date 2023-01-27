@@ -7,6 +7,7 @@ import {
 	Rectangle,
 	RectangleOptions
 } from '~/game-objects';
+import { World } from '~/physics';
 
 export interface SceneOptions {
 	readonly blocks?: Group<Block>;
@@ -20,6 +21,8 @@ export class Scene implements GameObjectLifeCycle {
 
 	readonly engine: Engine;
 
+	readonly world: World;
+
 	isInit = false;
 
 	constructor(options: SceneOptions) {
@@ -28,6 +31,7 @@ export class Scene implements GameObjectLifeCycle {
 		this.blocks = blocks ?? new Group();
 		this.engine = null as unknown as Engine;
 		this.shape = new Rectangle({ ...shapeOptions, });
+		this.world = new World();
 	}
 
 	addBlock(block: Block): this {
@@ -56,6 +60,7 @@ export class Scene implements GameObjectLifeCycle {
 	}
 
 	update(): void {
+		this.world.update();
 		this.shape.update();
 		this.blocks.forEach((block) => block.update());
 	}

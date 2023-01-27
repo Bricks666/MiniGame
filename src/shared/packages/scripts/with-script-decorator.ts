@@ -2,23 +2,31 @@
 import { GameObject } from '../game-objects';
 import { Script } from './script';
 
-export interface WithScriptOptions<S extends typeof Script> {
-	readonly script: S;
-}
+type ExtractAttachScriptScriptOption<S extends typeof Script> = Omit<
+	ConstructorParameters<S>['0'],
+	'gameObject'
+>;
 
-export const withScript = <S extends typeof Script>(
-	options: WithScriptOptions<S>
+export type AttachScriptOptions<S extends typeof Script> = {
+	readonly Script: S;
+} & ExtractAttachScriptScriptOption<S>;
+
+export const AttachScript = <S extends typeof Script>(
+	options: AttachScriptOptions<S>
 ) => {
-	const { script: Scr, } = options;
-	return <T extends typeof GameObject>(Constructor: T): T => {
+	const { Script: Scr, ...rest } = options;
+	return <O extends typeof GameObject>(Constructor: O): O => {
 		// @ts-ignore
 		return class extends Constructor {
-			script: Script<InstanceType<T>>;
+			script: Script<InstanceType<O>>;
 
 			constructor(...args: any[]) {
 				// @ts-ignore
 				super(...args);
-				this.script = new Scr(this as InstanceType<T>);
+				this.script = new Scr({
+					...rest,
+					gameObject: this as InstanceType<O>,
+				});
 			}
 
 			start(): void {
@@ -32,8 +40,8 @@ export const withScript = <S extends typeof Script>(
 			}
 
 			destroy(): void {
-				super.destroy();
 				this.script.destroy();
+				super.destroy();
 			}
 		};
 	};

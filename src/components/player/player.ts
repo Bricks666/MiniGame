@@ -1,12 +1,12 @@
 import { Entity, EntityOptions } from '../entity';
 import { PlayerScript } from './player-script';
-import { withScript } from '~/scripts';
+import { AttachScript } from '~/scripts';
 
 export interface PlayerOptions
 	extends Omit<EntityOptions, 'src' | 'direction'> {}
 
-@withScript({
-	script: PlayerScript,
+@AttachScript({
+	Script: PlayerScript,
 })
 export class Player extends Entity {
 	constructor(options: PlayerOptions) {

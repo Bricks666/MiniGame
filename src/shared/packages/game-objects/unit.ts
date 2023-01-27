@@ -1,5 +1,6 @@
 import { Block } from './block';
 import { GameObject, GameObjectOptions } from './game-object';
+import { Scene } from '~/scene';
 
 export interface UnitOptions extends GameObjectOptions {}
 
@@ -22,6 +23,7 @@ export class Unit extends GameObject {
 		}
 
 		this.#block = block;
+		this.setScene(block.scene);
 		block.addUnit(this);
 
 		return this;
@@ -33,6 +35,7 @@ export class Unit extends GameObject {
 		}
 
 		this.#block = null as unknown as Block;
+		this.setScene(null as unknown as Scene);
 
 		block.removeUnit(this);
 
@@ -40,8 +43,7 @@ export class Unit extends GameObject {
 	}
 
 	destroy(): void {
-		this.removeFromBlock(this.#block);
-
 		super.destroy();
+		this.removeFromBlock(this.#block);
 	}
 }

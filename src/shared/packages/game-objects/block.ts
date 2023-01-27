@@ -1,4 +1,3 @@
-import { GameObjectLifeCycle } from './game-object';
 import { Group } from './group';
 import { Rectangle, RectangleOptions } from './rectangle';
 import { Unit } from './unit';
@@ -8,21 +7,14 @@ import { Scene } from '~/scene';
 
 export interface BlockOptions extends Omit<RectangleOptions, 'layer'> {}
 
-export class Block extends Rectangle implements GameObjectLifeCycle {
+export class Block extends Rectangle {
 	readonly units: Group<Unit>;
-
-	#scene: Scene;
 
 	constructor(options: BlockOptions) {
 		super(options);
-		this.#scene = null as unknown as Scene;
 		this.units = new Group();
 
 		eventBus.once(EVENTS.START, this.start, this);
-	}
-
-	get scene(): Scene {
-		return this.#scene;
 	}
 
 	addToScene(scene: Scene): this {
@@ -30,7 +22,7 @@ export class Block extends Rectangle implements GameObjectLifeCycle {
 			this.removeFromScene(this.scene);
 		}
 
-		this.#scene = scene;
+		this.setScene(scene);
 		scene.addBlock(this);
 
 		return this;
@@ -41,7 +33,7 @@ export class Block extends Rectangle implements GameObjectLifeCycle {
 			return this;
 		}
 
-		this.#scene = null as unknown as Scene;
+		this.setScene(null as unknown as Scene);
 		scene.removeBlock(this);
 
 		return this;

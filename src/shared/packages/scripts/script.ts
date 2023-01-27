@@ -1,9 +1,14 @@
 import { GameObject } from '../game-objects';
 
-export class Script<T extends GameObject> {
-	readonly gameObject: T;
+export interface ScriptOptions<O extends GameObject> {
+	readonly gameObject: O;
+}
 
-	constructor(gameObject: T) {
+export class Script<O extends GameObject> {
+	readonly gameObject: O;
+
+	constructor(options: ScriptOptions<O>) {
+		const { gameObject, } = options;
 		this.gameObject = gameObject;
 	}
 
@@ -12,6 +17,11 @@ export class Script<T extends GameObject> {
 	}
 
 	update(): void {
+		return undefined;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	onCollision(gameObject: GameObject): void {
 		return undefined;
 	}
 

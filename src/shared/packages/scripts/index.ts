@@ -1,3 +1,7 @@
-export { Script } from './script';
-export { type WithScriptOptions, withScript } from './with-script-decorator';
+export { Script, type ScriptOptions } from './script';
+export {
+	AttachScript,
+	type AttachScriptOptions
+} from './with-script-decorator';
 export * from './script';
+export * from './lib';

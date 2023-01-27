@@ -1,12 +1,12 @@
 import { Entity, EntityOptions } from '../entity';
 import { EnemyBullet } from './enemy-bullet';
 import { EnemyScript } from './enemy-script';
-import { withScript } from '~/scripts';
+import { AttachScript } from '~/scripts';
 
 export interface EnemyOptions extends Omit<EntityOptions, 'src'> {}
 
-@withScript({
-	script: EnemyScript,
+@AttachScript({
+	Script: EnemyScript,
 })
 export class Enemy extends Entity {
 	constructor(options: EnemyOptions) {

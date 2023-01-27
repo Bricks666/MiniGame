@@ -47,6 +47,5 @@ export class EnemyScript extends Script<WithBody<Enemy>> {
 			clearInterval(this.intervalId);
 		}
 		this.intervalId = null;
-		this.destroy();
 	}
 }

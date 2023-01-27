@@ -1,12 +1,12 @@
 import { Sprite, SpriteOptions } from '~/game-objects';
-import { withBody } from '~/physics';
+import { AttachPhysics } from '~/physics';
 
 export interface EntityOptions extends SpriteOptions {
 	readonly health: number;
 }
 
-@withBody()
-export abstract class Entity extends Sprite {
+@AttachPhysics()
+export class Entity extends Sprite {
 	readonly health: number;
 
 	constructor(options: EntityOptions) {

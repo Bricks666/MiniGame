@@ -1,6 +1,7 @@
-import { Display } from '../display';
-import { AABB, AABBOptions } from '../math';
 import { Group } from './group';
+import { Display } from '~/display';
+import { AABB, AABBOptions } from '~/math';
+import { Scene } from '~/scene';
 
 export interface GameObjectOptions extends AABBOptions {}
 
@@ -14,11 +15,22 @@ export interface GameObjectLifeCycle {
 export class GameObject extends AABB implements GameObjectLifeCycle {
 	readonly #groups: Set<Group<this>>;
 
-	started = false;
+	#scene: Scene;
 
 	constructor(options: GameObjectOptions) {
 		super(options);
 		this.#groups = new Set();
+		this.#scene = null as unknown as Scene;
+	}
+
+	get scene(): Scene {
+		return this.#scene;
+	}
+
+	setScene(scene: Scene): this {
+		this.#scene = scene;
+
+		return this;
 	}
 
 	add(group: Group<this>): this {
