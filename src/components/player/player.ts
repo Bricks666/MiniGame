@@ -1,15 +1,17 @@
-import { Entity, EntityOptions } from '../entity';
+import { Entity } from '../entity';
 import { PlayerScript } from './player-script';
 import { AttachScript } from '~/scripts';
-
-export interface PlayerOptions
-	extends Omit<EntityOptions, 'src' | 'direction'> {}
+import { AttachSprite, Image } from '~/sprites';
 
 @AttachScript({
 	Script: PlayerScript,
 })
+@AttachSprite({
+	Sprite: Image,
+	src: '/sprites/hero.png',
+})
 export class Player extends Entity {
-	constructor(options: PlayerOptions) {
-		super({ ...options, src: '/sprites/hero.png', });
+	update(): void {
+		super.update();
 	}
 }

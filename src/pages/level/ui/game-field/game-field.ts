@@ -3,6 +3,8 @@ import { Block, BlockOptions } from '~/game-objects';
 
 export type GameFieldOptions = BlockOptions;
 
+const SPRITE_SIZE = 32;
+
 export class GameField extends Block {
 	constructor(options: GameFieldOptions) {
 		super({
@@ -13,19 +15,25 @@ export class GameField extends Block {
 
 	init(): void {
 		new Player({
-			health: 100,
-			height: 64,
-			width: 64,
+			height: SPRITE_SIZE,
+			width: SPRITE_SIZE,
 			x: this.innerLeft,
-			y: this.innerBottom - 64,
+			y: this.innerBottom - SPRITE_SIZE,
 		}).addToBlock(this);
 
-		new Enemy({
-			health: 4,
-			height: 64,
-			width: 64,
-			x: this.innerLeft,
-			y: this.innerTop,
-		}).addToBlock(this);
+		const gap = SPRITE_SIZE;
+
+		const columnCount = Math.floor(this.innerWidth / (SPRITE_SIZE + gap * 2));
+
+		for (let i = 0; i < columnCount; i += 1) {
+			for (let j = 0; j < 8; j += 1) {
+				new Enemy({
+					height: SPRITE_SIZE,
+					width: SPRITE_SIZE,
+					x: this.innerLeft + gap + (SPRITE_SIZE + gap) * i,
+					y: this.innerTop + gap + (SPRITE_SIZE + gap) * j,
+				}).addToBlock(this);
+			}
+		}
 	}
 }

@@ -18,7 +18,7 @@ export class EnemyScript extends Script<WithBody<Enemy>> {
 			if (this.isEnd) {
 				this.gameObject.moveOn({
 					x: 0,
-					y: this.gameObject.width / 2,
+					y: this.gameObject.width,
 				});
 				this.isEnd = false;
 
@@ -35,9 +35,9 @@ export class EnemyScript extends Script<WithBody<Enemy>> {
 			this.checkEnd();
 		}, 500) as unknown as number;
 
-		this.shootId = setInterval(() => {
-			this.#shoot();
-		}, 1500) as unknown as number;
+		// this.shootId = setInterval(() => {
+		// 	this.#shoot();
+		// }, 1500) as unknown as number;
 	}
 
 	checkEnd(): void {

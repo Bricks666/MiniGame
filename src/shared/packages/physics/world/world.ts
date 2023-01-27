@@ -1,26 +1,25 @@
 import { hasBody, WithBody } from '../body';
 import { isCollide } from './lib';
-import { Unit } from '~/game-objects';
-import { hasScript, Script } from '~/scripts';
+import { GameObject } from '~/game-objects';
 
 export class World {
-	readonly units: Set<WithBody<Unit>>;
+	readonly gameObjects: Set<WithBody<GameObject>>;
 
 	constructor() {
-		this.units = new Set();
+		this.gameObjects = new Set();
 	}
 
-	addUnit(unit: Unit) {
-		if (!hasBody(unit)) {
+	addGameObject(gameObject: GameObject) {
+		if (!hasBody(gameObject)) {
 			return this;
 		}
 
-		this.units.add(unit);
+		this.gameObjects.add(gameObject);
 		return this;
 	}
 
-	removeUnit(unit: Unit): this {
-		this.units.delete(unit as WithBody<Unit>);
+	removeGameObject(gameObject: GameObject): this {
+		this.gameObjects.delete(gameObject as WithBody<GameObject>);
 		return this;
 	}
 
@@ -29,7 +28,7 @@ export class World {
 	}
 
 	resolveCollisions(): void {
-		const units = Array.from(this.units);
+		const units = Array.from(this.gameObjects);
 		for (let i = 0; i < units.length - 1; i += 1) {
 			for (let j = i + 1; j < units.length; j += 1) {
 				const object1 = units[i];
@@ -41,18 +40,13 @@ export class World {
 					continue;
 				}
 
-				if (hasScript(object1)) {
-					(object1.script as Script<any>).onCollision(object2);
-				}
-
-				if (hasScript(object2)) {
-					(object2.script as Script<any>).onCollision(object1);
-				}
+				object1.scripts.forEach((script) => script.onCollision(object2));
+				object2.scripts.forEach((script) => script.onCollision(object1));
 			}
 		}
 	}
 
 	destroy() {
-		this.units.forEach((body) => body.destroy());
+		this.gameObjects.forEach((gameObject) => gameObject.destroy());
 	}
 }

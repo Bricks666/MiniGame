@@ -1,10 +1,13 @@
-import { GameObject } from './game-object';
-
-export interface GroupOptions<T extends GameObject> {
+export interface GroupOptions<T extends Groupable> {
 	readonly units?: T[];
 }
 
-export class Group<T extends GameObject = GameObject> {
+export interface Groupable {
+	add(group: Group): unknown;
+	remove(group: Group): unknown;
+}
+
+export class Group<T extends Groupable = Groupable> {
 	readonly #units: Set<T>;
 
 	constructor(options: GroupOptions<T> = {}) {

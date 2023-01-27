@@ -34,7 +34,7 @@ export class Body extends AABB {
 		const vx = this.velocity.x * Timer.deltaS;
 		const vy = this.velocity.y * Timer.deltaS;
 
-		this.moveOn({ x: vx, y: vy, });
+		this.gameObject.moveOn({ x: vx, y: vy, });
 	}
 
 	destroy(): void {

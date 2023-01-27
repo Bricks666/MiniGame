@@ -1,6 +1,6 @@
 import { Enemy } from '../enemy';
-import { HeroBullet } from './hero-bullet';
 import { Player } from './player';
+import { PlayerBullet } from './player-bullet';
 import { pressedKeys, keyNames } from '~/events';
 import { GameObject } from '~/game-objects';
 import { Script } from '~/scripts';
@@ -59,7 +59,7 @@ export class PlayerScript extends Script<Player> {
 
 		const { gameObject, } = this;
 
-		new HeroBullet({
+		new PlayerBullet({
 			x: gameObject.centerX,
 			y: gameObject.y,
 			height: 17,

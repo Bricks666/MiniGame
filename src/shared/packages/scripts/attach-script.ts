@@ -18,30 +18,15 @@ export const AttachScript = <S extends typeof Script>(
 	return <O extends typeof GameObject>(Constructor: O): O => {
 		// @ts-ignore
 		return class extends Constructor {
-			script: Script<InstanceType<O>>;
-
 			constructor(...args: any[]) {
 				// @ts-ignore
 				super(...args);
-				this.script = new Scr({
-					...rest,
-					gameObject: this as InstanceType<O>,
-				});
-			}
-
-			start(): void {
-				super.start();
-				this.script.start();
-			}
-
-			update() {
-				super.update();
-				this.script.update();
-			}
-
-			destroy(): void {
-				this.script.destroy();
-				super.destroy();
+				this.scripts.add(
+					new Scr({
+						...rest,
+						gameObject: this as InstanceType<O>,
+					}) as Script<O>
+				);
 			}
 		};
 	};

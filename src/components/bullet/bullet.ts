@@ -1,23 +1,15 @@
-import { Entity, EntityOptions } from '../entity';
-import { Audio } from '~/audio';
-
-export interface BulletOptions extends Omit<EntityOptions, 'health'> {
-	readonly damage: number;
-}
+import { Entity } from '../entity';
 
 export class Bullet extends Entity {
-	readonly #damage: number;
-
-	readonly #audio: Audio;
-
-	constructor(options: BulletOptions) {
-		const { damage, ...rest } = options;
-		super({ ...rest, health: 1, });
-		this.#damage = damage;
-		this.#audio = new Audio({ src: 'musics/shoot.wav', volume: 0.5, });
-	}
-
-	get damage(): number {
-		return this.damage;
+	update(): void {
+		super.update();
+		console.log(
+			this.x,
+			this.y,
+			this.body?.x,
+			this.body?.y,
+			this.view?.x,
+			this.view?.y
+		);
 	}
 }

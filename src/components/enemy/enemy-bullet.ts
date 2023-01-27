@@ -1,17 +1,11 @@
-import { Bullet, BulletOptions } from '../bullet';
+import { Bullet } from '../bullet';
 import { EnemyBulletScript } from './enemy-bullet-script';
 import { AttachScript } from '~/scripts';
-
-export interface EnemyBulletOptions
-	extends Omit<BulletOptions, 'src' | 'damage' | 'direction'> {}
+import { AttachSprite, Image } from '~/sprites';
 
 @AttachScript({ Script: EnemyBulletScript, })
-export class EnemyBullet extends Bullet {
-	constructor(options: EnemyBulletOptions) {
-		super({
-			...options,
-			damage: 1,
-			src: 'sprites/enemy_bullet.png',
-		});
-	}
-}
+@AttachSprite({
+	Sprite: Image,
+	src: 'sprites/enemy_bullet.png',
+})
+export class EnemyBullet extends Bullet {}

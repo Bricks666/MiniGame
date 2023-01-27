@@ -20,7 +20,6 @@ export class SceneMachine<K extends Key>
 	}
 
 	changeState(key: K): void {
-		console.log(key);
 		this.current?.destroy();
 		super.changeState(key);
 		if (this.current?.isInit === false) {
