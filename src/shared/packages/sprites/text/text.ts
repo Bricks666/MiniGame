@@ -37,6 +37,7 @@ export class Text<O extends GameObject> extends Sprite<O> {
 		this.styles = { ...Text.defaultStyle, ...styles, };
 		this.width = this.text.length * this.styles.fontSize;
 		this.height = this.styles.fontSize;
+		this.gameObject.height = this.styles.fontSize;
 	}
 
 	render(display: Display): void {

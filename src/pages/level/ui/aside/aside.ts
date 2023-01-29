@@ -1,58 +1,46 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PADDING } from '@/shared/configs';
-import { eventBus, EVENTS } from '~/events';
+import {
+	CurrentScore,
+	CurrentScorePoints,
+	MaxScore,
+	MaxScorePoints
+} from './ui';
 import { GameObject, GameObjectOptions } from '~/game-objects';
-import { AttachSprite, Button, Rectangle, Text, TextOptions } from '~/sprites';
+import { AttachSprite, Rectangle } from '~/sprites';
 
 export type AsideOptions = GameObjectOptions;
 
-const options: TextOptions[] = [
-	{
-		text: 'Current score',
-		color: 'silver',
-	},
-	{
-		text: '0 POINTS',
-		color: 'silver',
-	},
-	{
-		text: 'Max score',
-		color: 'silver',
-	},
-	{
-		text: '0 POINTS',
-		color: 'silver',
-	}
+const options: (typeof GameObject)[] = [
+	CurrentScore,
+	CurrentScorePoints,
+	MaxScore,
+	MaxScorePoints
 ];
 @AttachSprite({
 	Sprite: Rectangle,
 })
 export class Aside extends GameObject {
 	init(): void {
-		const offsetY = 0;
+		let offsetY = 0;
 
-		const { x, y, centerX, height, } = this;
+		const { x, y, centerX, height, width, } = this;
 
-		// options.forEach((option) => {
-		// 	const unit = new Text({
-		// 		x,
-		// 		y: y + offsetY,
-		// 		...option,
-		// 	});
-		// 	unit.centerX = centerX;
+		console.log(x, y, centerX, height, width);
 
-		// 	offsetY += unit.height + PADDING;
-		// 	unit.addToBlock(this);
-		// });
+		options.forEach((Item) => {
+			const unit = new Item({
+				x,
+				y: y + offsetY,
+				width,
+				height: 20,
+			});
+			unit.centerX = centerX;
 
-		// new Button({
-		// 	text: 'В меню',
-		// 	y: height,
-		// 	color: 'silver',
-		// 	onClick: () => {
-		// 		eventBus.emit(EVENTS.CHANGE_SCENE, 'mainMenu');
-		// 	},
-		// }).addToBlock(this).centerX = centerX;
+			console.log(unit);
+
+			offsetY += unit.height + PADDING;
+			unit.addParent(this);
+		});
 
 		super.init();
 	}

@@ -20,7 +20,6 @@ export class EnemyBulletScript extends BulletScript {
 	onCollision(gameObject: GameObject) {
 		if (gameObject instanceof Player) {
 			this.gameObject.destroy();
-			gameObject.destroy();
 		}
 	}
 }

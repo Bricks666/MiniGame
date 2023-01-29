@@ -25,7 +25,7 @@ export class PlayerScript extends Script<Player> {
 
 	onCollision(gameObject: GameObject): void {
 		if (gameObject instanceof Enemy) {
-			this.destroy();
+			this.gameObject.destroy();
 		}
 	}
 

@@ -2,7 +2,7 @@ import { Size } from '../packages/core';
 
 export const DISPLAY_SIZE: Size = {
 	height: 704,
-	width: 980,
+	width: 1024,
 };
 
 export const GAME_NAME = 'Space Invaders';
